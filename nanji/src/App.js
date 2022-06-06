@@ -17,7 +17,7 @@ function App({ signOut, user }) {
       <Router>
         <Routes>
           <Route path='/' element={<Dashboard />} />
-          <Route path='/NewPost' element={<NewPost />} />
+          <Route path='/NewPost' element={<NewPost user={user} />} />
         </Routes>
       </Router>
     </>

@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "nanji",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-96aa6c0c-8ac5-4f4b-947e-7ad864076e7c/amplify/backend/api/nanji/schema.graphql",
+    "gqlSchemaPath": "/Users/mitchellsmith/code/nanji/nanji/amplify/backend/api/nanji/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",
@@ -12,6 +12,10 @@
     "additionalAuthTypes": [
       {
         "mode": "AWS_IAM"
+      },
+      {
+        "mode": "AMAZON_COGNITO_USER_POOLS",
+        "cognitoUserPoolId": "authnanji"
       }
     ],
     "conflictResolution": {
