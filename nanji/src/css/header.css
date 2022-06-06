@@ -1,0 +1,15 @@
+.header {
+  padding: 10px;
+  border: 0.5px solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.header h1 {
+  font-size: 20px;
+}
+
+.header button {
+  padding: 5px;
+}
