@@ -34,7 +34,10 @@ export function Dashboard() {
         </h1>
         <div>
             {posts.map((post) => (
+                <>
                 <img alt={post.id} src={post.s3Image} />
+                <p>{post.content}</p>
+                </>
             ))}
         </div>
         </>
