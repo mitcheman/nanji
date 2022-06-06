@@ -1,0 +1,11 @@
+{
+  "resourceName": "s3nanjistorage004554be",
+  "bucketName": "nanji-storage-004554be",
+  "policyUUID": "e17d3489",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ"
+  ]
+}

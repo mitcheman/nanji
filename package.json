@@ -1,0 +1,19 @@
+{
+  "name": "nanji",
+  "version": "1.0.0",
+  "description": "photo sharing application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mitcheman/nanji.git"
+  },
+  "author": "mitchell smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mitcheman/nanji/issues"
+  },
+  "homepage": "https://github.com/mitcheman/nanji#readme"
+}

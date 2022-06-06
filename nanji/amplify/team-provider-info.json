@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nanji-staging-83539-authRole",
+      "UnauthRoleArn": "arn:aws:iam::602366348679:role/amplify-nanji-staging-83539-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::602366348679:role/amplify-nanji-staging-83539-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-nanji-staging-83539-deployment",
+      "UnauthRoleName": "amplify-nanji-staging-83539-unauthRole",
+      "StackName": "amplify-nanji-staging-83539",
+      "StackId": "arn:aws:cloudformation:us-east-1:602366348679:stack/amplify-nanji-staging-83539/d46af6f0-d817-11ec-b995-12c8101c8f15",
+      "AmplifyAppId": "dk5qtqs5o6cin"
+    },
+    "categories": {
+      "auth": {
+        "nanji": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+type Post @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  content: String
+  image: AWSURL
+  userID: ID! @index(name: "byUser")
+}
+
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  firstName: String
+  lastName: String
+  email: String
+  Posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
+}
