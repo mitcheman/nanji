@@ -5,6 +5,7 @@ export const getPost = /* GraphQL */ `
   query GetPost($id: ID!) {
     getPost(id: $id) {
       id
+      date
       content
       image
       userID
@@ -26,6 +27,7 @@ export const listPosts = /* GraphQL */ `
     listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        date
         content
         image
         userID
@@ -56,6 +58,7 @@ export const syncPosts = /* GraphQL */ `
     ) {
       items {
         id
+        date
         content
         image
         userID

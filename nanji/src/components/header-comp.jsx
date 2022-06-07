@@ -2,6 +2,7 @@
 import '../css/header.css'
 import React from "react";
 import {BrowserRouter as Router} from "react-router-dom";
+import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from 'react-icons/md';
 
 
 export function Header({signOut, user}) {
@@ -12,8 +13,8 @@ export function Header({signOut, user}) {
         <nav>
         <h3>{user.username}</h3>
             <div id="nav-buttons">
-                <a href='/newPost'>New Post</a>
-                <button onClick={signOut}>Sign out</button>
+                <a href='/newPost'><MdOutlineAddPhotoAlternate /></a>
+                <button onClick={signOut}><MdOutlineLogout /></button>
             </div>
         </nav>
         </Router>

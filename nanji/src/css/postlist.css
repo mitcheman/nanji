@@ -1,0 +1,26 @@
+.postlist {
+  display: flex;
+  flex-direction: column;
+  max-width: 60%;
+  justify-content: center;
+  margin: 20px;
+}
+
+.timeinfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.postlist h3 {
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-right: 3px;
+  margin-left: 5px;
+}
+
+.postlist p {
+  font-size: 15px;
+}

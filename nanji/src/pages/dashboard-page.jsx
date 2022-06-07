@@ -2,6 +2,8 @@
 import { Storage, API } from "aws-amplify"
 import { listPosts } from "../graphql/queries"
 import { useState, useEffect } from "react"
+import { PostList } from '../components/postList-comp'
+import { Header } from '../components/header-comp'
 
 Storage.configure({ level: 'private' });
 
@@ -29,16 +31,8 @@ export function Dashboard() {
 
     return (
         <>
-        <h1>
-            Dashboard
-        </h1>
-        <div>
-            {posts.map((post) => (
-                <>
-                <img alt={post.id} src={post.s3Image} />
-                <p>{post.content}</p>
-                </>
-            ))}
+        <div class="container">
+            <PostList posts={posts} setPosts={setPosts} />
         </div>
         </>
     )

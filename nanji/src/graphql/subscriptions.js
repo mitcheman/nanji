@@ -5,6 +5,7 @@ export const onCreatePost = /* GraphQL */ `
   subscription OnCreatePost($owner: String) {
     onCreatePost(owner: $owner) {
       id
+      date
       content
       image
       userID
@@ -21,6 +22,7 @@ export const onUpdatePost = /* GraphQL */ `
   subscription OnUpdatePost($owner: String) {
     onUpdatePost(owner: $owner) {
       id
+      date
       content
       image
       userID
@@ -37,6 +39,7 @@ export const onDeletePost = /* GraphQL */ `
   subscription OnDeletePost($owner: String) {
     onDeletePost(owner: $owner) {
       id
+      date
       content
       image
       userID

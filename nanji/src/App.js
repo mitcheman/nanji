@@ -1,4 +1,5 @@
 import { withAuthenticator } from '@aws-amplify/ui-react';
+import './index.css';
 import '@aws-amplify/ui-react/styles.css';
 import { Header } from './components/header-comp';
 import { NewPost } from './pages/newPost-page';

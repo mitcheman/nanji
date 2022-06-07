@@ -14,6 +14,7 @@ type UserMetaData = {
 
 export declare class Post {
   readonly id: string;
+  readonly date: string;
   readonly content: string;
   readonly image: string;
   readonly userID: string;

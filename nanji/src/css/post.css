@@ -1,0 +1,21 @@
+.post {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  box-shadow: 0 2px 10px -1px #3333;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.post p {
+  margin-left: 20px;
+  background-color: rgba(0, 0, 0, 0.063);
+  width: 40%;
+  padding: 10px;
+}
+
+img {
+  object-fit: contain;
+  width: 60%;
+  height: 60%;
+}
