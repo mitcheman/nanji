@@ -23,8 +23,6 @@ export function NewPost({user}) {
             alert('wrong file type')
             return;
         }
-
-        console.log(fileData.type)
         //this is a stupid file naming system - need to change this
         const filename = user.username + fileData.name;
         await Storage.put(filename, fileData, {level: 'private'});
