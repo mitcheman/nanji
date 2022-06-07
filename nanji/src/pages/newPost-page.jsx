@@ -2,7 +2,6 @@
 import { Storage, API } from "aws-amplify"
 import { createPost } from "../graphql/mutations"
 import { useState } from "react"
-import { MdEventBusy } from "react-icons/md"
 
 
 export function NewPost({user}) {
@@ -12,7 +11,20 @@ export function NewPost({user}) {
 
     async function savePost (event) {
         event.preventDefault()
-        if (event.target.content.value.length === 0 || event.target.fileupload.value === null) return;
+        if (event.target.content.value.length === 0 || event.target.fileupload.value === null) {
+            alert('please input all required data')
+            return;
+        }
+        if (fileData.size > 3000000) {
+            alert('file size too large');
+            return;
+        }
+        if (fileData.type !== 'image/*') {
+            alert('wrong file type')
+            return;
+        }
+
+        console.log(fileData.type)
         //this is a stupid file naming system - need to change this
         const filename = user.username + fileData.name;
         await Storage.put(filename, fileData, {level: 'private'});
