@@ -9,6 +9,7 @@ import { BsChevronDown } from 'react-icons/bs';
 Storage.configure({ level: 'private' });
 
 let tokenID;
+let limitNum = 5;
 
 export function Dashboard() {
 
@@ -23,21 +24,20 @@ export function Dashboard() {
     }, [])
 
     async function listAllPosts () {
-        const postData = await API.graphql({ query: listPosts, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: { limit: 5, nextToken: tokenID } })
+        const postData = await API.graphql({ query: listPosts, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: { limit: limitNum, nextToken: tokenID } })
         const posts = await Promise.all(postData.data.listPosts.items.map(async post => {
             const image = await Storage.get(post.image)
             post.s3Image = image
             return post
         } ))
-        console.log(postData)
         return postData
     }
 
     async function newPage () {
         listAllPosts()
         .then((data) => {
+            if (tokenID === null) return;
             setPosts(prev => {
-                console.log([...prev, ...data.data.listPosts.items])
                 return ([...prev, ...data.data.listPosts.items])
             })
             tokenID = data.data.listPosts.nextToken;

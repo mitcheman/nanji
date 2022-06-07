@@ -19,10 +19,6 @@ export function NewPost({user}) {
             alert('file size too large');
             return;
         }
-        if (fileData.type !== 'image/*') {
-            alert('wrong file type')
-            return;
-        }
         //this is a stupid file naming system - need to change this
         const filename = user.username + fileData.name;
         await Storage.put(filename, fileData, {level: 'private'});
@@ -45,7 +41,7 @@ export function NewPost({user}) {
             <label for="picdate">Date:</label>
             <input id="picdate" name="date" type="date" />
             <input name="content" type="text" placeholder="enter content"></input>
-            <input name="fileupload" type="file" onChange={(e) => setFileData(e.target.files[0])}></input>
+            <input name="fileupload" type="file" accept="image/*" onChange={(e) => setFileData(e.target.files[0])}></input>
             <button type="submit">Upload</button>
         </form>
     </div>

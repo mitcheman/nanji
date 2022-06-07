@@ -8,6 +8,8 @@
 }
 
 #footer {
+  position: absolute;
+  margin-top: 0px;
   width: 100%;
   border: none;
   background: none;
