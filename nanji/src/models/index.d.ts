@@ -17,6 +17,7 @@ export declare class Post {
   readonly date: string;
   readonly content: string;
   readonly image: string;
+  readonly type: string;
   readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

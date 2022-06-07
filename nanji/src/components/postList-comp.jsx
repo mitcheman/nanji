@@ -3,6 +3,7 @@ import { Post } from './post-comp'
 import '../css/postlist.css'
 const moment = require('moment')
 
+//need to make it so it doesnt added date if date exists
 export function PostList ({posts}) {
     return (
         <>

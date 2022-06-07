@@ -8,6 +8,7 @@ export const onCreatePost = /* GraphQL */ `
       date
       content
       image
+      type
       userID
       createdAt
       updatedAt
@@ -25,6 +26,7 @@ export const onUpdatePost = /* GraphQL */ `
       date
       content
       image
+      type
       userID
       createdAt
       updatedAt
@@ -42,6 +44,7 @@ export const onDeletePost = /* GraphQL */ `
       date
       content
       image
+      type
       userID
       createdAt
       updatedAt

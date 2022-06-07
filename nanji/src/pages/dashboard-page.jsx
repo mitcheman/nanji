@@ -1,9 +1,9 @@
 
 import { Storage, API } from "aws-amplify"
-import { listPosts } from "../graphql/queries"
+import { listPosts, postByDate } from "../graphql/queries"
 import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
-import { Header } from '../components/header-comp'
+import { sortData } from "../utils/sort"
 import { BsChevronDown } from 'react-icons/bs';
 
 Storage.configure({ level: 'private' });
@@ -17,15 +17,15 @@ export function Dashboard() {
 
     useEffect(() => {
         listAllPosts().then((data) => {
-            setPosts(data.data.listPosts.items)
-            tokenID = data.data.listPosts.nextToken;
+            setPosts(data.data.postByDate.items)
+            tokenID = data.data.postByDate.nextToken;
             return tokenID;
         })
     }, [])
 
     async function listAllPosts () {
-        const postData = await API.graphql({ query: listPosts, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: { limit: limitNum, nextToken: tokenID } })
-        const posts = await Promise.all(postData.data.listPosts.items.map(async post => {
+        const postData = await API.graphql({ query: postByDate, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: { type: "Post", sortDirection: "DESC", limit: limitNum, nextToken: tokenID } })
+        const posts = await Promise.all(postData.data.postByDate.items.map(async post => {
             const image = await Storage.get(post.image)
             post.s3Image = image
             return post
@@ -38,9 +38,9 @@ export function Dashboard() {
         .then((data) => {
             if (tokenID === null) return;
             setPosts(prev => {
-                return ([...prev, ...data.data.listPosts.items])
+                return [...prev, ...data.data.postByDate.items]
             })
-            tokenID = data.data.listPosts.nextToken;
+            tokenID = data.data.postByDate.nextToken;
             return tokenID;
         })
     }

@@ -31,6 +31,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "userID": {
                     "name": "userID",
                     "isArray": false,
@@ -61,6 +68,17 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "postByDate",
+                        "queryField": "postByDate",
+                        "fields": [
+                            "type",
+                            "date"
+                        ]
+                    }
                 },
                 {
                     "type": "key",
@@ -185,5 +203,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "9e6f0ad0b089b1b277f7a1f8f8d86157"
+    "version": "e98fc58866734161d507d3d77b4a6bb1"
 };

@@ -22,7 +22,7 @@ export function NewPost({user}) {
         //this is a stupid file naming system - need to change this
         const filename = user.username + fileData.name;
         await Storage.put(filename, fileData, {level: 'private'});
-        const newPost = {date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username};
+        const newPost = {date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username, type: "Post"};
         const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
         setFileStatus(true);
 

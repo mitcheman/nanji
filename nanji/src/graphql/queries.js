@@ -8,6 +8,7 @@ export const getPost = /* GraphQL */ `
       date
       content
       image
+      type
       userID
       createdAt
       updatedAt
@@ -30,6 +31,7 @@ export const listPosts = /* GraphQL */ `
         date
         content
         image
+        type
         userID
         createdAt
         updatedAt
@@ -61,6 +63,43 @@ export const syncPosts = /* GraphQL */ `
         date
         content
         image
+        type
+        userID
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        owner
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const postByDate = /* GraphQL */ `
+  query PostByDate(
+    $type: String!
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    postByDate(
+      type: $type
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        date
+        content
+        image
+        type
         userID
         createdAt
         updatedAt
