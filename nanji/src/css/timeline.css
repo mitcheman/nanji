@@ -32,5 +32,12 @@ li:hover {
 }
 
 #timeline svg {
-  margin-left: 45%;
+  margin-left: 40%;
+  height: auto;
+  width: 20px;
+}
+
+#timeline svg:hover {
+  color: rgba(0, 0, 0, 0.512);
+  cursor: pointer;
 }

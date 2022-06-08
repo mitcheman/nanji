@@ -5,6 +5,7 @@ import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
 import { Timeline } from "../components/timeline"
 import { duplicates } from "../utils/duplicates"
+import { sortData } from "../utils/sort"
 import { BsChevronDown } from 'react-icons/bs';
 
 Storage.configure({ level: 'private' });
@@ -31,7 +32,7 @@ export function Dashboard() {
 
     useEffect(() => {
         listAllPosts().then((data) => {
-            setAllPosts(data.data.listPosts.items);
+            setAllPosts(sortData(data.data.listPosts.items));
             console.log(data)
         })
     }, [])

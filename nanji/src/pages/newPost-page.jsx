@@ -2,6 +2,11 @@
 import { Storage, API } from "aws-amplify"
 import { createPost } from "../graphql/mutations"
 import { useState } from "react"
+import { TextAreaField } from '@aws-amplify/ui-react';
+import { BsUpload } from 'react-icons/bs';
+import { BsCheckCircle } from 'react-icons/bs'
+import '../css/form.css'
+const moment = require('moment')
 
 
 export function NewPost({user}) {
@@ -32,23 +37,22 @@ export function NewPost({user}) {
         console.log(result);
     }
 
+    const currentDate = moment(new Date()).format('YYYY-MM-DD')
 
     return (
     <>
-    <h1>new post</h1>
-    <div>
-        <form class="form" onSubmit={savePost}>
+    <div id="newpost">
+        <form id="form" onSubmit={savePost}>
+        <h3>New Post</h3>
             <label for="picdate">Date:</label>
-            <input id="picdate" name="date" type="date" />
-            <input name="content" type="text" placeholder="enter content"></input>
-            <input name="fileupload" type="file" accept="image/*" onChange={(e) => setFileData(e.target.files[0])}></input>
-            <button type="submit">Upload</button>
+            <input id="picdate" name="date" type="date" max={currentDate} />
+            <label for="content">Background Story:</label>
+            <TextAreaField size="large" autoComplete="off" name="content" type="text" placeholder="Enter Text Here" />
+            <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => setFileData(e.target.files[0])}></input>
+            {/* {fileStatus ? <div><BsCheckCircle /></div>: ''} */}
+            <button type="submit"><BsUpload /></button>
         </form>
-    </div>
-    <div>
-
-    </div>
-    {fileStatus ? "file uploaded": ''}
+        </div>
     </>
     )
 }

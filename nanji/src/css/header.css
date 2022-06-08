@@ -18,6 +18,10 @@
   margin-left: 10px;
 }
 
+#nanji:hover {
+  color: rgba(0, 0, 0, 0.569);
+}
+
 #nav-buttons {
   display: flex;
   flex-direction: row;

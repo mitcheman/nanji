@@ -3,10 +3,20 @@
   flex-direction: row;
   padding: 20px;
   box-shadow: 0 2px 10px -1px #3333;
-  margin-bottom: 20px;
   justify-content: center;
   overflow: hidden;
   max-height: 50vh;
+  border-radius: 0.2em;
+}
+
+.createdat {
+  margin-left: 5px;
+  margin-bottom: 20px;
+}
+
+.createdat p {
+  font-size: 12px !important;
+  color: rgba(0, 0, 0, 0.372);
 }
 
 .timeinfo {
