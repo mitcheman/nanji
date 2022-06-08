@@ -1,4 +1,4 @@
-.postlist {
+#postlist {
   display: flex;
   flex-direction: column;
   max-width: 70%;
@@ -6,14 +6,7 @@
   margin: 20px;
 }
 
-.timeinfo {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  text-align: center;
-}
-
-.postlist h3 {
+#postlist h3 {
   font-size: 15px;
   text-align: center;
   margin-bottom: 20px;
@@ -21,6 +14,10 @@
   margin-left: 5px;
 }
 
-.postlist p {
+#postlist p {
   font-size: 16px;
+}
+
+#buffer {
+  margin-bottom: 70px;
 }

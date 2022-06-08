@@ -1,9 +1,9 @@
 
 import { Storage, API } from "aws-amplify"
-import { listPosts, postByDate } from "../graphql/queries"
+import { postByDate } from "../graphql/queries"
 import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
-import { sortData } from "../utils/sort"
+import { duplicates } from "../utils/duplicates"
 import { BsChevronDown } from 'react-icons/bs';
 
 Storage.configure({ level: 'private' });
@@ -16,6 +16,7 @@ export function Dashboard() {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
+        tokenID = null;
         listAllPosts().then((data) => {
             setPosts(data.data.postByDate.items)
             tokenID = data.data.postByDate.nextToken;
@@ -30,6 +31,8 @@ export function Dashboard() {
             post.s3Image = image
             return post
         } ))
+        //removes duplicate dates
+        duplicates(postData.data.postByDate.items)
         return postData
     }
 

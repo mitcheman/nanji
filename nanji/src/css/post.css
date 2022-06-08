@@ -8,6 +8,13 @@
   max-height: 50vh;
 }
 
+.timeinfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: center;
+}
+
 .post p {
   margin-left: 20px;
   background-color: rgba(0, 0, 0, 0.063);

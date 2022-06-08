@@ -2,6 +2,11 @@
   margin: 0;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 .welcome {
   display: flex;
   margin: 20px;
@@ -9,7 +14,8 @@
 
 #footer {
   position: absolute;
-  margin-top: 0px;
+  bottom: 0;
+  overflow: hidden;
   width: 100%;
   border: none;
   background: none;
