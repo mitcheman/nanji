@@ -12,6 +12,11 @@ html {
   margin: 20px;
 }
 
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
 #footer {
   position: absolute;
   bottom: 0;

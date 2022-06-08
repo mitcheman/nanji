@@ -1,9 +1,10 @@
 #postlist {
   display: flex;
   flex-direction: column;
-  max-width: 70%;
+  width: 60%;
   justify-content: center;
   margin: 20px;
+  margin-bottom: 50px;
 }
 
 #postlist h3 {

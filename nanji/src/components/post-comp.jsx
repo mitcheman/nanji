@@ -1,8 +1,6 @@
 import '../css/post.css'
 const moment = require('moment')
 
-//need to set it so when a date exists to not add it again
-
 export function Post ({post}) {
 
     if (post.date === null) {

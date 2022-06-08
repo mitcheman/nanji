@@ -5,12 +5,11 @@ import '../css/postlist.css'
 export function PostList ({posts}) {
     return (
         <>
+        <div id="postlist" >
             {posts.map((post) => (
-                <div id="postlist" >
-                    <Post post={post} key={post.id}/>
-                </div>
+                <Post post={post} key={post.id}/>
             ))}
-            <div id="buffer"></div>
+            </div>
         </>
     )
 }

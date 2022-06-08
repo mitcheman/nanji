@@ -1,0 +1,36 @@
+#timeline {
+  margin-left: auto;
+  width: 15%;
+  background: rgba(0, 0, 0, 0.063);
+  margin-bottom: 35px;
+}
+
+ul {
+  position: fixed;
+  overflow-y: scroll;
+  margin-left: 2vw;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+}
+
+li {
+  font-size: 16px;
+  list-style-type: none;
+  text-align: center;
+  margin-bottom: 15%;
+  margin-top: 15%;
+  justify-content: space-evenly;
+}
+
+li:hover {
+  color: rgba(0, 0, 0, 0.512);
+  cursor: pointer;
+}
+
+#timeline svg {
+  margin-left: 45%;
+}

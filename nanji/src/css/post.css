@@ -3,12 +3,14 @@
   flex-direction: row;
   padding: 20px;
   box-shadow: 0 2px 10px -1px #3333;
+  margin-bottom: 20px;
   justify-content: center;
   overflow: hidden;
   max-height: 50vh;
 }
 
 .timeinfo {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
