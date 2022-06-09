@@ -9,6 +9,20 @@
   border-radius: 0.2em;
 }
 
+.post svg {
+  position: absolute;
+  height: auto;
+  width: 25px;
+  left: 40px;
+  margin-right: auto;
+  margin-top: -20px;
+}
+
+.post svg:hover {
+  color: rgba(0, 0, 0, 0.569);
+  cursor: pointer;
+}
+
 .createdat {
   margin-left: 5px;
   margin-bottom: 20px;

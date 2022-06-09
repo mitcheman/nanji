@@ -3,8 +3,8 @@ import { Storage, API } from "aws-amplify"
 import { postByDate, listPosts } from "../graphql/queries"
 import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
-import { Timeline } from "../components/timeline"
-import { duplicates } from "../utils/duplicates"
+import { Timeline } from "../components/timeline-comp"
+import { duplicates, duplicatesByMonth } from "../utils/duplicates"
 import { sortData } from "../utils/sort"
 import { BsChevronDown } from 'react-icons/bs';
 
@@ -20,6 +20,8 @@ export function Dashboard() {
     //all posts
     const [allPosts, setAllPosts] = useState([])
 
+    const [noPosts, setNoPosts] = useState(false)
+
     useEffect(() => {
         tokenID = null;
         listSortedPosts().then((data) => {
@@ -32,8 +34,13 @@ export function Dashboard() {
 
     useEffect(() => {
         listAllPosts().then((data) => {
-            setAllPosts(sortData(data.data.listPosts.items));
-            console.log(data)
+            const listData = data.data.listPosts.items
+            setAllPosts(sortData(listData));
+            if (listData.length === 0) {
+                setNoPosts(true);
+            } else {
+                setNoPosts(false);
+            }
         })
     }, [])
 
@@ -51,6 +58,7 @@ export function Dashboard() {
 
     async function listAllPosts () {
         const allPostData = await API.graphql({ query: listPosts, authMode: 'AMAZON_COGNITO_USER_POOLS' })
+        duplicatesByMonth(allPostData.data.listPosts.items)
         return allPostData
     }
 
@@ -65,7 +73,13 @@ export function Dashboard() {
             return tokenID;
         })
     }
-
+if (noPosts === true) {
+    return (
+        <div id="nodata">
+            <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
+        </div>
+    )
+} else {
     return (
         <>
         <div class="container">
@@ -75,4 +89,5 @@ export function Dashboard() {
         </div>
         </>
     )
+}
 }

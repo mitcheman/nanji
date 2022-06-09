@@ -8,6 +8,7 @@ import { BsCheckCircle } from 'react-icons/bs'
 import '../css/form.css'
 const moment = require('moment')
 
+const currentDate = moment(new Date()).format('YYYY-MM-DD')
 
 export function NewPost({user}) {
 
@@ -25,7 +26,7 @@ export function NewPost({user}) {
             return;
         }
         //this is a stupid file naming system - need to change this
-        const filename = user.username + fileData.name;
+        const filename = currentDate + '_' + fileData.name;
         await Storage.put(filename, fileData, {level: 'private'});
         const newPost = {date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username, type: "Post"};
         const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
@@ -34,19 +35,16 @@ export function NewPost({user}) {
         event.target.content.value = '';
         event.target.date.value = "";
         event.target.fileupload.value = null;
-        console.log(result);
     }
-
-    const currentDate = moment(new Date()).format('YYYY-MM-DD')
 
     return (
     <>
     <div id="newpost">
         <form id="form" onSubmit={savePost}>
-        <h3>New Post</h3>
-            <label for="picdate">Date:</label>
+        <h3>ʕ •ᴥ•ʔ ☆<br></br>New Post</h3>
+            <label for="picdate">Enter the date you think this was taken</label>
             <input id="picdate" name="date" type="date" max={currentDate} />
-            <label for="content">Background Story:</label>
+            <label for="content">Background story of photo</label>
             <TextAreaField size="large" autoComplete="off" name="content" type="text" placeholder="Enter Text Here" />
             <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => setFileData(e.target.files[0])}></input>
             {/* {fileStatus ? <div><BsCheckCircle /></div>: ''} */}

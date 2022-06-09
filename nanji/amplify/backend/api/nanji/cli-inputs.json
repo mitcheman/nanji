@@ -18,10 +18,6 @@
         "cognitoUserPoolId": "authnanji"
       }
     ],
-    "conflictResolution": {
-      "defaultResolutionStrategy": {
-        "type": "AUTOMERGE"
-      }
-    }
+    "conflictResolution": {}
   }
 }

@@ -1,7 +1,7 @@
 #postlist {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 70%;
   justify-content: center;
   margin: 20px;
   margin-left: 40px;
@@ -18,8 +18,4 @@
 
 #postlist p {
   font-size: 16px;
-}
-
-#buffer {
-  margin-bottom: 70px;
 }

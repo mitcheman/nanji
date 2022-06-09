@@ -7,14 +7,24 @@ html {
   min-height: 100%;
 }
 
+body {
+  height: 100%;
+}
+
 .welcome {
   display: flex;
   margin: 20px;
 }
 
+#nodata {
+  margin-top: 25px;
+  margin-left: 25px;
+}
+
 .container {
   display: flex;
   flex-direction: row;
+  height: 100%;
 }
 
 #footer {
