@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { Welcome } from './pages/welcome-page';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Amplify } from 'aws-amplify';

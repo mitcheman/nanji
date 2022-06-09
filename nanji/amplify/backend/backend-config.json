@@ -78,5 +78,13 @@
       "providerPlugin": "awscloudformation",
       "dependsOn": []
     }
+  },
+  "function": {
+    "nanji645de7d8": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": []
+    }
   }
 }

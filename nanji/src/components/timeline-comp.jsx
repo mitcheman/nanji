@@ -1,7 +1,7 @@
 import '../css/timeline.css'
 import { Storage, API } from "aws-amplify"
 import { postByDate } from "../graphql/queries"
-import { duplicates, duplicatesByMonth } from "../utils/duplicates"
+import { duplicates } from "../utils/duplicates"
 const moment = require('moment')
 
 export function Timeline({allPosts, posts, setPosts, token, setToken}) {
@@ -24,6 +24,7 @@ export function Timeline({allPosts, posts, setPosts, token, setToken}) {
         duplicates(filteredPosts.items);
         setPosts(filteredPosts.items);
         setToken(filteredPosts.nextToken);
+        window.scrollTo(0, 0)
     }
 
     return (

@@ -54,14 +54,14 @@ body {
     0,
     0,
     0,
-    0.5
+    0.3
   );
   --amplify-components-button-link-color: black;
   --amplify-components-button-link-hover-background-color: rgba(
     72,
     72,
     72,
-    0.145
+    0.3
   );
   --amplify-components-button-link-hover-color: black;
   --amplify-components-authenticator-state-inactive-background-color: rgba(
@@ -71,4 +71,8 @@ body {
     0.045
   );
   --amplify-components-tabs-item-active-border-color: black;
+  --amplify-components-tabs-item-hover-color: rgba(0, 0, 0, 0.3);
+  --amplify-components-fieldcontrol-focus-border-color: black;
+  --amplify-components-button-primary-active-background-color: white;
+  --amplify-components-button-primary-active-color: black;
 }

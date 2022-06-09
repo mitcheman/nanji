@@ -74,15 +74,9 @@ export const getUser = /* GraphQL */ `
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
-      firstName
-      lastName
       email
-      Posts {
-        nextToken
-      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -95,12 +89,9 @@ export const listUsers = /* GraphQL */ `
     listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        firstName
-        lastName
         email
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

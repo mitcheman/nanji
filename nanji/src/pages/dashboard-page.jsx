@@ -34,6 +34,7 @@ export function Dashboard() {
     useEffect(() => {
         listAllPosts().then((data) => {
             const listData = data.data.listPosts.items
+            console.log(listData)
             sortData(listData);
             setAllPosts(duplicatesByMonth(listData))
             if (listData.length === 0) {

@@ -47,50 +47,32 @@ export const onDeletePost = /* GraphQL */ `
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String) {
-    onCreateUser(owner: $owner) {
+  subscription OnCreateUser {
+    onCreateUser {
       id
-      firstName
-      lastName
       email
-      Posts {
-        nextToken
-      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String) {
-    onUpdateUser(owner: $owner) {
+  subscription OnUpdateUser {
+    onUpdateUser {
       id
-      firstName
-      lastName
       email
-      Posts {
-        nextToken
-      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String) {
-    onDeleteUser(owner: $owner) {
+  subscription OnDeleteUser {
+    onDeleteUser {
       id
-      firstName
-      lastName
       email
-      Posts {
-        nextToken
-      }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

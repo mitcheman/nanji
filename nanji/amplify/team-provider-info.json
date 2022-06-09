@@ -14,6 +14,12 @@
     "categories": {
       "auth": {
         "nanji": {}
+      },
+      "function": {
+        "nanji645de7d8": {
+          "deploymentBucketName": "amplify-nanji-staging-83539-deployment",
+          "s3Key": "amplify-builds/nanji645de7d8-4a487053516e53632b6a-build.zip"
+        }
       }
     }
   }

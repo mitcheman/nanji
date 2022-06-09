@@ -3,8 +3,7 @@ import '../css/header.css'
 import React from "react";
 import {BrowserRouter as Router} from "react-router-dom";
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from 'react-icons/md';
-import { Auth } from 'aws-amplify';
-
+import { BsPersonLinesFill } from 'react-icons/bs'
 
 export function Header({signOut, user}) {
 
@@ -15,8 +14,9 @@ export function Header({signOut, user}) {
             <a id="nanji" href='/'>Nanji</a>
         <Router>
         <nav>
-        <h3>{name}</h3>
+        <a id="username" href='/Account'>{name}</a>
             <div id="nav-buttons">
+                <a href='/Friends'><BsPersonLinesFill /></a>
                 <a href='/newPost'><MdOutlineAddPhotoAlternate /></a>
                 <button onClick={signOut}><MdOutlineLogout /></button>
             </div>
