@@ -1,7 +1,31 @@
 import '../css/timeline.css'
+import { Storage, API } from "aws-amplify"
+import { postByDate } from "../graphql/queries"
+import { duplicates, duplicatesByMonth } from "../utils/duplicates"
 const moment = require('moment')
 
-export function Timeline({allPosts}) {
+export function Timeline({allPosts, posts, setPosts, token, setToken}) {
+
+    let tokenID;
+    let limitNum = 5;
+
+    const clickHandler = async (e) => {
+
+        if (allPosts.length <= limitNum) return;
+
+        const postData = await API.graphql({ query: postByDate, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: { type: "Post", sortDirection: "DESC", limit: limitNum, nextToken: tokenID, date: { le: e.target.getAttribute('id') } } });
+        const filteredPosts = postData.data.postByDate;
+        const posts = await Promise.all(filteredPosts.items.map(async post => {
+            const image = await Storage.get(post.image)
+            post.s3Image = image
+            return post
+        } ));
+
+        duplicates(filteredPosts.items);
+        setPosts(filteredPosts.items);
+        setToken(filteredPosts.nextToken);
+    }
+
     return (
         <div id="timeline">
             <ul>
@@ -9,7 +33,8 @@ export function Timeline({allPosts}) {
             {allPosts.map((post) => (
                 (post.date === null)
                 ? <></>: <>
-                <li key={post.date}>{moment(post.date).format('MMMM YYYY')}</li>
+                <li onClick={clickHandler}
+                id={post.date} key={post.date}>{moment(post.date).format('MMMM YYYY')}</li>
                 </>
             ))}
             </ul>
