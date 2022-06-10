@@ -182,38 +182,35 @@ export const onDeleteOutgoingFriendRequest = /* GraphQL */ `
   }
 `;
 export const onCreateIncomingFriendRequest = /* GraphQL */ `
-  subscription OnCreateIncomingFriendRequest($owner: String) {
-    onCreateIncomingFriendRequest(owner: $owner) {
+  subscription OnCreateIncomingFriendRequest {
+    onCreateIncomingFriendRequest {
       id
-      request_to
+      request_from
       createdAt
       updatedAt
       userIncoming_friend_requestsId
-      owner
     }
   }
 `;
 export const onUpdateIncomingFriendRequest = /* GraphQL */ `
-  subscription OnUpdateIncomingFriendRequest($owner: String) {
-    onUpdateIncomingFriendRequest(owner: $owner) {
+  subscription OnUpdateIncomingFriendRequest {
+    onUpdateIncomingFriendRequest {
       id
-      request_to
+      request_from
       createdAt
       updatedAt
       userIncoming_friend_requestsId
-      owner
     }
   }
 `;
 export const onDeleteIncomingFriendRequest = /* GraphQL */ `
-  subscription OnDeleteIncomingFriendRequest($owner: String) {
-    onDeleteIncomingFriendRequest(owner: $owner) {
+  subscription OnDeleteIncomingFriendRequest {
+    onDeleteIncomingFriendRequest {
       id
-      request_to
+      request_from
       createdAt
       updatedAt
       userIncoming_friend_requestsId
-      owner
     }
   }
 `;

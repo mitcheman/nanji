@@ -25,3 +25,17 @@ export const getUserOutgoing = /* GraphQL */ `
     }
   }
 `;
+
+export const getUserIncoming = /* GraphQL */ `
+  query getUserIncoming($id: ID!) {
+    getUser(id: $id) {
+      incoming_friend_requests {
+        items {
+          createdAt
+          id
+          request_from
+        }
+      }
+    }
+  }
+`;

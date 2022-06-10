@@ -35,7 +35,7 @@ type OutgoingFriendRequest @model @auth(rules: [{ allow: owner }]) {
   request_to: String!
 }
 
-type IncomingFriendRequest @model @auth(rules: [{ allow: owner }]) {
+type IncomingFriendRequest @model @auth(rules: [{ allow: private }]) {
   id: ID!
-  request_to: String!
+  request_from: String!
 }

@@ -224,11 +224,10 @@ export const getIncomingFriendRequest = /* GraphQL */ `
   query GetIncomingFriendRequest($id: ID!) {
     getIncomingFriendRequest(id: $id) {
       id
-      request_to
+      request_from
       createdAt
       updatedAt
       userIncoming_friend_requestsId
-      owner
     }
   }
 `;
@@ -245,11 +244,10 @@ export const listIncomingFriendRequests = /* GraphQL */ `
     ) {
       items {
         id
-        request_to
+        request_from
         createdAt
         updatedAt
         userIncoming_friend_requestsId
-        owner
       }
       nextToken
     }

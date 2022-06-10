@@ -21,19 +21,54 @@
 }
 
 #requestlist {
+  display: flex;
+  flex-direction: column;
   margin-top: 50px;
   margin-left: 5%;
-  width: 20%;
+  width: 30%;
 }
 
 .individualrequest {
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
   margin: 20px;
+  background-color: rgba(0, 0, 0, 0.029);
+  border-radius: 0.2em;
 }
 
-/* .individualrequest:hover {
+.textinfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.textinfo p {
+  font-size: 14px;
+  margin: 5px;
+}
+
+.iconinfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+}
+
+.iconinfo svg {
+  height: auto;
+  width: 30px;
+  margin: 5px;
+}
+
+.acceptrequest:hover {
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.569);
-} */
+  color: rgba(37, 151, 60, 0.771);
+}
+
+.denyrequest:hover {
+  cursor: pointer;
+  color: rgba(185, 30, 30, 0.771);
+}
 
 .outgoing {
   box-shadow: 0 2px 10px -1px #3333;
@@ -42,6 +77,17 @@
 }
 
 .outgoing h5 {
+  margin-left: 20px;
+  margin-bottom: 10px;
+}
+
+.incoming {
+  box-shadow: 0 2px 10px -1px #3333;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.incoming h5 {
   margin-left: 20px;
   margin-bottom: 10px;
 }
