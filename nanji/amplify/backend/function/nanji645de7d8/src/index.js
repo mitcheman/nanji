@@ -1,6 +1,9 @@
 var aws = require('aws-sdk');
 var ddb = new aws.DynamoDB();
 
+//as of now this is directly doing a put on my dynamoDB; Probably need to change this to go through my graphql API
+//https://docs.amplify.aws/guides/functions/graphql-from-lambda/q/platform/js/#mutation
+
 exports.handler = async (event, context) => {
   let date = new Date();
 

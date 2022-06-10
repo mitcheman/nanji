@@ -3,16 +3,19 @@ import { API } from "aws-amplify"
 import { searchUsers } from "../graphql/queries"
 import { useState } from 'react';
 import { BsFillPersonPlusFill } from 'react-icons/bs'
+import { createOutgoingFriendRequest } from "../graphql/mutations"
+import { listOutgoingFriendRequests } from "../graphql/queries"
+import { getUserByUser } from '../graphql/custom';
 import '../css/search.css'
 
-export function Search({user}) {
+export function Search({user, outGoing, setOutGoing}) {
 
     const [userSearch, setUserSearch] = useState();
     const [searchResult, setSearchResult] = useState(false);
+    const [selectedUser, setSelectedUser] = useState();
 
     const searchHandler = async(event) => {
         const result = await API.graphql({query: searchUsers, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {filter: {preferred_username: { match: event }}} })
-        console.log(result.data.searchUsers.items);
         const results = result.data.searchUsers.items
         if (results.length > 0) {
             setSearchResult(true);
@@ -25,7 +28,22 @@ export function Search({user}) {
     }
 
     const friendRequestHandler = async(event) => {
-        alert('friend request sent')
+        //get id from target
+        const selectedID = (event.target.parentNode.getAttribute('id') === null || undefined) ? event.target.parentNode.parentNode.getAttribute('id') : event.target.parentNode.getAttribute('id');
+        //get user data associated with target
+        const userData = await API.graphql({query: getUserByUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: selectedID } });
+        //prevent multiple requests to the same person
+        const RequestExists = await API.graphql({ query: listOutgoingFriendRequests, authMode: 'AMAZON_COGNITO_USER_POOLS', filter: { request_to: {eq: selectedID}} });
+        if (RequestExists.data.listOutgoingFriendRequests.items.length > 0) return;
+        // state new friend request data
+        const friendRequest = {userOutgoing_friend_requestsId: user.username, request_to: selectedID};
+        //create a new friend request
+        const result = await API.graphql({query: createOutgoingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendRequest } });
+        const newRequest = userData.data.getUser
+        setOutGoing(prev => {
+            return [...prev, newRequest]
+        });
+        alert('friend request sent');
     }
 
  return (
@@ -41,7 +59,7 @@ export function Search({user}) {
         {(searchResult) ?
         <div>
             {userSearch.map((userResult) => (
-                <div key={userResult.preferred_username} class="searchresults">
+                <div id={userResult.id} key={userResult.id} class="searchresults">
                 <ul>
                     <li>Name: {userResult.given_name + ' ' + userResult.family_name}</li>
                     <li>Username: {userResult.preferred_username}</li>

@@ -19,5 +19,33 @@ type User
   id: ID!
   family_name: String!
   given_name: String!
-  preferred_username: String!
+  preferred_username: String
+  friends: [Friend] @hasMany @auth(rules: [{ allow: owner }])
+  outgoing_friend_requests: [OutgoingFriendRequest]
+    @hasMany
+    @auth(rules: [{ allow: owner }])
+  incoming_friend_requests: [IncomingFriendRequest]
+    @hasMany
+    @auth(
+      rules: [
+        { allow: owner }
+        { allow: private, operations: [create, update] }
+      ]
+    )
+}
+
+type Friend @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  request_to: String!
+}
+
+type OutgoingFriendRequest @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  request_to: String!
+  request_to_username: String!
+}
+
+type IncomingFriendRequest @model @auth(rules: [{ allow: owner }]) {
+  id: ID!
+  request_to: String!
 }

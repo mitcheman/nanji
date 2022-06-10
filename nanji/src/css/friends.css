@@ -16,12 +16,32 @@
 
 #friendlist {
   margin-top: 50px;
-  margin-left: 50px;
-  margin-right: 20px;
+  margin-left: 5%;
+  width: 33%;
 }
 
 #requestlist {
   margin-top: 50px;
-  margin-left: 50px;
-  margin-right: 20px;
+  margin-left: 5%;
+  width: 20%;
+}
+
+.individualrequest {
+  margin: 20px;
+}
+
+/* .individualrequest:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.569);
+} */
+
+.outgoing {
+  box-shadow: 0 2px 10px -1px #3333;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.outgoing h5 {
+  margin-left: 20px;
+  margin-bottom: 10px;
 }

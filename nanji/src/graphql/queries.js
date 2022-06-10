@@ -77,8 +77,18 @@ export const getUser = /* GraphQL */ `
       family_name
       given_name
       preferred_username
+      friends {
+        nextToken
+      }
+      outgoing_friend_requests {
+        nextToken
+      }
+      incoming_friend_requests {
+        nextToken
+      }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -96,6 +106,7 @@ export const listUsers = /* GraphQL */ `
         preferred_username
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
@@ -125,6 +136,7 @@ export const searchUsers = /* GraphQL */ `
         preferred_username
         createdAt
         updatedAt
+        owner
       }
       nextToken
       total
@@ -142,6 +154,107 @@ export const searchUsers = /* GraphQL */ `
           }
         }
       }
+    }
+  }
+`;
+export const getFriend = /* GraphQL */ `
+  query GetFriend($id: ID!) {
+    getFriend(id: $id) {
+      id
+      request_to
+      createdAt
+      updatedAt
+      userFriendsId
+      owner
+    }
+  }
+`;
+export const listFriends = /* GraphQL */ `
+  query ListFriends(
+    $filter: ModelFriendFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listFriends(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        request_to
+        createdAt
+        updatedAt
+        userFriendsId
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getOutgoingFriendRequest = /* GraphQL */ `
+  query GetOutgoingFriendRequest($id: ID!) {
+    getOutgoingFriendRequest(id: $id) {
+      id
+      request_to
+      createdAt
+      updatedAt
+      userOutgoing_friend_requestsId
+      owner
+    }
+  }
+`;
+export const listOutgoingFriendRequests = /* GraphQL */ `
+  query ListOutgoingFriendRequests(
+    $filter: ModelOutgoingFriendRequestFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listOutgoingFriendRequests(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        request_to
+        createdAt
+        updatedAt
+        userOutgoing_friend_requestsId
+        owner
+      }
+      nextToken
+    }
+  }
+`;
+export const getIncomingFriendRequest = /* GraphQL */ `
+  query GetIncomingFriendRequest($id: ID!) {
+    getIncomingFriendRequest(id: $id) {
+      id
+      request_to
+      createdAt
+      updatedAt
+      userIncoming_friend_requestsId
+      owner
+    }
+  }
+`;
+export const listIncomingFriendRequests = /* GraphQL */ `
+  query ListIncomingFriendRequests(
+    $filter: ModelIncomingFriendRequestFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listIncomingFriendRequests(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        request_to
+        createdAt
+        updatedAt
+        userIncoming_friend_requestsId
+        owner
+      }
+      nextToken
     }
   }
 `;
