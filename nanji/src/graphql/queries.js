@@ -88,7 +88,6 @@ export const getUser = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -106,7 +105,6 @@ export const listUsers = /* GraphQL */ `
         preferred_username
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -136,7 +134,6 @@ export const searchUsers = /* GraphQL */ `
         preferred_username
         createdAt
         updatedAt
-        owner
       }
       nextToken
       total

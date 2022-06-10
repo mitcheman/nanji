@@ -7,7 +7,21 @@ export const getUserByUser = /* GraphQL */ `
       preferred_username
       createdAt
       updatedAt
-      owner
+    }
+  }
+`;
+
+export const getUserOutgoing = /* GraphQL */ `
+  query getUserOutgoing($id: ID!) {
+    getUser(id: $id) {
+      outgoing_friend_requests {
+        items {
+          createdAt
+          id
+          owner
+          request_to
+        }
+      }
     }
   }
 `;

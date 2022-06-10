@@ -12,7 +12,7 @@ export function Friends({user}) {
     <>
     <div id="friends">
         <Search user={user} outGoing={outGoing} setOutGoing={setOutGoing}/>
-        <RequestList outGoing={outGoing} setOutGoing={setOutGoing}/>
+        <RequestList user={user} outGoing={outGoing} setOutGoing={setOutGoing}/>
         <FriendsList />
     </div>
     </>

@@ -4,8 +4,7 @@ import { searchUsers } from "../graphql/queries"
 import { useState } from 'react';
 import { BsFillPersonPlusFill } from 'react-icons/bs'
 import { createOutgoingFriendRequest } from "../graphql/mutations"
-import { listOutgoingFriendRequests } from "../graphql/queries"
-import { getUserByUser } from '../graphql/custom';
+import { getUserOutgoing } from '../graphql/custom';
 import '../css/search.css'
 
 export function Search({user, outGoing, setOutGoing}) {
@@ -28,21 +27,15 @@ export function Search({user, outGoing, setOutGoing}) {
     }
 
     const friendRequestHandler = async(event) => {
-        //get id from target
         const selectedID = (event.target.parentNode.getAttribute('id') === null || undefined) ? event.target.parentNode.parentNode.getAttribute('id') : event.target.parentNode.getAttribute('id');
-        //get user data associated with target
-        const userData = await API.graphql({query: getUserByUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: selectedID } });
-        //prevent multiple requests to the same person
-        const RequestExists = await API.graphql({ query: listOutgoingFriendRequests, authMode: 'AMAZON_COGNITO_USER_POOLS', filter: { request_to: {eq: selectedID}} });
-        if (RequestExists.data.listOutgoingFriendRequests.items.length > 0) return;
-        // state new friend request data
+         const RequestExists = await API.graphql({query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username, filter: { request_to: {eq: selectedID}}} });
+         if (RequestExists.data.getUser.outgoing_friend_requests.items.length > 0) return;
         const friendRequest = {userOutgoing_friend_requestsId: user.username, request_to: selectedID};
-        //create a new friend request
         const result = await API.graphql({query: createOutgoingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendRequest } });
-        const newRequest = userData.data.getUser
-        setOutGoing(prev => {
-            return [...prev, newRequest]
-        });
+        const newOutGoing = result.data.createOutgoingFriendRequest
+        // setOutGoing(prev => {
+        //     return [...prev, newOutGoing]
+        // });
         alert('friend request sent');
     }
 
