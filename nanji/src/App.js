@@ -31,4 +31,4 @@ function App({ signOut, user }) {
   );
 }
 
-export default withAuthenticator(App, console.log('banana'));
+export default withAuthenticator(App);

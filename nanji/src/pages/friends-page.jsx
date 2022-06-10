@@ -1,15 +1,17 @@
-
-import { SearchField } from '@aws-amplify/ui-react';
+import { Search } from "../components/search-comp"
+import { FriendsList } from "../components/friendsList-comp"
+import { RequestList } from "../components/requestList-comp"
 import '../css/friends.css'
 
 export function Friends({user}) {
 
  return (
     <>
-    <div id="friendsearch">
-        <h4>Search for friends and family</h4>
-        <SearchField label="Search for friends and family" placeholder="Search here..."/>
-     </div>
+    <div id="friends">
+        <Search />
+        <FriendsList />
+        <RequestList />
+    </div>
     </>
  )
 }

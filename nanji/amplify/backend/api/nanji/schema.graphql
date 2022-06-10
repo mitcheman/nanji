@@ -12,7 +12,12 @@ type Post @model @auth(rules: [{ allow: owner }]) {
   userID: ID! @index(name: "byUser")
 }
 
-type User @model @auth(rules: [{ allow: public }]) {
+type User
+  @model
+  @auth(rules: [{ allow: private, operations: [read] }])
+  @searchable {
   id: ID!
-  email: String!
+  family_name: String!
+  given_name: String!
+  preferred_username: String!
 }

@@ -5,7 +5,7 @@
   margin-bottom: 35px;
 }
 
-ul {
+#timeline ul {
   position: fixed;
   overflow-y: scroll;
   margin-left: 2vw;
@@ -18,7 +18,7 @@ ul {
   padding: 0px;
 }
 
-li {
+#timeline li {
   font-size: 16px;
   list-style-type: none;
   text-align: center;
@@ -36,7 +36,7 @@ li {
   text-underline-offset: 5px;
 }
 
-li:hover {
+#timeline li:hover {
   color: rgba(0, 0, 0, 0.512);
   cursor: pointer;
 }
