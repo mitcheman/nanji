@@ -18,6 +18,10 @@
   padding: 0px;
 }
 
+#timeline ::-webkit-scrollbar {
+  width: 1px;
+}
+
 #timeline li {
   font-size: 16px;
   list-style-type: none;

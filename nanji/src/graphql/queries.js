@@ -12,7 +12,6 @@ export const getPost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -32,7 +31,6 @@ export const listPosts = /* GraphQL */ `
         userID
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -64,7 +62,6 @@ export const postByDate = /* GraphQL */ `
         userID
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

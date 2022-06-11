@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost($owner: String) {
-    onCreatePost(owner: $owner) {
+  subscription OnCreatePost {
+    onCreatePost {
       id
       date
       content
@@ -12,13 +12,12 @@ export const onCreatePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost($owner: String) {
-    onUpdatePost(owner: $owner) {
+  subscription OnUpdatePost {
+    onUpdatePost {
       id
       date
       content
@@ -27,13 +26,12 @@ export const onUpdatePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost($owner: String) {
-    onDeletePost(owner: $owner) {
+  subscription OnDeletePost {
+    onDeletePost {
       id
       date
       content
@@ -42,7 +40,6 @@ export const onDeletePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
-      owner
     }
   }
 `;

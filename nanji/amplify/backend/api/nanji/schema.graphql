@@ -1,4 +1,4 @@
-type Post @model @auth(rules: [{ allow: owner }]) {
+type Post @model @auth(rules: [{ allow: private }]) {
   id: ID!
   date: AWSDate!
   content: String!

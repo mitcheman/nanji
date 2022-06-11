@@ -30,6 +30,10 @@
   padding: 20px;
 }
 
+#friendlist p {
+  font-size: 15px;
+}
+
 #requestlist {
   display: flex;
   flex-direction: column;

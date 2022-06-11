@@ -6,10 +6,11 @@ import { NewPost } from './pages/newPost-page';
 import { Dashboard } from './pages/dashboard-page';
 import { Account } from './pages/account-page';
 import { Friends } from './pages/friends-page';
+import { UserFriend } from './pages/userFriend-page';
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-function App({ signOut, user }) {
+function App({ signOut, user, setUser }) {
   return (
     <>
       <div>
@@ -18,9 +19,10 @@ function App({ signOut, user }) {
       </div>
       <Router>
         <Routes>
-          <Route path='/' element={<Dashboard />} />
+          <Route path='/' element={<Dashboard user={user} />} />
           <Route path='/Friends' element={<Friends user={user} />} />
           <Route path='/NewPost' element={<NewPost user={user} />} />
+          <Route path='/user/:id' element={<UserFriend />} />
           <Route
             path='/Account'
             element={<Account user={user} signOut={signOut} />}
