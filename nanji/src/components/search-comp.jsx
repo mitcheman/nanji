@@ -29,9 +29,17 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
     const friendRequestHandler = async(event) => {
         //get ID from selected element
         const selectedID = (event.target.parentNode.getAttribute('id') === null || undefined) ? event.target.parentNode.parentNode.getAttribute('id') : event.target.parentNode.getAttribute('id');
+        //confirm user is not the same user
+        if (selectedID === user.username) {
+            setSearchResult(false);
+            return;
+        }
         //check if friend request already exists
         const RequestExists = await API.graphql({query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username, filter: { request_to: {eq: selectedID}}} });
-        if (RequestExists.data.getUser.outgoing_friend_requests.items.length > 0) return;
+        if (RequestExists.data.getUser.outgoing_friend_requests.items.length > 0) {
+            setSearchResult(false);
+            return;
+        }
          //create an outgoing friend request
         const friendRequest = {userOutgoing_friend_requestsId: user.username, request_to: selectedID};
         const createOutGoing = await API.graphql({query: createOutgoingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendRequest } });
@@ -44,6 +52,7 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
         //update incoming requests for requested user
         const fromFriendRequest = {userIncoming_friend_requestsId: selectedID, request_from: user.username};
         const createIncoming = await API.graphql({query: createIncomingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: fromFriendRequest } });
+        setSearchResult(false);
     }
 
  return (
@@ -68,7 +77,7 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
                 </div>
             ))}
         </div>
-        : <div class="searchresults"><h4>No results</h4></div>}
+        : <div class="searchresults"><h5>No results</h5></div>}
     </div>
     </div>
     </>
