@@ -67,43 +67,59 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
         return results
     }
 
-    const handleRequest = async (selectedID) => {
+    const handleIncomingRequest = async (currentUser, oppositeUser) => {
                 //get incoming requests
-                const incomingRequests = await API.graphql({ query: getUserIncoming, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username} });
+                const incomingRequests = await API.graphql({ query: getUserIncoming, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: currentUser} });
                 const reqIncoming = incomingRequests.data.getUser.incoming_friend_requests.items;
-                const selectedIncoming = reqIncoming.filter(el => el.request_from === selectedID);
+                const selectedIncoming = reqIncoming.filter(el => el.request_from === oppositeUser);
                 //delete incoming request that matches
                 const deleteIncomingRequest = await API.graphql({query: deleteIncomingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedIncoming[0].id }}});
                 //update incoming state
                 getIncomingRequests().then((data) => {
                     setIncoming(data);
                 })
+    }
+
+    const handleOutgoingRequest = async (currentUser, oppositeUser) => {
                 //get outgoing request for other user
-                const outgoingRequests = await API.graphql({ query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: selectedID} });
+                const outgoingRequests = await API.graphql({ query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: oppositeUser} });
                 const reqOutgoing = outgoingRequests.data.getUser.outgoing_friend_requests.items;
-                const selectedOutgoing = reqOutgoing.filter(el => el.request_to === user.username);
+                const selectedOutgoing = reqOutgoing.filter(el => el.request_to === currentUser);
                 // //delete outgoing request that matches
                 const deleteOutgoingRequest = await API.graphql({query: deleteOutgoingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedOutgoing[0].id }}});
     }
 
-    const acceptRequestHandler = async (event) => {
-        const selectedID = ((event.target.parentNode.getAttribute('id') === null) ? event.target.parentNode.parentNode.getAttribute('id') : event.target.parentNode.getAttribute('id'));
+    const acceptRequestHandler = async (selectedID) => {
         //accept request
         const acceptedRequest = {userFriendsId: user.username, friend_with: selectedID, owner: user.username};
         const createAcceptedRequest = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: acceptedRequest}});
         const friendAcceptedRequest = {userFriendsId: selectedID, friend_with: user.username, owner: selectedID};
         const createFriendAcceptedRequest = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendAcceptedRequest}});
         //handle requests
-        handleRequest(selectedID);
+        handleIncomingRequest(user.username, selectedID);
+        handleOutgoingRequest(user.username, selectedID);
         //update friends list
         getFriends().then((data) => {
             setFriends(data);
         })
     }
 
-    const denyRequestHandler = async (event) => {
-        const selectedID = ((event.target.parentNode.getAttribute('id') === null) ? event.target.parentNode.parentNode.getAttribute('id') : event.target.parentNode.getAttribute('id'));
-        handleRequest(selectedID);
+    const denyRequestHandler = async (selectedID) => {
+        console.log(selectedID)
+        await handleIncomingRequest(user.username, selectedID);
+        await handleOutgoingRequest(user.username, selectedID);
+        getIncomingRequests().then((data) => {
+            setIncoming(data);
+        })
+    }
+
+    const cancelRequestHandler = async (selectedID) => {
+        await handleIncomingRequest(selectedID, user.username);
+        await handleOutgoingRequest(selectedID, user.username);
+        getOutgoingRequests().then((data) => {
+            console.log(data)
+            setOutGoing(data);
+        });
     }
 
     //requests should be their own componenet probably
@@ -119,7 +135,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
                             <p>Username: {req.preferred_username}</p>
                         </div>
                         <div class="iconinfo">
-                            <TiCancelOutline class="denyrequest" onClick={denyRequestHandler}/>
+                            <TiCancelOutline class="denyrequest" onClick={() => cancelRequestHandler(req.id)}/>
                         </div>
                     </div>
                 ))}
@@ -133,8 +149,8 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
                             <p>Username: {req.preferred_username}</p>
                         </div>
                         <div class="iconinfo">
-                            <BiUserPlus class="acceptrequest" onClick={acceptRequestHandler}/>
-                            <BiUserMinus class="denyrequest" onClick={denyRequestHandler}/>
+                            <BiUserPlus class="acceptrequest" onClick={() => acceptRequestHandler(req.id)}/>
+                            <BiUserMinus class="denyrequest" onClick={() => denyRequestHandler(req.id)}/>
                         </div>
                     </div>
                 ))}

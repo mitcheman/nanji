@@ -14,7 +14,7 @@ export function FriendsList({friends, setFriends}) {
                         <p>Username: {req.preferred_username}</p>
                     </div>
                 ))}
-                </div>
+            </div>
         </div>
     )
 }
