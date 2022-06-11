@@ -25,12 +25,13 @@ type User
   incoming_friend_requests: [IncomingFriendRequest] @hasMany
 }
 
-type Friend @model @auth(rules: [{ allow: owner }]) {
+type Friend @model @auth(rules: [{ allow: private }]) {
   id: ID!
-  request_to: String!
+  friend_with: String!
+  owner: String
 }
 
-type OutgoingFriendRequest @model @auth(rules: [{ allow: owner }]) {
+type OutgoingFriendRequest @model @auth(rules: [{ allow: private }]) {
   id: ID!
   request_to: String!
 }

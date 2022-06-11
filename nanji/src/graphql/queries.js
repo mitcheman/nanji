@@ -158,11 +158,11 @@ export const getFriend = /* GraphQL */ `
   query GetFriend($id: ID!) {
     getFriend(id: $id) {
       id
-      request_to
+      friend_with
+      owner
       createdAt
       updatedAt
       userFriendsId
-      owner
     }
   }
 `;
@@ -175,11 +175,11 @@ export const listFriends = /* GraphQL */ `
     listFriends(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        request_to
+        friend_with
+        owner
         createdAt
         updatedAt
         userFriendsId
-        owner
       }
       nextToken
     }
@@ -193,7 +193,6 @@ export const getOutgoingFriendRequest = /* GraphQL */ `
       createdAt
       updatedAt
       userOutgoing_friend_requestsId
-      owner
     }
   }
 `;
@@ -214,7 +213,6 @@ export const listOutgoingFriendRequests = /* GraphQL */ `
         createdAt
         updatedAt
         userOutgoing_friend_requestsId
-        owner
       }
       nextToken
     }

@@ -1,12 +1,10 @@
 .search {
   margin-left: 5%;
   margin-top: 50px;
-  width: 30%;
 }
 
 .search h4 {
-  font-size: 16px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 
 .searchresults {

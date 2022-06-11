@@ -11,14 +11,30 @@ export const getUserByUser = /* GraphQL */ `
   }
 `;
 
+export const getUserFriends = /* GraphQL */ `
+  query getUserFriends($id: ID!) {
+    getUser(id: $id) {
+      friends {
+        items {
+          createdAt
+          updatedAt
+          id
+          owner
+          friend_with
+        }
+      }
+    }
+  }
+`;
+
 export const getUserOutgoing = /* GraphQL */ `
   query getUserOutgoing($id: ID!) {
     getUser(id: $id) {
       outgoing_friend_requests {
         items {
           createdAt
+          updatedAt
           id
-          owner
           request_to
         }
       }
@@ -32,6 +48,7 @@ export const getUserIncoming = /* GraphQL */ `
       incoming_friend_requests {
         items {
           createdAt
+          updatedAt
           id
           request_from
         }

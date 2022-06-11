@@ -134,11 +134,11 @@ export const createFriend = /* GraphQL */ `
   ) {
     createFriend(input: $input, condition: $condition) {
       id
-      request_to
+      friend_with
+      owner
       createdAt
       updatedAt
       userFriendsId
-      owner
     }
   }
 `;
@@ -149,11 +149,11 @@ export const updateFriend = /* GraphQL */ `
   ) {
     updateFriend(input: $input, condition: $condition) {
       id
-      request_to
+      friend_with
+      owner
       createdAt
       updatedAt
       userFriendsId
-      owner
     }
   }
 `;
@@ -164,11 +164,11 @@ export const deleteFriend = /* GraphQL */ `
   ) {
     deleteFriend(input: $input, condition: $condition) {
       id
-      request_to
+      friend_with
+      owner
       createdAt
       updatedAt
       userFriendsId
-      owner
     }
   }
 `;
@@ -183,7 +183,6 @@ export const createOutgoingFriendRequest = /* GraphQL */ `
       createdAt
       updatedAt
       userOutgoing_friend_requestsId
-      owner
     }
   }
 `;
@@ -198,7 +197,6 @@ export const updateOutgoingFriendRequest = /* GraphQL */ `
       createdAt
       updatedAt
       userOutgoing_friend_requestsId
-      owner
     }
   }
 `;
@@ -213,7 +211,6 @@ export const deleteOutgoingFriendRequest = /* GraphQL */ `
       createdAt
       updatedAt
       userOutgoing_friend_requestsId
-      owner
     }
   }
 `;

@@ -110,74 +110,71 @@ export const onDeleteUser = /* GraphQL */ `
   }
 `;
 export const onCreateFriend = /* GraphQL */ `
-  subscription OnCreateFriend($owner: String) {
-    onCreateFriend(owner: $owner) {
+  subscription OnCreateFriend {
+    onCreateFriend {
       id
-      request_to
+      friend_with
+      owner
       createdAt
       updatedAt
       userFriendsId
-      owner
     }
   }
 `;
 export const onUpdateFriend = /* GraphQL */ `
-  subscription OnUpdateFriend($owner: String) {
-    onUpdateFriend(owner: $owner) {
+  subscription OnUpdateFriend {
+    onUpdateFriend {
       id
-      request_to
+      friend_with
+      owner
       createdAt
       updatedAt
       userFriendsId
-      owner
     }
   }
 `;
 export const onDeleteFriend = /* GraphQL */ `
-  subscription OnDeleteFriend($owner: String) {
-    onDeleteFriend(owner: $owner) {
+  subscription OnDeleteFriend {
+    onDeleteFriend {
       id
-      request_to
+      friend_with
+      owner
       createdAt
       updatedAt
       userFriendsId
-      owner
     }
   }
 `;
 export const onCreateOutgoingFriendRequest = /* GraphQL */ `
-  subscription OnCreateOutgoingFriendRequest($owner: String) {
-    onCreateOutgoingFriendRequest(owner: $owner) {
+  subscription OnCreateOutgoingFriendRequest {
+    onCreateOutgoingFriendRequest {
       id
       request_to
       createdAt
       updatedAt
       userOutgoing_friend_requestsId
-      owner
     }
   }
 `;
 export const onUpdateOutgoingFriendRequest = /* GraphQL */ `
-  subscription OnUpdateOutgoingFriendRequest($owner: String) {
-    onUpdateOutgoingFriendRequest(owner: $owner) {
+  subscription OnUpdateOutgoingFriendRequest {
+    onUpdateOutgoingFriendRequest {
       id
       request_to
       createdAt
       updatedAt
       userOutgoing_friend_requestsId
-      owner
     }
   }
 `;
 export const onDeleteOutgoingFriendRequest = /* GraphQL */ `
-  subscription OnDeleteOutgoingFriendRequest($owner: String) {
-    onDeleteOutgoingFriendRequest(owner: $owner) {
+  subscription OnDeleteOutgoingFriendRequest {
+    onDeleteOutgoingFriendRequest {
       id
       request_to
       createdAt
       updatedAt
       userOutgoing_friend_requestsId
-      owner
     }
   }
 `;

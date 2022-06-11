@@ -27,16 +27,21 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
     }
 
     const friendRequestHandler = async(event) => {
+        //get ID from selected element
         const selectedID = (event.target.parentNode.getAttribute('id') === null || undefined) ? event.target.parentNode.parentNode.getAttribute('id') : event.target.parentNode.getAttribute('id');
-         const RequestExists = await API.graphql({query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username, filter: { request_to: {eq: selectedID}}} });
-         if (RequestExists.data.getUser.outgoing_friend_requests.items.length > 0) return;
+        //check if friend request already exists
+        const RequestExists = await API.graphql({query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username, filter: { request_to: {eq: selectedID}}} });
+        if (RequestExists.data.getUser.outgoing_friend_requests.items.length > 0) return;
+         //create an outgoing friend request
         const friendRequest = {userOutgoing_friend_requestsId: user.username, request_to: selectedID};
         const createOutGoing = await API.graphql({query: createOutgoingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendRequest } });
         const newOutGoing = await API.graphql({query: getUserByUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: selectedID } });
+        //update ougoing state
         setOutGoing(prev => {
             return [...prev, newOutGoing.data.getUser]
         });
 
+        //update incoming requests for requested user
         const fromFriendRequest = {userIncoming_friend_requestsId: selectedID, request_from: user.username};
         const createIncoming = await API.graphql({query: createIncomingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: fromFriendRequest } });
     }
@@ -45,7 +50,7 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
 
     <>
     <div class="search">
-        <h4>Search for friends and family</h4>
+        <h4>Search for Friends and Family</h4>
         <SearchField label="Search for friends and family" placeholder="Search here..."
         onSubmit={searchHandler}
         />

@@ -6,7 +6,6 @@
 #friendsearch {
   margin-left: 20px;
   margin-top: 50px;
-  width: 50%;
 }
 
 #friendsearch h4 {
@@ -14,10 +13,16 @@
   margin-bottom: 5px;
 }
 
+#addfriends {
+  width: 30%;
+}
+
 #friendlist {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
   margin-top: 50px;
   margin-left: 5%;
-  width: 33%;
 }
 
 #requestlist {
@@ -25,7 +30,6 @@
   flex-direction: column;
   margin-top: 50px;
   margin-left: 5%;
-  width: 30%;
 }
 
 .individualrequest {
@@ -90,4 +94,25 @@
 .incoming h5 {
   margin-left: 20px;
   margin-bottom: 10px;
+}
+
+.individualfriendslist {
+  box-shadow: 0 2px 10px -1px #3333;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.individualfriend {
+  margin: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  background-color: rgba(0, 0, 0, 0.029);
+  border-radius: 0.2em;
+}
+
+.individualfriend:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.444);
 }
