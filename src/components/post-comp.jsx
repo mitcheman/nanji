@@ -5,7 +5,7 @@ import { Storage, API } from "aws-amplify"
 import { deletePost } from "../graphql/mutations"
 const moment = require('moment')
 
-export function Post ({currentFriend, post, posts, setPosts, setDeleted}) {
+export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllPosts}) {
 
     const [style, setStyle] = useState({display: 'none'});
 
@@ -16,7 +16,11 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted}) {
         const deletedPost = await API.graphql({ query: deletePost, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: deleteDetails} });
         await Storage.remove(deletedPost.data.deletePost.image, {level: 'private'})
         setPosts(prev => {
-            return prev.filter(data => data.id !== selectedID)});
+            return prev.filter(data => data.id !== selectedID)
+        });
+        setAllPosts(prev => {
+            return prev.filter(data => data.id !== selectedID)
+        })
         setDeleted(true);
         return deletedPost;
 };
