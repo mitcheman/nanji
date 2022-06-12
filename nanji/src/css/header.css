@@ -1,28 +1,41 @@
 .header {
+  position: fixed;
+  width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   box-shadow: 0 2px 10px -1px #3333;
+  background-color: white;
 }
 
 #username {
   color: black;
   text-decoration: none;
   font-size: 20px;
-  align-self: flex-start;
-  margin-left: 19%;
 }
 
 #username:hover {
   color: rgba(0, 0, 0, 0.569);
 }
 
+#userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#friendname {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 #nanji {
   color: black;
   text-decoration: none;
   font-size: 25px;
-  margin-top: 10px;
   margin-left: 10px;
 }
 
@@ -37,11 +50,16 @@
   margin: 5px;
 }
 
+#nav-buttons button {
+  padding: 0px !important;
+}
+
 .header svg {
   height: auto;
   width: 30px;
   color: black;
-  margin-left: 25px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .header svg:hover {

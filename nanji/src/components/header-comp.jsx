@@ -3,21 +3,25 @@ import '../css/header.css'
 import React from "react";
 import {BrowserRouter as Router} from "react-router-dom";
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from 'react-icons/md';
-import { BsPersonLinesFill } from 'react-icons/bs'
+import { BsPersonLinesFill, BsPersonFill } from 'react-icons/bs'
 
-export function Header({signOut, user}) {
+export function Header({signOut, user, currentFriend}) {
 
     const name = user.attributes.given_name + ' ' + user.attributes.family_name
 
     return (
         <div className='header'>
-            <a id="nanji" href='/'>Nanji</a>
+                <a id="nanji" href='/'>Nanji</a>
         <Router>
+        <div id="userinfo">
+            <a id="username" href='/'>{name}</a>
+            {(currentFriend) ? <div id="friendname"><h5>Current Profile&ensp;|</h5><p>&ensp;{currentFriend.given_name + ' ' + currentFriend.family_name}</p></div>: ''}
+        </div>
         <nav>
-        <a id="username" href='/Account'>{name}</a>
             <div id="nav-buttons">
                 <a href='/Friends'><BsPersonLinesFill /></a>
                 <a href='/newPost'><MdOutlineAddPhotoAlternate /></a>
+                <a href='/Account'><BsPersonFill /></a>
                 <button onClick={signOut}><MdOutlineLogout /></button>
             </div>
         </nav>

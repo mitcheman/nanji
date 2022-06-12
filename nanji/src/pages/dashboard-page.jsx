@@ -60,7 +60,7 @@ export function Dashboard({user}) {
         return (
             <>
             <div class="container">
-                <PostList posts={posts} setPosts={setPosts} />
+                <PostList posts={posts} setPosts={setPosts}/>
                 <Timeline allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
             </div>

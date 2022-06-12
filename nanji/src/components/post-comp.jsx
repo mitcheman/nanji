@@ -5,22 +5,19 @@ import { Storage, API } from "aws-amplify"
 import { deletePost } from "../graphql/mutations"
 const moment = require('moment')
 
-export function Post ({post, posts, setPosts}) {
+export function Post ({currentFriend, post, posts, setPosts, setDeleted}) {
 
     const [style, setStyle] = useState({display: 'none'});
 
-    async function deleteHandler (event) {
-        //this is crazy and no way correct
-        console.log(event)
-        const details = (event.target.parentNode.getAttribute('id') === null || undefined) ? event.target.parentNode.parentNode.getAttribute('id') : event.target.parentNode.getAttribute('id')
-
+    async function deleteHandler (selectedID) {
         const deleteDetails = {
-            id: details,
+            id: selectedID,
         };
         const deletedPost = await API.graphql({ query: deletePost, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: deleteDetails} });
         await Storage.remove(deletedPost.data.deletePost.image, {level: 'private'})
         setPosts(prev => {
-            return prev.filter(data => data.id !== details)});
+            return prev.filter(data => data.id !== selectedID)});
+        setDeleted(true);
         return deletedPost;
 };
 
@@ -37,7 +34,7 @@ export function Post ({post, posts, setPosts}) {
                 onMouseLeave={e => {
                     setStyle({display: 'none'})
                 }}>
-                <TiDeleteOutline style={style} onClick={(e) => deleteHandler(e)}/>
+                { (!currentFriend) ? <TiDeleteOutline style={style} onClick={() => deleteHandler(post.id)}/>: <></>}
                 <img alt={post.id} src={post.s3Image} />
                 <p>{post.content}</p>
             </div>
@@ -61,7 +58,7 @@ export function Post ({post, posts, setPosts}) {
                 onMouseLeave={e => {
                     setStyle({display: 'none'})
                 }}>
-                <TiDeleteOutline style={style} onClick={(e) => deleteHandler(e)}/>
+                { (!currentFriend) ? <TiDeleteOutline style={style} onClick={() => deleteHandler(post.id)}/>: <></>}
             <img alt={post.id} src={post.s3Image} />
             <p>{post.content}</p>
         </div>

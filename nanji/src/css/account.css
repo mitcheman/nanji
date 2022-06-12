@@ -1,5 +1,4 @@
 #accountcontainer {
-  margin: 20px;
   display: flex;
   flex-direction: column;
 }
@@ -13,7 +12,7 @@
   flex-direction: column;
   width: 80%;
   margin: 25px;
-  margin-top: 50px;
+  margin-top: 90px;
 }
 
 #accountdetails h3 {

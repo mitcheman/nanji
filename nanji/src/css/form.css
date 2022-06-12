@@ -1,6 +1,7 @@
 #newpost {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 #form {
@@ -10,7 +11,11 @@
   flex-direction: column;
   width: 50%;
   margin: 25px;
-  margin-top: 50px;
+  margin-top: 90px;
+}
+
+#uploadalert {
+  width: 50%;
 }
 
 #form h3 {

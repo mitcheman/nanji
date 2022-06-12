@@ -9,22 +9,18 @@ import { listAllPosts, listSortedPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
 import { BsChevronDown } from 'react-icons/bs';
 
-export function UserFriend() {
+export function UserFriend({currentFriend, setCurrentFriend}) {
 
     const { id } = useParams();
-
-    const [currentFriend, setCurrentFriend] = useState();
 
     useEffect(() => {
         getUserinfo().then((data) => {
             setCurrentFriend(data.data.getUser);
-            console.log(currentFriend)
         })
     }, [])
 
     const getUserinfo = async () => {
         const userData = await API.graphql({ query: getUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: { id: id } });
-        // console.log(userData.data.getUser)
         return userData;
     }
 
@@ -75,9 +71,8 @@ export function UserFriend() {
     } else {
         return (
             <>
-            {/* <h3>{currentFriend.given_name + ' ' + currentFriend.family_name}</h3> */}
             <div class="container">
-                <PostList posts={posts} setPosts={setPosts} />
+                <PostList posts={posts} setPosts={setPosts} currentFriend={currentFriend} />
                 <Timeline allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
             </div>

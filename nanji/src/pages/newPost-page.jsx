@@ -4,7 +4,7 @@ import { createPost } from "../graphql/mutations"
 import { useState } from "react"
 import { TextAreaField } from '@aws-amplify/ui-react';
 import { BsUpload } from 'react-icons/bs';
-import { BsCheckCircle } from 'react-icons/bs'
+import { Alert } from '@aws-amplify/ui-react';
 import '../css/form.css'
 const moment = require('moment')
 
@@ -37,19 +37,25 @@ export function NewPost({user}) {
         event.target.fileupload.value = null;
     }
 
+    function dismissAlert() {
+        setFileStatus(false);
+    }
+
     return (
     <>
     <div id="newpost">
         <form id="form" onSubmit={savePost}>
         <h3>ʕ •ᴥ•ʔ ☆<br></br>New Post</h3>
             <label for="picdate">Enter the date you think this was taken</label>
-            <input id="picdate" name="date" type="date" max={currentDate} />
+            <input id="picdate" name="date" type="date" max={currentDate} onClick={dismissAlert}/>
             <label for="content">Background story of photo</label>
-            <TextAreaField size="large" autoComplete="off" name="content" type="text" placeholder="Enter Text Here" />
+            <TextAreaField size="large" autoComplete="off" name="content" type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
             <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => setFileData(e.target.files[0])}></input>
-            {/* {fileStatus ? <div><BsCheckCircle /></div>: ''} */}
             <button type="submit"><BsUpload /></button>
         </form>
+        <div id="uploadalert">
+            {fileStatus ? <Alert variation="success" isDismissible={true}>File Uploaded</Alert>: ''}
+        </div>
         </div>
     </>
     )

@@ -1,5 +1,6 @@
 import '../css/friends.css'
 import { API } from "aws-amplify"
+import { Alert } from '@aws-amplify/ui-react';
 import { getUserOutgoing, getUserIncoming, getUserFriends, getUserByUser } from '../graphql/custom'
 import { createFriend, deleteIncomingFriendRequest, deleteOutgoingFriendRequest } from '../graphql/mutations'
 import { useEffect, useState } from 'react'
@@ -7,6 +8,10 @@ import { BiUserPlus, BiUserMinus } from 'react-icons/bi'
 import { TiCancelOutline } from 'react-icons/ti'
 
 export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming, friends, setFriends}) {
+
+    const [acceptedStatus, setAcceptedStatus] = useState(false);
+    const [deniedStatus, setDeniedStatus] = useState(false);
+    const [cancelledStatus, setCancelledStatus] = useState(false);
 
     useEffect(() => {
         getOutgoingRequests().then((data) => {
@@ -25,6 +30,12 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
             setFriends(data);
         })
     }, [])
+
+    function dismissAlerts() {
+        setAcceptedStatus(false);
+        setDeniedStatus(false);
+        setCancelledStatus(false);
+    }
 
     //I could put the user info in the actual friend request but what if the user changes info? sure there is a better/faster way to handle this.
     const getOutgoingRequests = async() => {
@@ -102,6 +113,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
         getFriends().then((data) => {
             setFriends(data);
         })
+        setAcceptedStatus(true)
     }
 
     const denyRequestHandler = async (selectedID) => {
@@ -110,6 +122,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
         await handleOutgoingRequest(user.username, selectedID);
         getIncomingRequests().then((data) => {
             setIncoming(data);
+            setDeniedStatus(true)
         })
     }
 
@@ -117,14 +130,14 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
         await handleIncomingRequest(selectedID, user.username);
         await handleOutgoingRequest(selectedID, user.username);
         getOutgoingRequests().then((data) => {
-            console.log(data)
             setOutGoing(data);
+            setCancelledStatus(true)
         });
     }
 
     //requests should be their own componenet probably
     return (
-        <><div id="requestlist">
+        <><div id="requestlist" onClick={dismissAlerts}>
             <h4>Friend Requests</h4>
             <div class="outgoing">
                 <h5>Pending Sent Requests</h5>
@@ -155,6 +168,9 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
                     </div>
                 ))}
             </div>
+            {acceptedStatus ? <Alert variation="success" isDismissible={true}>Friend Request Accepted ʕ ꈍᴥꈍʔ</Alert>: ''}
+            {deniedStatus ? <Alert variation="success" isDismissible={true}>Friend Request Denied ʕ•`ᴥ´•ʔ</Alert>: ''}
+            {cancelledStatus ? <Alert variation="success" isDismissible={true}>Freind Request Cancelled  ʕノ•ᴥ•ʔノ ︵ ┻━┻</Alert>: ''}
             </div></>
     )
 }

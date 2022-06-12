@@ -1,15 +1,25 @@
 
 import { Post } from './post-comp'
+import { Alert } from '@aws-amplify/ui-react';
+import { useState } from 'react'
 import '../css/postlist.css'
 
-export function PostList ({posts, setPosts }) {
+export function PostList ({currentFriend, posts, setPosts }) {
+
+    const [deleted, setDeleted] = useState(false)
+
+    function dismissAlert() {
+        setDeleted(false);
+    }
+
     return (
         <>
-        <div id="postlist" >
+        <div id="postlist" onClick={dismissAlert}>
             {posts.map((post) => (
-                <Post post={post} posts={posts} setPosts={setPosts} key={post.id}/>
+                <Post currentFriend={currentFriend} post={post} posts={posts} setPosts={setPosts} setDeleted={setDeleted} key={post.id}/>
             ))}
-            </div>
+            {deleted ? <Alert variation="success" isDismissible={true}>Post Deleted</Alert>: ''}
+        </div>
         </>
     )
 }

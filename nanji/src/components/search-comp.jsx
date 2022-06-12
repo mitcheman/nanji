@@ -11,7 +11,6 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
 
     const [userSearch, setUserSearch] = useState();
     const [searchResult, setSearchResult] = useState(false);
-    const [selectedUser, setSelectedUser] = useState();
 
     const searchHandler = async(event) => {
         const result = await API.graphql({query: searchUsers, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {filter: {preferred_username: { match: event }}} })
@@ -26,9 +25,7 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
         }
     }
 
-    const friendRequestHandler = async(event) => {
-        //get ID from selected element
-        const selectedID = (event.target.parentNode.getAttribute('id') === null || undefined) ? event.target.parentNode.parentNode.getAttribute('id') : event.target.parentNode.getAttribute('id');
+    const friendRequestHandler = async(selectedID) => {
         //confirm user is not the same user
         if (selectedID === user.username) {
             setSearchResult(false);
@@ -73,7 +70,7 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
                     <li>Name: {userResult.given_name + ' ' + userResult.family_name}</li>
                     <li>Username: {userResult.preferred_username}</li>
                 </ul>
-                <BsFillPersonPlusFill onClick={friendRequestHandler}/>
+                <BsFillPersonPlusFill onClick={() => friendRequestHandler(userResult.id)}/>
                 </div>
             ))}
         </div>
