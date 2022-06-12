@@ -13,7 +13,17 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
     const [searchResult, setSearchResult] = useState(false);
 
     const searchHandler = async(event) => {
-        const result = await API.graphql({query: searchUsers, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {filter: {preferred_username: { match: event }}} })
+        const filterSearch =
+        { filter:
+            { or: [
+                {preferred_username: { matchPhrasePrefix: event }},
+                {given_name: { matchPhrasePrefix: event}},
+                {family_name: {matchPhrasePrefix: event}},
+                ],
+            },
+            limit: 20,
+        };
+        const result = await API.graphql({query: searchUsers, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: filterSearch})
         const results = result.data.searchUsers.items
         if (results.length > 0) {
             setSearchResult(true);
@@ -67,8 +77,8 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
             {userSearch.map((userResult) => (
                 <div id={userResult.id} key={userResult.id} class="searchresults">
                 <ul>
-                    <li>Name: {userResult.given_name + ' ' + userResult.family_name}</li>
-                    <li>Username: {userResult.preferred_username}</li>
+                    <li>Name | {userResult.given_name + ' ' + userResult.family_name}</li>
+                    <li>Username | {userResult.preferred_username}</li>
                 </ul>
                 <BsFillPersonPlusFill onClick={() => friendRequestHandler(userResult.id)}/>
                 </div>
