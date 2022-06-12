@@ -10,18 +10,32 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "date": {
+                    "name": "date",
+                    "isArray": false,
+                    "type": "AWSDate",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "content": {
                     "name": "content",
                     "isArray": false,
                     "type": "String",
-                    "isRequired": false,
+                    "isRequired": true,
                     "attributes": []
                 },
                 "image": {
                     "name": "image",
                     "isArray": false,
-                    "type": "AWSURL",
-                    "isRequired": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "userID": {
@@ -58,6 +72,17 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
+                        "name": "postByDate",
+                        "queryField": "postByDate",
+                        "fields": [
+                            "type",
+                            "date"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
                         "name": "byUser",
                         "fields": [
                             "userID"
@@ -69,7 +94,10 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
                                 "operations": [
                                     "create",
                                     "update",
@@ -156,7 +184,10 @@ export const schema = {
                     "properties": {
                         "rules": [
                             {
-                                "allow": "public",
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
                                 "operations": [
                                     "create",
                                     "update",
@@ -172,5 +203,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "afbb7cf6759f06a8ac876c437815e641"
+    "version": "e98fc58866734161d507d3d77b4a6bb1"
 };

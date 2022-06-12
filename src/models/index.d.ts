@@ -14,8 +14,10 @@ type UserMetaData = {
 
 export declare class Post {
   readonly id: string;
-  readonly content?: string | null;
-  readonly image?: string | null;
+  readonly date: string;
+  readonly content: string;
+  readonly image: string;
+  readonly type: string;
   readonly userID: string;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
