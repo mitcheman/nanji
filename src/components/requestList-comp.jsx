@@ -1,7 +1,8 @@
 import '../css/friends.css'
 import { API } from "aws-amplify"
 import { Alert } from '@aws-amplify/ui-react';
-import { getUserOutgoing, getUserIncoming, getUserFriends, getUserByUser } from '../graphql/custom'
+import { getOutgoingRequests, getIncomingRequests, getFriends } from '../utils/friendRequests';
+import { getUserOutgoing, getUserIncoming } from '../graphql/custom'
 import { createFriend, deleteIncomingFriendRequest, deleteOutgoingFriendRequest } from '../graphql/mutations'
 import { useEffect, useState } from 'react'
 import { BiUserPlus, BiUserMinus } from 'react-icons/bi'
@@ -14,19 +15,19 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     const [cancelledStatus, setCancelledStatus] = useState(false);
 
     useEffect(() => {
-        getOutgoingRequests().then((data) => {
+        getOutgoingRequests(user.username).then((data) => {
             setOutGoing(data);
         });
     }, [])
 
     useEffect(() => {
-        getIncomingRequests().then((data) => {
+        getIncomingRequests(user.username).then((data) => {
             setIncoming(data);
         })
     }, [])
 
     useEffect(() => {
-        getFriends().then((data) => {
+        getFriends(user.username).then((data) => {
             setFriends(data);
         })
     }, [])
@@ -37,47 +38,6 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
         setCancelledStatus(false);
     }
 
-    //I could put the user info in the actual friend request but what if the user changes info? sure there is a better/faster way to handle this.
-    const getOutgoingRequests = async() => {
-        //get outgoing friend requests for user
-        const outGoingRequests = await API.graphql({ query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username} });
-        const req = outGoingRequests.data.getUser.outgoing_friend_requests.items
-        //get user information on each user for a request - (outgoing requests only contain data on specific request - no user info besides ID)
-        const results = [];
-        for (let i = 0; i < req.length; i++) {
-            const call = await API.graphql({query: getUserByUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: req[i].request_to } });
-            results.push(call.data.getUser);
-        };
-        return results;
-    }
-
-    const getIncomingRequests = async () => {
-        //get incoming friend requests for user
-        const incomingRequests = await API.graphql({ query: getUserIncoming, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username} });
-        const req = incomingRequests.data.getUser.incoming_friend_requests.items
-        //get user information for each request (incomingRequests only contains data on specific request - no user info besides ID)
-        const results = [];
-        for (let i = 0; i < req.length; i++) {
-            const call = await API.graphql({query: getUserByUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: req[i].request_from } });
-            results.push(call.data.getUser);
-        };
-        return results;
-    }
-
-    const getFriends = async () => {
-        //get friends list for current user
-        const listFriends = await API.graphql({query: getUserFriends, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username}});
-        const req = listFriends.data.getUser.friends.items
-
-        //get user information for each request (incomingRequests only contains data on specific request - no user info besides ID)
-        const results = [];
-        for (let i = 0; i < req.length; i++) {
-            const call = await API.graphql({query: getUserByUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: req[i].friend_with } });
-            results.push(call.data.getUser);
-        };
-        return results
-    }
-
     const handleIncomingRequest = async (currentUser, oppositeUser) => {
                 //get incoming requests
                 const incomingRequests = await API.graphql({ query: getUserIncoming, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: currentUser} });
@@ -86,7 +46,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
                 //delete incoming request that matches
                 const deleteIncomingRequest = await API.graphql({query: deleteIncomingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedIncoming[0].id }}});
                 //update incoming state
-                getIncomingRequests().then((data) => {
+                getIncomingRequests(user.username).then((data) => {
                     setIncoming(data);
                 })
     }
@@ -110,17 +70,16 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
         handleIncomingRequest(user.username, selectedID);
         handleOutgoingRequest(user.username, selectedID);
         //update friends list
-        getFriends().then((data) => {
+        getFriends(user.username).then((data) => {
             setFriends(data);
         })
         setAcceptedStatus(true)
     }
 
     const denyRequestHandler = async (selectedID) => {
-        console.log(selectedID)
         await handleIncomingRequest(user.username, selectedID);
         await handleOutgoingRequest(user.username, selectedID);
-        getIncomingRequests().then((data) => {
+        getIncomingRequests(user.username).then((data) => {
             setIncoming(data);
             setDeniedStatus(true)
         })
@@ -129,7 +88,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     const cancelRequestHandler = async (selectedID) => {
         await handleIncomingRequest(selectedID, user.username);
         await handleOutgoingRequest(selectedID, user.username);
-        getOutgoingRequests().then((data) => {
+        getOutgoingRequests(user.username).then((data) => {
             setOutGoing(data);
             setCancelledStatus(true)
         });
