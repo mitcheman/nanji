@@ -1,51 +1,39 @@
 import { duplicates } from './duplicates';
-import { postByDate, listPosts } from '../graphql/queries';
+import { postByUser } from '../graphql/queries';
 import { API, Storage } from 'aws-amplify';
 
-//this should be refactored to query user not posts table (one to many relationship on user to posts). Same with listAllPosts.
-//at scale this wont work
-//not to mention permission stuff !fix
-
-//some funkiness with limit here - that is why it hard coded. !fix
-export const listSortedPosts = async (user, token) => {
-  const filterUser = {
-    userID: {
-      eq: user,
-    },
-  };
-  const postData = await API.graphql({
-    query: postByDate,
+export const listUserPosts = async (user, token) => {
+  const userPosts = await API.graphql({
+    query: postByUser,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: {
-      type: 'Post',
-      sortDirection: 'DESC',
-      limit: 10,
+      userID: user,
+      limit: 5,
       nextToken: token,
-      filter: filterUser,
+      sortDirection: 'DESC',
     },
   });
+
   const posts = await Promise.all(
-    postData.data.postByDate.items.map(async (post) => {
+    userPosts.data.postByUser.items.map(async (post) => {
       const image = await Storage.get(post.image);
       post.s3Image = image;
       return post;
     })
   );
 
-  duplicates(postData.data.postByDate.items);
-  return postData;
+  duplicates(userPosts.data.postByUser.items);
+  return userPosts;
 };
 
-export const listAllPosts = async (user) => {
-  const filterUser = {
-    userID: {
-      eq: user,
-    },
-  };
+export const listAllUserPosts = async (user) => {
   const allPostData = await API.graphql({
-    query: listPosts,
+    query: postByUser,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
-    variables: { filter: filterUser },
+    variables: {
+      userID: user,
+      sortDirection: 'DESC',
+    },
   });
   return allPostData;
 };

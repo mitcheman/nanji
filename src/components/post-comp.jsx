@@ -14,7 +14,7 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
             id: selectedID,
         };
         const deletedPost = await API.graphql({ query: deletePost, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: deleteDetails} });
-        await Storage.remove(deletedPost.data.deletePost.image, {level: 'private'})
+        await Storage.remove(deletedPost.data.deletePost.image, {level: 'public'})
         setPosts(prev => {
             return prev.filter(data => data.id !== selectedID)
         });

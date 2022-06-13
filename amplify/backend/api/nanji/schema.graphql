@@ -9,7 +9,12 @@ type Post @model @auth(rules: [{ allow: private }]) {
       queryField: "postByDate"
       sortKeyFields: ["date"]
     )
-  userID: ID! @index(name: "byUser")
+  userID: ID!
+    @index(
+      name: "postByUser"
+      queryField: "postByUser"
+      sortKeyFields: ["date"]
+    )
 }
 
 type User @model @auth(rules: [{ allow: private }]) @searchable {
@@ -18,7 +23,7 @@ type User @model @auth(rules: [{ allow: private }]) @searchable {
   given_name: String!
   preferred_username: String
   profile_pic: String
-  posts: [Post] @hasMany
+  posts: [Post] @hasMany(indexName: "postByUser", fields: ["id"])
   friends: [Friend] @hasMany
   outgoing_friend_requests: [OutgoingFriendRequest] @hasMany
   incoming_friend_requests: [IncomingFriendRequest] @hasMany

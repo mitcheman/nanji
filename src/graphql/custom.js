@@ -11,6 +11,26 @@ export const getUserByUser = /* GraphQL */ `
   }
 `;
 
+export const getUserPosts = /* GraphQL */ `
+  query getUser($id: ID!) {
+    getUser(id: $id) {
+      posts {
+        items {
+          id
+          date
+          content
+          image
+          type
+          userID
+          createdAt
+          updatedAt
+          userPostsId
+        }
+      }
+    }
+  }
+`;
+
 export const getUserFriends = /* GraphQL */ `
   query getUserFriends($id: ID!) {
     getUser(id: $id) {

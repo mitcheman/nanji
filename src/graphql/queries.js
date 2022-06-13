@@ -12,7 +12,6 @@ export const getPost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
-      userPostsId
     }
   }
 `;
@@ -32,7 +31,6 @@ export const listPosts = /* GraphQL */ `
         userID
         createdAt
         updatedAt
-        userPostsId
       }
       nextToken
     }
@@ -64,7 +62,37 @@ export const postByDate = /* GraphQL */ `
         userID
         createdAt
         updatedAt
-        userPostsId
+      }
+      nextToken
+    }
+  }
+`;
+export const postByUser = /* GraphQL */ `
+  query PostByUser(
+    $userID: ID!
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelPostFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    postByUser(
+      userID: $userID
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        date
+        content
+        image
+        type
+        userID
+        createdAt
+        updatedAt
       }
       nextToken
     }

@@ -5,12 +5,12 @@ import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
 import { Timeline } from "../components/timeline-comp"
 import { duplicatesByMonth } from "../utils/duplicates"
-import { listAllPosts, listSortedPosts } from "../utils/listdata"
+import { listAllUserPosts, listUserPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
 import { BsChevronDown } from 'react-icons/bs';
 
 //would love to reuse a lot of the dashboard and tried.
-//Some confusion anf funkiness between using user token on initial login vs grabbing data and using current friend. !fix
+//Some confusion and funkiness between using user token on initial login vs grabbing data and using current friend. !fix
 export function UserFriend({currentFriend, setCurrentFriend}) {
 
     const { id } = useParams();
@@ -32,16 +32,16 @@ export function UserFriend({currentFriend, setCurrentFriend}) {
     const [token, setToken] = useState();
 
     useEffect(() => {
-        listSortedPosts(id).then((data) => {
-            setPosts(data.data.postByDate.items);
-            const tokenID = data.data.postByDate.nextToken;
+        listUserPosts(id).then((data) => {
+            setPosts(data.data.postByUser.items);
+            const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
         })
     }, [])
 
     useEffect(() => {
-        listAllPosts(id).then((data) => {
-            const listData = data.data.listPosts.items
+        listAllUserPosts(id).then((data) => {
+            const listData = data.data.postByUser.items
             sortData(listData);
             setAllPosts(duplicatesByMonth(listData))
             if (listData.length === 0) {
@@ -53,13 +53,13 @@ export function UserFriend({currentFriend, setCurrentFriend}) {
     }, [])
 
     async function newPage () {
-        listSortedPosts(id, token)
+        listUserPosts(id, token)
         .then((data) => {
             if (token === null || undefined) return;
             setPosts(prev => {
-                return [...prev, ...data.data.postByDate.items]
+                return [...prev, ...data.data.postByUser.items]
             })
-            const tokenID = data.data.postByDate.nextToken;
+            const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
         })
     }

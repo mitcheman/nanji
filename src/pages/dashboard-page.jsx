@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
 import { Timeline } from "../components/timeline-comp"
 import { duplicatesByMonth } from "../utils/duplicates"
-import { listAllPosts, listSortedPosts } from "../utils/listdata"
+import { listUserPosts, listAllUserPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
 import { BsChevronDown } from 'react-icons/bs';
 
@@ -19,16 +19,16 @@ export function Dashboard({user}) {
     const [token, setToken] = useState();
 
     useEffect(() => {
-        listSortedPosts(user.username).then((data) => {
-            setPosts(data.data.postByDate.items);
-            const tokenID = data.data.postByDate.nextToken;
+        listUserPosts(user.username).then((data) => {
+            setPosts(data.data.postByUser.items);
+            const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
         })
     }, [])
 
     useEffect(() => {
-        listAllPosts(user.username).then((data) => {
-            const listData = data.data.listPosts.items
+        listAllUserPosts(user.username).then((data) => {
+            const listData = data.data.postByUser.items
             sortData(listData);
             setAllPosts(duplicatesByMonth(listData))
             if (listData.length === 0) {
@@ -40,13 +40,13 @@ export function Dashboard({user}) {
     }, [])
 
     async function newPage () {
-        listSortedPosts(user.username, token)
+        listUserPosts(user.username, token)
         .then((data) => {
             if (token === null || undefined) return;
             setPosts(prev => {
-                return [...prev, ...data.data.postByDate.items]
+                return [...prev, ...data.data.postByUser.items]
             })
-            const tokenID = data.data.postByDate.nextToken;
+            const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
         })
     }

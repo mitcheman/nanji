@@ -12,7 +12,6 @@ export const onCreatePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
-      userPostsId
     }
   }
 `;
@@ -27,7 +26,6 @@ export const onUpdatePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
-      userPostsId
     }
   }
 `;
@@ -42,7 +40,6 @@ export const onDeletePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
-      userPostsId
     }
   }
 `;

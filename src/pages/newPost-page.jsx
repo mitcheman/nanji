@@ -31,6 +31,7 @@ export function NewPost({user}) {
         await Storage.put(filename, fileData, {level: 'public'});
         const newPost = {date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username, type: "Post"};
         const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
+        console.log(result)
         setFileStatus(true);
 
         event.target.content.value = '';
