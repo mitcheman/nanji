@@ -36,14 +36,17 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
     }
 
     const friendRequestHandler = async(selectedID) => {
+
         //confirm user is not the same user
         if (selectedID === user.username) {
             setSearchResult(false);
             return;
         }
         //check if friend request already exists
-        const RequestExists = await API.graphql({query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username, filter: { request_to: {eq: selectedID}}} });
-        if (RequestExists.data.getUser.outgoing_friend_requests.items.length > 0) {
+        const RequestExists = await API.graphql({query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username} });
+        const requests = RequestExists.data.getUser.outgoing_friend_requests.items;
+        const filtered = requests.filter(el => el.request_to === selectedID)
+        if (filtered > 0) {
             setSearchResult(false);
             return;
         }
