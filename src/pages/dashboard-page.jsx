@@ -8,6 +8,7 @@ import { listAllPosts, listSortedPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
 import { BsChevronDown } from 'react-icons/bs';
 
+//temp set to public - this needs to change and implement groups for friends !fix
 Storage.configure({ level: 'public' });
 
 export function Dashboard({user}) {

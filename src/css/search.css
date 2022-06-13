@@ -9,6 +9,7 @@
 }
 
 .searchresults {
+  background-color: rgba(0, 0, 0, 0.029);
   display: flex;
   flex-direction: row;
   padding: 10px;

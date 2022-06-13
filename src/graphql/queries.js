@@ -12,6 +12,7 @@ export const getPost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      userPostsId
     }
   }
 `;
@@ -31,6 +32,7 @@ export const listPosts = /* GraphQL */ `
         userID
         createdAt
         updatedAt
+        userPostsId
       }
       nextToken
     }
@@ -62,6 +64,7 @@ export const postByDate = /* GraphQL */ `
         userID
         createdAt
         updatedAt
+        userPostsId
       }
       nextToken
     }
@@ -74,6 +77,10 @@ export const getUser = /* GraphQL */ `
       family_name
       given_name
       preferred_username
+      profile_pic
+      posts {
+        nextToken
+      }
       friends {
         nextToken
       }
@@ -100,6 +107,7 @@ export const listUsers = /* GraphQL */ `
         family_name
         given_name
         preferred_username
+        profile_pic
         createdAt
         updatedAt
       }
@@ -129,6 +137,7 @@ export const searchUsers = /* GraphQL */ `
         family_name
         given_name
         preferred_username
+        profile_pic
         createdAt
         updatedAt
       }

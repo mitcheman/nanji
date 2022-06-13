@@ -15,6 +15,7 @@ export const createPost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      userPostsId
     }
   }
 `;
@@ -32,6 +33,7 @@ export const updatePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      userPostsId
     }
   }
 `;
@@ -49,6 +51,7 @@ export const deletePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      userPostsId
     }
   }
 `;
@@ -62,6 +65,10 @@ export const createUser = /* GraphQL */ `
       family_name
       given_name
       preferred_username
+      profile_pic
+      posts {
+        nextToken
+      }
       friends {
         nextToken
       }
@@ -86,6 +93,10 @@ export const updateUser = /* GraphQL */ `
       family_name
       given_name
       preferred_username
+      profile_pic
+      posts {
+        nextToken
+      }
       friends {
         nextToken
       }
@@ -110,6 +121,10 @@ export const deleteUser = /* GraphQL */ `
       family_name
       given_name
       preferred_username
+      profile_pic
+      posts {
+        nextToken
+      }
       friends {
         nextToken
       }

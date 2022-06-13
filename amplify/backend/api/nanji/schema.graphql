@@ -12,14 +12,13 @@ type Post @model @auth(rules: [{ allow: private }]) {
   userID: ID! @index(name: "byUser")
 }
 
-type User
-  @model
-  @auth(rules: [{ allow: private, operations: [read] }])
-  @searchable {
+type User @model @auth(rules: [{ allow: private }]) @searchable {
   id: ID!
   family_name: String!
   given_name: String!
   preferred_username: String
+  profile_pic: String
+  posts: [Post] @hasMany
   friends: [Friend] @hasMany
   outgoing_friend_requests: [OutgoingFriendRequest] @hasMany
   incoming_friend_requests: [IncomingFriendRequest] @hasMany

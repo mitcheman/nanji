@@ -7,7 +7,8 @@ const moment = require('moment')
 export function Timeline({allPosts, posts, setPosts, token, setToken}) {
 
     let tokenID;
-    let limitNum = 5;
+    //passing this var in too many places !fix
+    let limitNum = 10;
 
     const clickHandler = async (e) => {
 

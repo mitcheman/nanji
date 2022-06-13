@@ -21,6 +21,7 @@ export function NewPost({user}) {
             alert('please input all required data')
             return;
         }
+        //this cant be best practice; also add compression? !fix
         if (fileData.size > 3000000) {
             alert('file size too large');
             return;
@@ -45,7 +46,7 @@ export function NewPost({user}) {
     <>
     <div id="newpost">
         <form id="form" onSubmit={savePost}>
-        <h3>ʕ •ᴥ•ʔ ☆<br></br>New Post</h3>
+            <h3>ʕ •ᴥ•ʔ ☆<br></br>New Post</h3>
             <label for="picdate">Enter the date you think this was taken</label>
             <input id="picdate" name="date" type="date" max={currentDate} onClick={dismissAlert}/>
             <label for="content">Background story of photo</label>

@@ -18,11 +18,11 @@ export function Account({user}) {
     }
 
  return (
-     <>
-     <AccountInfo user={user} />
-     <div id="accountdelete">
-     <button onClick={deleteUser}>Delete Account</button>
-     </div>
-     </>
+    <>
+    <AccountInfo user={user} />
+    <div id="accountdelete">
+        <button onClick={deleteUser}>Delete Account</button>
+    </div>
+    </>
  )
 }

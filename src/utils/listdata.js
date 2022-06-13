@@ -4,7 +4,9 @@ import { API, Storage } from 'aws-amplify';
 
 //this should be refactored to query user not posts table (one to many relationship on user to posts). Same with listAllPosts.
 //at scale this wont work
-//not to mention permission stuff
+//not to mention permission stuff !fix
+
+//some funkiness with limit here - that is why it hard coded. !fix
 export const listSortedPosts = async (user, token) => {
   const filterUser = {
     userID: {

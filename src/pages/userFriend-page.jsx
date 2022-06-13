@@ -9,6 +9,8 @@ import { listAllPosts, listSortedPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
 import { BsChevronDown } from 'react-icons/bs';
 
+//would love to reuse a lot of the dashboard and tried.
+//Some confusion anf funkiness between using user token on initial login vs grabbing data and using current friend. !fix
 export function UserFriend({currentFriend, setCurrentFriend}) {
 
     const { id } = useParams();
