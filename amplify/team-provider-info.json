@@ -20,6 +20,12 @@
           "deploymentBucketName": "amplify-nanji-staging-83539-deployment",
           "s3Key": "amplify-builds/nanji645de7d8-616574732b57784d4571-build.zip"
         }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dk5qtqs5o6cin",
+          "type": "manual"
+        }
       }
     }
   }

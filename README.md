@@ -4,12 +4,13 @@ A social media and photo sharing app focused on the simple things.
 
 ## Backend Requirements
 
-Nanji's backend runs on aws and uses aws amplify for the management. You will need an AWS account and the Amplify CLI installed.
+Nanji's backend runs on aws and uses aws amplify for management. You will need an AWS account and the Amplify CLI installed.
 
 See the following instructions to [Setup AWS Amplify](https://docs.amplify.aws/cli/start/install/)
 
 Note that it uses the following services:
 
+- Amplify
 - DynamoDB
 - Appsync
 - Lambda
@@ -17,6 +18,7 @@ Note that it uses the following services:
 - Cognito
 - Cloud Formation
 - Opensearch (requires a T2.Small running on the backend for search and will cost money)
+- Location Service
 
 ## Available Scripts
 
