@@ -34,12 +34,11 @@ input[type='file']::file-selector-button {
   padding: 10px;
   border-radius: 0.2em;
   background-color: white;
-  transition: 0.5s;
 }
 
 input[type='file']::file-selector-button:hover {
-  background-color: black;
-  color: white;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.569);
 }
 
 #picdate {
@@ -54,17 +53,15 @@ input[type='file']::file-selector-button:hover {
   border: none;
   border-radius: 0.2em;
   background: none;
-  background-color: black;
-  color: white;
   align-self: center;
-}
-
-#form button:hover {
-  cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.569);
 }
 
 #form svg {
   height: auto;
-  width: 20px;
+  width: 30px;
+}
+
+#form svg:hover {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.569);
 }

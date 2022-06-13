@@ -34,10 +34,11 @@ export function Timeline({allPosts, posts, setPosts, token, setToken}) {
             <h3>Timeline</h3>
             {allPosts.map((post) => (
                 (post.date === null)
-                ? <></>: <>
-                <li onClick={clickHandler}
-                id={post.date} key={post.date}>{moment(post.date).format('MMMM YYYY')}</li>
-                </>
+                ? <></>:
+                <div key={post.date}>
+                    <li onClick={clickHandler}
+                    id={post.date}>{moment(post.date).format('MMMM YYYY')}</li>
+                </div>
             ))}
             </ul>
         </div>

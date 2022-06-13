@@ -12,7 +12,6 @@ import { BsChevronDown } from 'react-icons/bs';
 Storage.configure({ level: 'public' });
 
 export function Dashboard({user}) {
-
     const [posts, setPosts] = useState([]);
     const [allPosts, setAllPosts] = useState([]);
     const [noPosts, setNoPosts] = useState(false);
@@ -57,7 +56,8 @@ export function Dashboard({user}) {
                 <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
             </div>
         )
-    } else {
+    }
+    else {
         return (
             <>
             <div class="container">

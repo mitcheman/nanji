@@ -77,6 +77,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     }
 
     const denyRequestHandler = async (selectedID) => {
+        console.log(selectedID)
         await handleIncomingRequest(user.username, selectedID);
         await handleOutgoingRequest(user.username, selectedID);
         getIncomingRequests(user.username).then((data) => {
@@ -94,7 +95,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
         });
     }
 
-    //requests should be their own componenet probably
+    //requests should be their own component !fix
     return (
         <><div id="requestlist" onClick={dismissAlerts}>
             <h4>Friend Requests</h4>

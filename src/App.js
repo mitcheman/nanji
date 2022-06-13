@@ -16,9 +16,7 @@ function App({ signOut, user }) {
 
   return (
     <>
-      <div>
-        <Header signOut={signOut} user={user} currentFriend={currentFriend} />
-      </div>
+      <Header signOut={signOut} user={user} currentFriend={currentFriend} />
       <Router>
         <Routes>
           <Route path='/' element={<Dashboard user={user} />} />

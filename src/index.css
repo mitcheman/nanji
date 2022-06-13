@@ -16,6 +16,10 @@ body {
   margin: 20px;
 }
 
+.loader h3 {
+  margin-top: 25px;
+}
+
 #nodata {
   margin-top: 25px;
   margin-left: 25px;
