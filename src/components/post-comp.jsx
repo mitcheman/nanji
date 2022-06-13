@@ -40,7 +40,12 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
                 }}>
                 { (!currentFriend) ? <TiDeleteOutline style={style} onClick={() => deleteHandler(post.id)}/>: <></>}
                 <img alt={post.id} src={post.s3Image} />
-                <p>{post.content}</p>
+                <div class="content">
+                    <div id="contentlocation">
+                        <h5>{post.location}</h5>
+                    </div>
+                    <p>{post.content}</p>
+                </div>
             </div>
             <div class="createdat">
             <p>post created: {moment(post.createdAt).format('MMMM Do YYYY')}</p>
@@ -64,7 +69,12 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
                 }}>
                 { (!currentFriend) ? <TiDeleteOutline style={style} onClick={() => deleteHandler(post.id)}/>: <></>}
             <img alt={post.id} src={post.s3Image} />
-            <p>{post.content}</p>
+            <div class="content">
+                <div id="contentlocation">
+                    <h5>{post.location}</h5>
+                </div>
+                    <p>{post.content}</p>
+            </div>
         </div>
         <div class="createdat">
         <p>post created: {moment(post.createdAt).format('MMMM Do YYYY')}</p>

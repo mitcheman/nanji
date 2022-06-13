@@ -8,7 +8,7 @@ export function Timeline({allPosts, posts, setPosts, token, setToken}) {
 
     let tokenID;
     //passing this var in too many places !fix
-    let limitNum = 10;
+    let limitNum = 5;
 
     const clickHandler = async (e) => {
 

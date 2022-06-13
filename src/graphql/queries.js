@@ -5,6 +5,7 @@ export const getPost = /* GraphQL */ `
   query GetPost($id: ID!) {
     getPost(id: $id) {
       id
+      location
       date
       content
       image
@@ -24,6 +25,7 @@ export const listPosts = /* GraphQL */ `
     listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        location
         date
         content
         image
@@ -55,6 +57,7 @@ export const postByDate = /* GraphQL */ `
     ) {
       items {
         id
+        location
         date
         content
         image
@@ -86,6 +89,7 @@ export const postByUser = /* GraphQL */ `
     ) {
       items {
         id
+        location
         date
         content
         image

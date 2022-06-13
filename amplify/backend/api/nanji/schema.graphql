@@ -1,5 +1,6 @@
 type Post @model @auth(rules: [{ allow: private }]) {
   id: ID!
+  location: String
   date: AWSDate!
   content: String!
   image: String!

@@ -14,6 +14,12 @@
   margin-top: 90px;
 }
 
+#form form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
 #uploadalert {
   width: 50%;
 }
@@ -23,13 +29,8 @@
   margin-bottom: 30px;
 }
 
-#form input {
-  margin-top: 5px;
-  margin-bottom: 50px;
-}
-
 input[type='file']::file-selector-button {
-  margin-top: 50px;
+  margin-top: 30px;
   border: 0.5px solid black;
   padding: 10px;
   border-radius: 0.2em;
@@ -47,7 +48,11 @@ input[type='file']::file-selector-button:hover {
   margin-top: 5px;
 }
 
-#form button {
+#content {
+  margin-top: 30px;
+}
+
+#submitbutton {
   padding: 10px;
   width: 20%;
   border: none;
@@ -56,12 +61,59 @@ input[type='file']::file-selector-button:hover {
   align-self: center;
 }
 
-#form svg {
+#submitbutton svg {
   height: auto;
   width: 30px;
 }
 
-#form svg:hover {
+#submitbutton svg:hover {
   cursor: pointer;
   color: rgba(0, 0, 0, 0.569);
+}
+
+.locationsearchresults {
+  background-color: rgba(0, 0, 0, 0.029);
+  display: flex;
+  flex-direction: row;
+  margin-top: 5px;
+}
+
+.locationsearchresults ul {
+  display: flex;
+  flex-direction: column;
+  padding-inline-start: 0px !important;
+}
+
+.locationsearchresults li {
+  margin-left: 5px;
+  font-size: 15px;
+  list-style-type: none;
+  overflow-x: scroll;
+}
+
+.locationsearchresults svg {
+  height: auto;
+  width: 25px !important;
+  margin-left: auto;
+}
+
+.locationsearchresults svg:hover {
+  color: rgba(0, 0, 0, 0.569);
+  cursor: pointer;
+}
+
+#selectedlocation {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#selectedlocation svg {
+  margin-left: 10px;
+}
+
+#selectedlocation svg:hover {
+  color: rgba(185, 30, 30, 0.771);
+  cursor: pointer;
 }

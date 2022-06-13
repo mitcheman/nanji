@@ -5,23 +5,29 @@
   box-shadow: 0 2px 10px -1px #3333;
   justify-content: center;
   overflow: hidden;
-  max-height: 50vh;
+  max-height: 35vh;
   border-radius: 0.2em;
   background-color: white;
+  overflow: visible;
 }
 
 .post svg {
   position: absolute;
   height: auto;
   width: 25px;
-  left: 40px;
-  margin-right: auto;
+  margin-left: 49%;
   margin-top: -20px;
 }
 
 .post svg:hover {
   color: rgba(0, 0, 0, 0.569);
   cursor: pointer;
+}
+
+#contentlocation h5 {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.634);
+  margin-bottom: 5px;
 }
 
 .createdat {
@@ -42,7 +48,7 @@
   text-align: center;
 }
 
-.post p {
+.content {
   margin-left: 20px;
   background-color: rgba(0, 0, 0, 0.063);
   width: 40%;
@@ -53,4 +59,9 @@ img {
   object-fit: contain;
   width: 60%;
   max-height: 100%;
+  transition: all 0.2s ease-in-out;
+}
+
+.post img:hover {
+  transform: scale(1.1);
 }

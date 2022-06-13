@@ -1,11 +1,16 @@
 #postlist {
   display: flex;
   flex-direction: column;
-  width: 70%;
+  width: 50%;
   justify-content: center;
-  margin-left: 40px;
+  margin-left: 10%;
   margin-bottom: 50px;
   margin-top: 70px;
+}
+
+.postcolumn {
+  display: flex;
+  flex-direction: column;
 }
 
 #postlist h3 {
@@ -18,7 +23,4 @@
 
 #postlist p {
   font-size: 16px;
-}
-
-#friendinfo {
 }
