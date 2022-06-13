@@ -2,7 +2,7 @@
 
 A social media and photo sharing app focused on the simple things.
 
-##Backend Requirements
+## Backend Requirements
 
 Nanji's backend runs on aws and uses aws amplify for the management. You will need an AWS account and the Amplify CLI installed.
 
