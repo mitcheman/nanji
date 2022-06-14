@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App({ signOut, user }) {
+  const [friends, setFriends] = useState([]);
   const [currentFriend, setCurrentFriend] = useState();
 
   return (
@@ -19,13 +20,30 @@ function App({ signOut, user }) {
       <Header signOut={signOut} user={user} currentFriend={currentFriend} />
       <Router>
         <Routes>
-          <Route path='/' element={<Dashboard user={user} />} />
-          <Route path='/Friends' element={<Friends user={user} />} />
+          <Route
+            path='/'
+            element={
+              <Dashboard
+                user={user}
+                friends={friends}
+                setFriends={setFriends}
+              />
+            }
+          />
+          <Route
+            path='/Friends'
+            element={
+              <Friends user={user} friends={friends} setFriends={setFriends} />
+            }
+          />
           <Route path='/NewPost' element={<NewPost user={user} />} />
           <Route
             path='/user/:id'
             element={
               <UserFriend
+                user={user}
+                friends={friends}
+                setFriends={setFriends}
                 currentFriend={currentFriend}
                 setCurrentFriend={setCurrentFriend}
               />

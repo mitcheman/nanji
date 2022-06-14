@@ -2,16 +2,17 @@
 import { Storage } from "aws-amplify"
 import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
-import { Timeline } from "../components/timeline-comp"
+import { Menu } from "../components/menu-comp"
 import { duplicatesByMonth } from "../utils/duplicates"
 import { listUserPosts, listAllUserPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
+import { getFriends } from "../utils/friendRequests"
 import { BsChevronDown } from 'react-icons/bs';
 
 //temp set to public - this needs to change and implement groups for friends !fix
 Storage.configure({ level: 'public' });
 
-export function Dashboard({user}) {
+export function Dashboard({user, friends, setFriends}) {
     const [posts, setPosts] = useState([]);
     const [allPosts, setAllPosts] = useState([]);
     const [noPosts, setNoPosts] = useState(false);
@@ -38,6 +39,12 @@ export function Dashboard({user}) {
         })
     }, [])
 
+    useEffect(() => {
+        getFriends(user.username).then((data) => {
+            setFriends(data)
+        })
+    }, []);
+
     async function newPage () {
         listUserPosts(user.username, token)
         .then((data) => {
@@ -62,7 +69,7 @@ export function Dashboard({user}) {
             <>
             <div class="container">
                 <PostList posts={posts} setPosts={setPosts} setAllPosts={setAllPosts}/>
-                <Timeline allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
+                <Menu user={user} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
             </div>
             </>

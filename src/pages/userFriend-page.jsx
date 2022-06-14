@@ -4,7 +4,7 @@ import { getUserFr } from "../graphql/custom"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
-import { Timeline } from "../components/timeline-comp"
+import { Menu } from '../components/menu-comp'
 import { duplicatesByMonth } from "../utils/duplicates"
 import { listAllUserPosts, listUserPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
@@ -12,7 +12,7 @@ import { BsChevronDown } from 'react-icons/bs';
 
 //would love to reuse a lot of the dashboard and tried.
 //Some confusion and funkiness between using user token on initial login vs grabbing data and using current friend. !fix
-export function UserFriend({currentFriend, setCurrentFriend}) {
+export function UserFriend({user, friends, setFriends, currentFriend, setCurrentFriend}) {
 
     const { id } = useParams();
 
@@ -76,7 +76,7 @@ export function UserFriend({currentFriend, setCurrentFriend}) {
             <>
             <div class="container">
                 <PostList posts={posts} setPosts={setPosts} currentFriend={currentFriend} />
-                <Timeline allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
+                <Menu user={currentFriend} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
             </div>
             </>

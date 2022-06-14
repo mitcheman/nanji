@@ -1,24 +1,18 @@
 #timeline {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  margin-left: auto;
+  right: 0;
   width: 12vw;
   overflow: auto;
 }
 
 #timeline ul {
   width: 12vw;
-  position: fixed;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
   height: 100%;
-  background: rgba(0, 0, 0, 0.063);
-  padding-top: 90px;
-  z-index: 1;
   padding-inline-start: 0px !important;
-  text-align: center !important;
 }
 
 #timeline ::-webkit-scrollbar {
@@ -28,16 +22,12 @@
 #timeline li {
   font-size: 16px;
   list-style-type: none;
-  margin-bottom: 15%;
-  margin-top: 15%;
+  margin-top: 20px;
   justify-content: space-evenly;
-  align-self: center;
 }
 
 #timeline h3 {
   overflow-y: visible;
-  text-align: center;
-  margin-bottom: 20px;
   font-size: 16px;
   text-decoration: underline;
   text-underline-offset: 5px;

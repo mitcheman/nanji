@@ -4,11 +4,10 @@ import { RequestList } from "../components/requestList-comp"
 import '../css/friends.css'
 import { useState } from "react"
 
-export function Friends({user}) {
+export function Friends({user, friends, setFriends}) {
 
     const [outGoing, setOutGoing] = useState([]);
     const [incoming, setIncoming] = useState([]);
-    const [friends, setFriends] = useState([]);
 
  return (
     <>
@@ -19,7 +18,7 @@ export function Friends({user}) {
             setOutGoing={setOutGoing} incoming={incoming}
             setIncoming={setIncoming} friends={friends} setFriends={setFriends}/>
         </div>
-        <FriendsList friends={friends} setFriends={setFriends}/>
+        <FriendsList user={user} friends={friends} setFriends={setFriends}/>
     </div>
     </>
  )

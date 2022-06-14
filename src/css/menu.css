@@ -1,0 +1,19 @@
+#menu {
+  position: fixed;
+  padding-top: 90px;
+  padding-left: 20px;
+  width: 15vw;
+  z-index: 1;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.063);
+}
+
+#menu svg {
+  height: auto;
+  width: 25px;
+}
+
+#menu svg:hover {
+  color: rgba(0, 0, 0, 0.569);
+  cursor: pointer;
+}
