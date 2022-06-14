@@ -58,7 +58,7 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
         <>
         <div class="timeinfo">
             <h3>{moment(post.date).format('MMMM Do YYYY')} - </h3>
-            <p>{moment(post.date).fromNow()}</p>
+            {(moment(post.date).format('MMMM Do YYYY') === moment(new Date()).format('MMMM Do YYYY')) ? <p>Today</p>:<p>{moment(post.date).fromNow()}</p>}
         </div>
         <div id={post.id} class="post"
                 onMouseEnter={e => {
