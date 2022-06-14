@@ -11,8 +11,10 @@ const [menu, setMenu] = useState(true)
 
     return (
         <div id="menu">
-            <GiBackwardTime onClick={() => setMenu(true)} />
-            <FaUserFriends onClick={() => setMenu(false)} />
+            <div id="menusvg">
+                <GiBackwardTime onClick={() => setMenu(true)} />
+                <FaUserFriends id="menufriends" onClick={() => setMenu(false)} />
+            </div>
             { (!menu) ?
             <FriendsList user={user} friends={friends} setFriends={setFriends}/>:
             <Timeline allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>

@@ -98,7 +98,7 @@ input[type='file']::file-selector-button:hover {
 }
 
 .locationsearchresults svg:hover {
-  color: rgba(0, 0, 0, 0.569);
+  color: rgba(37, 151, 60, 0.771);
   cursor: pointer;
 }
 

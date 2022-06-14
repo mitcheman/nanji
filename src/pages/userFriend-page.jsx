@@ -12,6 +12,7 @@ import { BsChevronDown } from 'react-icons/bs';
 
 //would love to reuse a lot of the dashboard and tried.
 //Some confusion and funkiness between using user token on initial login vs grabbing data and using current friend. !fix
+//future me note - can switch between user if id params exist - see friendslist component
 export function UserFriend({user, friends, setFriends, currentFriend, setCurrentFriend}) {
 
     const { id } = useParams();

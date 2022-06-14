@@ -18,7 +18,9 @@ export function Friends({user, friends, setFriends}) {
             setOutGoing={setOutGoing} incoming={incoming}
             setIncoming={setIncoming} friends={friends} setFriends={setFriends}/>
         </div>
-        <FriendsList user={user} friends={friends} setFriends={setFriends}/>
+        <div id="friendspagelist">
+            <FriendsList user={user} friends={friends} setFriends={setFriends}/>
+        </div>
     </div>
     </>
  )

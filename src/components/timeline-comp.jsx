@@ -31,7 +31,7 @@ export function Timeline({allPosts, posts, setPosts, token, setToken}) {
     return (
         <div id="timeline">
             <ul>
-            <h3>Timeline</h3>
+            <h4>Timeline</h4>
             {allPosts.map((post) => (
                 (post.date === null)
                 ? <></>:
