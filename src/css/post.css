@@ -5,7 +5,7 @@
   box-shadow: 0 2px 10px -1px #3333;
   justify-content: center;
   overflow: hidden;
-  max-height: 60vh;
+  max-height: 40vh;
   border-radius: 0.2em;
   background-color: white;
   overflow: visible;
@@ -49,6 +49,7 @@
 }
 
 .content {
+  min-width: 30%;
   margin-left: 20px;
   background-color: rgba(0, 0, 0, 0.063);
   width: 40%;
@@ -62,7 +63,7 @@
 
 img {
   object-fit: contain;
-  width: 80%;
+  width: 60%;
   max-height: 100%;
   transition: all 0.2s ease-in-out;
 }
