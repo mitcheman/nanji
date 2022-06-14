@@ -26,6 +26,30 @@ export const listUserPosts = async (user, token) => {
   return userPosts;
 };
 
+export const listUserPostsTimeline = async (user, token, date) => {
+  const userPosts = await API.graphql({
+    query: postByUser,
+    authMode: 'AMAZON_COGNITO_USER_POOLS',
+    variables: {
+      userID: user,
+      limit: 5,
+      sortDirection: 'DESC',
+      date: { le: date },
+    },
+  });
+
+  const posts = await Promise.all(
+    userPosts.data.postByUser.items.map(async (post) => {
+      const image = await Storage.get(post.image);
+      post.s3Image = image;
+      return post;
+    })
+  );
+
+  duplicates(userPosts.data.postByUser.items);
+  return userPosts;
+};
+
 export const listAllUserPosts = async (user) => {
   const allPostData = await API.graphql({
     query: postByUser,

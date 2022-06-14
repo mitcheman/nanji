@@ -17,7 +17,7 @@ const [menu, setMenu] = useState(true)
             </div>
             { (!menu) ?
             <FriendsList user={user} friends={friends} setFriends={setFriends}/>:
-            <Timeline allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
+            <Timeline user={user} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
             }
         </div>
     )
