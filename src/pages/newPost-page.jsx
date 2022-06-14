@@ -6,6 +6,7 @@ import { TextAreaField, SearchField } from '@aws-amplify/ui-react';
 import { BsUpload } from 'react-icons/bs';
 import { TiDeleteOutline } from 'react-icons/ti'
 import { AiOutlineCheckCircle } from 'react-icons/ai'
+import { GrPowerReset } from 'react-icons/gr'
 import { Alert } from '@aws-amplify/ui-react';
 import '../css/form.css'
 const moment = require('moment')
@@ -17,6 +18,8 @@ export function NewPost({user}) {
     const [fileData, setFileData] = useState()
     const [fileStatus, setFileStatus] = useState(false)
 
+    const [currentImage, setCurrentImage] = useState()
+
     //search for location
     const [locationSearch, setLocationSearch] = useState();
     const [locationSearchResult, setLocationSearchResult] = useState(false);
@@ -24,6 +27,24 @@ export function NewPost({user}) {
     //select location
     const [selectedLocation, setSelectedLocation] = useState()
     const [selectedLocationResult, setSelectedLocationResult] = useState(false);
+
+    function imageOnChangeHandler(e) {
+        setFileData(e.target.files[0])
+        setCurrentImage(URL.createObjectURL(e.target.files[0]));
+    }
+
+    function resetFormHandler(e) {
+        document.getElementById('content').value = '';
+        document.getElementById('picdate').value = '';
+        document.getElementById('searchfield').value = '';
+        document.getElementById('fileupload').value = null;
+        setFileData();
+        setCurrentImage();
+        setLocationSearch();
+        setLocationSearchResult(false)
+        setSelectedLocationResult(false);
+        setSelectedLocation();
+    }
 
     async function savePost (event) {
         event.preventDefault()
@@ -41,20 +62,17 @@ export function NewPost({user}) {
         await Storage.put(filename, fileData, {level: 'public'});
         const newPost = {location: selectedLocation, date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username, type: "Post"};
         const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
-        console.log(result)
         setFileStatus(true);
         setSelectedLocation()
         setSelectedLocationResult(false);
 
-        event.target.content.value = '';
-        event.target.date.value = "";
-        event.target.fileupload.value = null;
+        //reset form
+        resetFormHandler();
     }
 
     async function searchLocation (event) {
         const searchOptions = {maxResults: 10, language: 'en'}
         const results = await Geo.searchByText(event, searchOptions);
-        console.log(results)
         if (results.length > 0) {
             setLocationSearchResult(true);
             setLocationSearch(results);
@@ -84,16 +102,19 @@ export function NewPost({user}) {
     return (
     <>
     <div id="newpost">
+        <div id="formreset">
+            <GrPowerReset onClick={(e) => resetFormHandler(e)}/>
+        </div>
         <div id="form">
         <h3>ʕ •ᴥ•ʔ ☆<br></br>New Post</h3>
         <label>Location of Photo</label>
-            <SearchField label="Location Search" placeholder="Search here..."
+            <SearchField label="Location Search" id="searchfield" placeholder="Search here..."
             onSubmit={searchLocation}/>
             <div>
             {(locationSearchResult) ?
             <div>
                 {locationSearch.map((locationResult) => (
-                    <div class="locationsearchresults">
+                    <div class="locationsearchresults" key={locationResult.label}>
                     <ul>
                         <li>{locationResult.label}</li>
                     </ul>
@@ -108,9 +129,12 @@ export function NewPost({user}) {
         <form onSubmit={savePost}>
             <label for="picdate">Date of Photo</label>
             <input id="picdate" name="date" type="date" max={currentDate} onClick={dismissAlert}/>
-            <label id="content" for="content">Background Story</label>
-            <TextAreaField size="large" autoComplete="off" name="content" type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
-            <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => setFileData(e.target.files[0])}></input>
+            <label id="contentlabel" for="content">Background Story</label>
+            <TextAreaField size="large" autoComplete="off" id="content" name="content" type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
+            <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => imageOnChangeHandler(e)}></input>
+            <div id="formimage">
+                <img id="frame" alt="" src={currentImage} name="frame"/>
+            </div>
             <button id="submitbutton" type="submit"><BsUpload /></button>
         </form>
     </div>

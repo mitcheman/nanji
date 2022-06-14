@@ -8,6 +8,7 @@ import { listUserPosts, listAllUserPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
 import { getFriends } from "../utils/friendRequests"
 import { BsChevronDown } from 'react-icons/bs';
+import '../css/dashboard.css'
 
 //temp set to public - this needs to change and implement groups for friends !fix
 Storage.configure({ level: 'public' });
@@ -59,8 +60,10 @@ export function Dashboard({user, friends, setFriends}) {
 
     if (noPosts === true) {
         return (
+            <div cass="container">
             <div id="nodata">
                 <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
+            </div>
             </div>
         )
     }

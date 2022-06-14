@@ -11,20 +11,6 @@ body {
   height: 100%;
 }
 
-.welcome {
-  display: flex;
-  margin: 20px;
-}
-
-.loader h3 {
-  margin-top: 25px;
-}
-
-#nodata {
-  margin-top: 25px;
-  margin-left: 25px;
-}
-
 #root {
   height: 100%;
 }
