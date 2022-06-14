@@ -53,6 +53,11 @@
   background-color: rgba(0, 0, 0, 0.063);
   width: 40%;
   padding: 10px;
+  display: inline-block;
+  word-break: break-word;
+  overflow-wrap: normal;
+  overflow-y: scroll;
+  font-size: 14px;
 }
 
 img {
