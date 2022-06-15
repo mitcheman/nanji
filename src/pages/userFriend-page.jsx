@@ -69,9 +69,12 @@ export function UserFriend({user, friends, setFriends, currentFriend, setCurrent
 
     if (noPosts === true) {
         return (
+            <>
+            <Menu user={currentFriend} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} />
             <div id="nodata">
                 <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
             </div>
+            </>
         )
     } else {
         return (

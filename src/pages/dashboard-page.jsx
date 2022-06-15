@@ -61,6 +61,7 @@ export function Dashboard({user, signOut, friends, setFriends}) {
     if (noPosts === true) {
         return (
             <div cass="container">
+                <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
             <div id="nodata">
                 <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
             </div>
