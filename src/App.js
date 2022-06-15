@@ -25,6 +25,7 @@ function App({ signOut, user }) {
             element={
               <Dashboard
                 user={user}
+                signout={signOut}
                 friends={friends}
                 setFriends={setFriends}
               />

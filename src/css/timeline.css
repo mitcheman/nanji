@@ -39,13 +39,33 @@
 }
 
 @media screen and (max-width: 500px) {
+  #timeline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding-top: 10vh;
+    padding-bottom: 1vh;
+    background-color: white;
+  }
+  #timeline ul {
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    text-align: center;
+  }
   #timeline h4 {
-    font-size: 3vw;
+    display: none;
   }
   #timeline {
     width: 100%;
   }
   #timeline li {
+    margin-left: 3vw;
+    margin-right: 3vw;
     width: 100%;
     font-size: 3vw;
   }

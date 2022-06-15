@@ -42,6 +42,7 @@
 @media screen and (max-width: 500px) {
   .search {
     margin: 2vw;
+    margin-top: 6vh;
     padding: 2vw;
   }
   .search h4 {

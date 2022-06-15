@@ -21,6 +21,12 @@ body {
   height: 100%;
 }
 
+@media screen and (max-width: 500px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
 #footer {
   position: absolute;
   bottom: 0;
@@ -41,6 +47,7 @@ body {
   height: auto;
   width: 25px;
   z-index: 2;
+  color: black;
 }
 
 [data-amplify-authenticator] {

@@ -36,27 +36,33 @@
 }
 
 @media screen and (max-width: 500px) {
-  #menu h4 {
-    font-size: 3vw;
-    margin-top: 1vh;
-    text-align: center;
-  }
-
-  #menu p {
-    font-size: 3vw;
-  }
-  #menu {
-    max-width: 20%;
-    overflow: auto;
-    padding: 1vw;
-  }
-  #menusvg {
-    margin-top: 9vh;
-  }
-  #menufriends {
-    margin-left: 1.5vw;
-  }
-  #menu ul {
+  #menumobile {
+    align-items: center;
+    align-content: center;
+    background-color: white;
     width: 100%;
+    padding-top: 6.5vh;
+    padding-bottom: 1vh;
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: 0;
+    --amplify-line-heights-medium: 0;
+    z-index: 2;
+  }
+  #menumobile svg {
+    width: 30px;
+    height: 30px !important;
+    height: auto;
+    color: black;
+  }
+  #menumobile button {
+    border: none;
+    background: none;
+  }
+  #menu svg:hover {
+    color: rgba(0, 0, 0, 0.569);
+    cursor: pointer;
   }
 }

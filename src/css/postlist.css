@@ -23,9 +23,10 @@
 
 @media screen and (max-width: 500px) {
   #postlist {
-    width: 100%;
-    margin-top: 9vh;
-    margin-right: 2vw;
+    width: 98%;
+    margin-top: 12vh;
+    margin-right: 0;
+    margin-left: 0;
   }
   #postlist h3 {
     font-size: 3vw;

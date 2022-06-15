@@ -124,6 +124,7 @@
 @media screen and (max-width: 500px) {
   #friends {
     flex-direction: column;
+    overflow: scroll;
   }
   #addfriends {
     width: 100%;
@@ -158,6 +159,23 @@
     font-size: 3.5vw;
   }
   #friendspagelist p {
+    font-size: 3vw;
+  }
+
+  #friendslistmobile {
+    margin-top: 7vh;
+    overflow: scroll;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    position: fixed;
+    top: 0%;
+    max-height: 40%;
+    padding-bottom: 1vh;
+    width: 100%;
+    background-color: white;
+  }
+  #friendslistmobile p {
     font-size: 3vw;
   }
 }

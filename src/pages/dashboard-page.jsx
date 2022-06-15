@@ -13,7 +13,7 @@ import '../css/dashboard.css'
 //temp set to public - this needs to change and implement groups for friends !fix
 Storage.configure({ level: 'public' });
 
-export function Dashboard({user, friends, setFriends}) {
+export function Dashboard({user, signOut, friends, setFriends}) {
     const [posts, setPosts] = useState([]);
     const [allPosts, setAllPosts] = useState([]);
     const [noPosts, setNoPosts] = useState(false);
@@ -72,7 +72,7 @@ export function Dashboard({user, friends, setFriends}) {
             <>
             <div class="container">
                 <PostList posts={posts} setPosts={setPosts} setAllPosts={setAllPosts}/>
-                <Menu user={user} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
+                <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
             </div>
             </>
