@@ -36,8 +36,8 @@ export function Header({signOut, user, currentFriend}) {
                 <a id="nanji" href='/'>Nanji</a>
         <Router>
         <div id="userinfo">
-            <a id="username" href='/'>{name}</a>
-            {(currentFriend) ? <div id="friendname"><h5>Current Profile&ensp;|</h5><p>&ensp;{currentFriend.given_name + ' ' + currentFriend.family_name}</p></div>: ''}
+            {(currentFriend) ? <div id="friendname"><h5>Current Profile&ensp;|</h5><p>&ensp;{currentFriend.given_name + ' ' + currentFriend.family_name}</p></div>:
+            <a id="username" href='/'>{name}</a>}
         </div>
         </Router>
         </div>
