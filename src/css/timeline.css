@@ -37,3 +37,16 @@
   color: rgba(0, 0, 0, 0.512);
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  #timeline h4 {
+    font-size: 3vw;
+  }
+  #timeline {
+    width: 100%;
+  }
+  #timeline li {
+    width: 100%;
+    font-size: 3vw;
+  }
+}

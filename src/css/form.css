@@ -141,3 +141,32 @@ input[type='file']::file-selector-button:hover {
   color: rgba(185, 30, 30, 0.771);
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  #form {
+    width: 96%;
+    padding: 2vw;
+  }
+  #formreset {
+    width: 100%;
+    margin-top: 7vh;
+  }
+  #form h3 {
+    font-size: 2vh;
+    margin-bottom: 2vh;
+  }
+  #form label {
+    font-size: 1.8vh;
+  }
+  #content {
+    font-size: 4vw;
+  }
+  #contentlabel {
+    margin-top: 2vh;
+  }
+  #picdate {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+  }
+}

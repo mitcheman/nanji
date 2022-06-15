@@ -34,3 +34,29 @@
   text-decoration: underline;
   text-underline-offset: 5px;
 }
+
+@media screen and (max-width: 500px) {
+  #menu h4 {
+    font-size: 3vw;
+    margin-top: 1vh;
+    text-align: center;
+  }
+
+  #menu p {
+    font-size: 3vw;
+  }
+  #menu {
+    max-width: 20%;
+    overflow: auto;
+    padding: 1vw;
+  }
+  #menusvg {
+    margin-top: 8.5vh;
+  }
+  #menufriends {
+    margin-left: 1.5vw;
+  }
+  #menu ul {
+    width: 100%;
+  }
+}

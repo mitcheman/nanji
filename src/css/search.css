@@ -38,3 +38,20 @@
   color: rgba(0, 0, 0, 0.569);
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px) {
+  .search {
+    margin: 2vw;
+    padding: 2vw;
+  }
+  .search h4 {
+    margin-bottom: 2vh;
+    font-size: 3.5vw;
+  }
+  .searchresults li {
+    margin-top: 2vh;
+  }
+  .searchresults h5 {
+    font-size: 3vw;
+  }
+}

@@ -20,3 +20,15 @@
   margin-right: 3px;
   margin-left: 5px;
 }
+
+@media screen and (max-width: 500px) {
+  #postlist {
+    width: 100%;
+    margin-top: 8.5vh;
+    margin-right: 2vw;
+  }
+  #postlist h3 {
+    font-size: 3vw;
+    margin-bottom: 1vh;
+  }
+}
