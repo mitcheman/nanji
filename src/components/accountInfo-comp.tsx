@@ -1,7 +1,7 @@
-
+import React from 'react'
 import '../css/account.css'
 
-export function AccountInfo({user}) {
+export function AccountInfo ({user}) {
 
     return (
         <div id="accountcontainer">
