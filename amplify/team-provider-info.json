@@ -1,59 +1,62 @@
 {
-    "staging": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-nanji-staging-83539-authRole",
-            "UnauthRoleArn": "arn:aws:iam::602366348679:role/amplify-nanji-staging-83539-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::602366348679:role/amplify-nanji-staging-83539-authRole",
-            "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-nanji-staging-83539-deployment",
-            "UnauthRoleName": "amplify-nanji-staging-83539-unauthRole",
-            "StackName": "amplify-nanji-staging-83539",
-            "StackId": "arn:aws:cloudformation:us-east-1:602366348679:stack/amplify-nanji-staging-83539/d46af6f0-d817-11ec-b995-12c8101c8f15",
-            "AmplifyAppId": "dk5qtqs5o6cin"
-        },
-        "categories": {
-            "auth": {
-                "nanji": {}
-            },
-            "function": {
-                "nanji645de7d8": {
-                    "deploymentBucketName": "amplify-nanji-staging-83539-deployment",
-                    "s3Key": "amplify-builds/nanji645de7d8-616574732b57784d4571-build.zip"
-                }
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "dk5qtqs5o6cin",
-                    "type": "manual"
-                }
-            }
-        }
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nanji-staging-83539-authRole",
+      "UnauthRoleArn": "arn:aws:iam::602366348679:role/amplify-nanji-staging-83539-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::602366348679:role/amplify-nanji-staging-83539-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-nanji-staging-83539-deployment",
+      "UnauthRoleName": "amplify-nanji-staging-83539-unauthRole",
+      "StackName": "amplify-nanji-staging-83539",
+      "StackId": "arn:aws:cloudformation:us-east-1:602366348679:stack/amplify-nanji-staging-83539/d46af6f0-d817-11ec-b995-12c8101c8f15",
+      "AmplifyAppId": "dk5qtqs5o6cin"
     },
-    "dev": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-nanji-dev-171229-authRole",
-            "UnauthRoleArn": "arn:aws:iam::866879017192:role/amplify-nanji-dev-171229-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::866879017192:role/amplify-nanji-dev-171229-authRole",
-            "Region": "us-east-1",
-            "DeploymentBucketName": "amplify-nanji-dev-171229-deployment",
-            "UnauthRoleName": "amplify-nanji-dev-171229-unauthRole",
-            "StackName": "amplify-nanji-dev-171229",
-            "StackId": "arn:aws:cloudformation:us-east-1:866879017192:stack/amplify-nanji-dev-171229/e90f64d0-ee4f-11ec-9ae9-128869e8bf65",
-            "AmplifyAppId": "d1ro1ev96rcj2l"
-        },
-        "categories": {
-            "auth": {
-                "nanji": {}
-            },
-            "function": {
-                "nanji645de7d8": {}
-            },
-            "hosting": {
-                "amplifyhosting": {
-                    "appId": "d1ro1ev96rcj2l",
-                    "type": "manual"
-                }
-            }
+    "categories": {
+      "auth": {
+        "nanji": {}
+      },
+      "function": {
+        "nanji645de7d8": {
+          "deploymentBucketName": "amplify-nanji-staging-83539-deployment",
+          "s3Key": "amplify-builds/nanji645de7d8-616574732b57784d4571-build.zip"
         }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dk5qtqs5o6cin",
+          "type": "manual"
+        }
+      }
     }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nanji-dev-171229-authRole",
+      "UnauthRoleArn": "arn:aws:iam::866879017192:role/amplify-nanji-dev-171229-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::866879017192:role/amplify-nanji-dev-171229-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-nanji-dev-171229-deployment",
+      "UnauthRoleName": "amplify-nanji-dev-171229-unauthRole",
+      "StackName": "amplify-nanji-dev-171229",
+      "StackId": "arn:aws:cloudformation:us-east-1:866879017192:stack/amplify-nanji-dev-171229/e90f64d0-ee4f-11ec-9ae9-128869e8bf65",
+      "AmplifyAppId": "d1ro1ev96rcj2l"
+    },
+    "categories": {
+      "auth": {
+        "nanji": {}
+      },
+      "function": {
+        "nanji645de7d8": {
+          "deploymentBucketName": "amplify-nanji-dev-171229-deployment",
+          "s3Key": "amplify-builds/nanji645de7d8-616574732b57784d4571-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1ro1ev96rcj2l",
+          "type": "manual"
+        }
+      }
+    }
+  }
 }
