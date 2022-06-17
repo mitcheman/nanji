@@ -1,7 +1,16 @@
 import React from "react";
 import "../css/account.css";
 
-export const AccountInfo: React.FC = ({ user }) => {
+export type User = {
+	attributes: {
+		email: string;
+		family_name: string;
+		given_name: string;
+		preferred_username: string;
+	};
+};
+
+export const AccountInfo: React.FC<{ user: User }> = ({ user }) => {
 	return (
 		<div id="accountcontainer">
 			<div id="accountdetails">
