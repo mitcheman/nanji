@@ -1,6 +1,6 @@
-import { Search } from "../components/search-comp"
-import { FriendsList } from "../components/friendsList-comp"
-import { RequestList } from "../components/requestList-comp"
+import { Search } from '../components/search-comp.jsx'
+import { FriendsList } from "../components/friendsList-comp.tsx"
+import { RequestList } from "../components/requestList-comp.tsx"
 import '../css/friends.css'
 import { useState } from "react"
 
