@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/account.css";
 
-export const AccountInfo: React.FC = ({ user }) => {
+export function AccountInfo({ user }) {
 	return (
 		<div id="accountcontainer">
 			<div id="accountdetails">
@@ -25,4 +25,4 @@ export const AccountInfo: React.FC = ({ user }) => {
 			</div>
 		</div>
 	);
-};
+}
