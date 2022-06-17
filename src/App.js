@@ -9,6 +9,8 @@ import { Friends } from './pages/friends-page';
 import { UserFriend } from './pages/userFriend-page';
 import { useState } from 'react';
 
+// this is a comment!
+
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App({ signOut, user }) {
