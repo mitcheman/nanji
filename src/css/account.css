@@ -1,54 +1,54 @@
 #accountcontainer {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 #accountdetails {
-  align-self: center;
-  overflow-x: scroll;
-  display: flex;
-  padding: 20px;
-  box-shadow: 0 2px 10px -1px #3333;
-  flex-direction: column;
-  width: 80%;
-  margin: 25px;
-  margin-top: 90px;
+	align-self: center;
+	overflow-x: scroll;
+	display: flex;
+	padding: 20px;
+	box-shadow: 0 2px 10px -1px #3333;
+	flex-direction: column;
+	width: 80%;
+	margin: 25px;
+	margin-top: 90px;
 }
 
 #accountdetails h3 {
-  align-self: center;
+	align-self: center;
 }
 
 .accountline {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-  margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	margin-top: 10px;
 }
 
 .accountline p {
-  margin-left: 10px;
-  font-size: 17px;
+	margin-left: 10px;
+	font-size: 17px;
 }
 
 #accountdelete {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 #accountdelete button {
-  padding: 10px;
-  width: 20%;
-  border: none;
-  border-radius: 0.2em;
-  background: none;
-  background-color: rgb(195, 8, 8);
-  color: white;
-  align-self: center;
+	padding: 10px;
+	width: 20%;
+	border: none;
+	border-radius: 0.2em;
+	background: none;
+	background-color: rgb(195, 8, 8);
+	color: white;
+	align-self: center;
 }
 
 #accountdelete button:hover {
-  background-color: red;
-  cursor: pointer;
+	background-color: red;
+	cursor: pointer;
 }
