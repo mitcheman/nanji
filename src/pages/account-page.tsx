@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { Auth, API, Storage } from 'aws-amplify';
 import { deletePost } from "../graphql/mutations"
 import '../css/account.css'
+import React from "react";
 
 
-export function Account({user}) {
+export const Account: React.FC<any> = ({user}) => {
 
     //just deletes account - can trigger a lambda function to clean up s3/dynamo after
-    async function deleteUser() {
+    async function deleteUser(): Promise<string | void> {
         try {
-            const result = await Auth.deleteUser();
+            const result: string | void = await Auth.deleteUser();
             return result;
         } catch (error) {
             console.log('Error deleting user', error);
