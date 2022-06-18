@@ -4,9 +4,10 @@ import { Auth, API, Storage } from 'aws-amplify';
 import { deletePost } from "../graphql/mutations"
 import '../css/account.css'
 import React from "react";
+import { CognitoUserType } from "../Shared/Types";
 
 
-export const Account: React.FC<any> = ({user}) => {
+export const Account: React.FC<{user: CognitoUserType}> = ({user}) => {
 
     //just deletes account - can trigger a lambda function to clean up s3/dynamo after
     async function deleteUser(): Promise<string | void> {
