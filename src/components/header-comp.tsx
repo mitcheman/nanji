@@ -4,8 +4,13 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
 import { isMobile } from "react-device-detect";
+import { CognitoUserType, FriendType } from "../Shared/Types";
 
-export const Header: React.FC = ({ signOut, user, currentFriend }) => {
+export const Header: React.FC<{
+	user: CognitoUserType;
+	currentFriend: FriendType;
+	signOut: () => Promise<any>;
+}> = ({ signOut, user, currentFriend }) => {
 	const name = user.attributes.given_name + " " + user.attributes.family_name;
 
 	if (!isMobile) {
