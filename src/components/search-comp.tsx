@@ -32,7 +32,6 @@ export const Search: React.FC<SearchProps> = ({
 	const [searchResult, setSearchResult] = useState(false);
 
 	const searchHandler = async (event: string) => {
-		// possible break here
 		const filterSearch = {
 			filter: {
 				or: [

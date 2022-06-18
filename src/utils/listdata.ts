@@ -1,6 +1,7 @@
 import { duplicates } from "./duplicates";
 import { postByUser } from "../graphql/queries";
 import { API, Storage } from "aws-amplify";
+import { GraphQLResult } from "@aws-amplify/api-graphql";
 
 export const listUserPosts = async (user, token) => {
 	const userPosts = await API.graphql({
@@ -27,7 +28,7 @@ export const listUserPosts = async (user, token) => {
 };
 
 export const listUserPostsTimeline = async (user, token, date) => {
-	const userPosts = await API.graphql({
+	const userPosts: GraphQLResult<any> = await API.graphql({
 		query: postByUser,
 		authMode: "AMAZON_COGNITO_USER_POOLS",
 		variables: {

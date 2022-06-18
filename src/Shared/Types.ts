@@ -92,3 +92,12 @@ export type RequestListProps = {
 	friends: FriendType[];
 	setFriends: React.Dispatch<React.SetStateAction<FriendType[]>>;
 };
+
+export type TimeLineProps = {
+	user: CognitoUserType;
+	allPosts: PostType[];
+	posts: PostType[];
+	setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+	token: string;
+	setToken: React.Dispatch<React.SetStateAction<string>>;
+};

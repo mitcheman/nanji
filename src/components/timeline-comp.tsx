@@ -5,9 +5,11 @@ import { postByDate } from "../graphql/queries";
 import { listUserPostsTimeline } from "../utils/listdata";
 import { duplicates } from "../utils/duplicates";
 import { useParams } from "react-router-dom";
+import { TimeLineProps } from "../Shared/Types";
+
 const moment = require("moment");
 
-export const Timeline: React.FC = ({
+export const Timeline: React.FC<TimeLineProps> = ({
 	user,
 	allPosts,
 	posts,
@@ -17,23 +19,25 @@ export const Timeline: React.FC = ({
 }) => {
 	const { id } = useParams();
 
-	if (!id) {
-		user = user.username;
-	} else {
-		user = id;
-	}
+	// if (!id) {
+	// 	user = user.username;
+	// } else {
+	// 	user = id;
+	// }
+
+	const userId = id || user.username;
 
 	// let tokenID;
 	//passing this var in too many places !fix
 	let limitNum = 5;
 
-	const clickHandler = async (date) => {
+	const clickHandler = async (date: string) => {
 		if (allPosts.length <= limitNum) return;
-		listUserPostsTimeline(user, token, date).then((data) => {
-			setPosts(data.data.postByUser.items);
-			const tokenID = data.data.postByUser.nextToken;
-			setToken(tokenID);
-		});
+		const data = await listUserPostsTimeline(userId, token, date);
+
+		setPosts(data.data.postByUser.items);
+		const tokenID = data.data.postByUser.nextToken;
+		setToken(tokenID);
 
 		window.scrollTo(0, 0);
 	};
