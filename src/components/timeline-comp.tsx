@@ -1,7 +1,6 @@
 import React from "react";
 import "../css/timeline.css";
 import { Storage, API } from "aws-amplify";
-import { postByDate } from "../graphql/queries";
 import { listUserPostsTimeline } from "../utils/listdata";
 import { duplicates } from "../utils/duplicates";
 import { useParams } from "react-router-dom";
