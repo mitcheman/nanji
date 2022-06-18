@@ -10,18 +10,29 @@ import {
 } from "../graphql/mutations";
 import { getUserOutgoing, getUserByUser } from "../graphql/custom";
 import "../css/search.css";
+import {
+	CognitoUserType,
+	DynamoUserType,
+	OutGoingFriendRequestType,
+} from "../Shared/Types";
+import { GraphQLResult } from "@aws-amplify/api-graphql";
 
-export const Search: React.FC = ({
+export type SearchProps = {
+	user: CognitoUserType;
+	setOutGoingRequestsUsers: React.Dispatch<
+		React.SetStateAction<DynamoUserType[]>
+	>;
+};
+
+export const Search: React.FC<SearchProps> = ({
 	user,
-	outGoing,
-	setOutGoing,
-	incoming,
-	setIncoming,
+	setOutGoingRequestsUsers,
 }) => {
-	const [userSearch, setUserSearch] = useState();
+	const [userSearch, setUserSearch] = useState<DynamoUserType[]>([]);
 	const [searchResult, setSearchResult] = useState(false);
 
-	const searchHandler = async (event) => {
+	const searchHandler = async (event: string) => {
+		// possible break here
 		const filterSearch = {
 			filter: {
 				or: [
@@ -32,7 +43,7 @@ export const Search: React.FC = ({
 			},
 			limit: 20,
 		};
-		const result = await API.graphql({
+		const result: GraphQLResult<any> = await API.graphql({
 			query: searchUsers,
 			authMode: "AMAZON_COGNITO_USER_POOLS",
 			variables: filterSearch,
@@ -48,20 +59,22 @@ export const Search: React.FC = ({
 		}
 	};
 
-	const friendRequestHandler = async (selectedID) => {
+	const friendRequestHandler = async (selectedID: string) => {
 		//confirm user is not the same user
 		if (selectedID === user.username) {
 			setSearchResult(false);
 			return;
 		}
 		//check if friend request already exists
-		const RequestExists = await API.graphql({
+		const RequestExists: GraphQLResult<any> = await API.graphql({
 			query: getUserOutgoing,
 			authMode: "AMAZON_COGNITO_USER_POOLS",
 			variables: { id: user.username },
 		});
 		const requests = RequestExists.data.getUser.outgoing_friend_requests.items;
-		const filtered = requests.filter((el) => el.request_to === selectedID);
+		const filtered = requests.filter(
+			(el: OutGoingFriendRequestType) => el.request_to === selectedID
+		);
 		if (filtered > 0) {
 			setSearchResult(false);
 			return;
@@ -76,13 +89,13 @@ export const Search: React.FC = ({
 			authMode: "AMAZON_COGNITO_USER_POOLS",
 			variables: { input: friendRequest },
 		});
-		const newOutGoing = await API.graphql({
+		const newOutGoing: GraphQLResult<any> = await API.graphql({
 			query: getUserByUser,
 			authMode: "AMAZON_COGNITO_USER_POOLS",
 			variables: { id: selectedID },
 		});
 		//update ougoing state
-		setOutGoing((prev) => {
+		setOutGoingRequestsUsers((prev) => {
 			return [...prev, newOutGoing.data.getUser];
 		});
 
