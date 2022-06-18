@@ -5,12 +5,6 @@ import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from 'react-icons/md';
 import { BsPersonLinesFill, BsPersonFill } from 'react-icons/bs';
 import { isMobile } from 'react-device-detect';
 
-// interface Props {
-//   user: String;
-//   signOut: String;
-//   currentFriend: String;
-// }
-
 export function Header({ signOut, user, currentFriend }) {
   const name = user.attributes.given_name + ' ' + user.attributes.family_name;
 
