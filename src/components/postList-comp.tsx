@@ -3,13 +3,14 @@ import { Post } from "./post-comp";
 import { Alert } from "@aws-amplify/ui-react";
 import { useState } from "react";
 import "../css/postlist.css";
+import { DynamoUserType, PostType } from "../Shared/Types";
 
-export const PostList: React.FC = ({
-	currentFriend,
-	posts,
-	setPosts,
-	setAllPosts,
-}) => {
+export const PostList: React.FC<{
+	currentFriend: DynamoUserType;
+	posts: PostType[];
+	setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+	setAllPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+}> = ({ currentFriend, posts, setPosts, setAllPosts }) => {
 	const [deleted, setDeleted] = useState(false);
 
 	function dismissAlert() {
