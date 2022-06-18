@@ -4,13 +4,13 @@ import { Timeline } from "./timeline-comp";
 import { GiBackwardTime } from "react-icons/gi";
 import { FaUserFriends } from "react-icons/fa";
 import { isMobile } from "react-device-detect";
-import { BrowserRouter as Router } from "react-router-dom";
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
 import { useState } from "react";
 import "../css/menu.css";
+import { MenuProps } from "../Shared/Types";
 
-export const Menu: React.FC = ({
+export const Menu: React.FC<MenuProps> = ({
 	user,
 	signOut,
 	friends,
