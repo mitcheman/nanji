@@ -1,16 +1,8 @@
 import React from "react";
 import "../css/account.css";
+import { CognitoUserType } from "../Shared/Types";
 
-export type User = {
-	attributes: {
-		email: string;
-		family_name: string;
-		given_name: string;
-		preferred_username: string;
-	};
-};
-
-export const AccountInfo: React.FC<{ user: User }> = ({ user }) => {
+export const AccountInfo: React.FC<{ user: CognitoUserType }> = ({ user }) => {
 	return (
 		<div id="accountcontainer">
 			<div id="accountdetails">
