@@ -13,6 +13,10 @@ const moment = require('moment')
 
 const currentDate = moment(new Date()).format('YYYY-MM-DD')
 
+
+
+
+
 export function NewPost({user}) {
 
     const [fileData, setFileData] = useState()
@@ -114,7 +118,7 @@ export function NewPost({user}) {
             {(locationSearchResult) ?
             <div>
                 {locationSearch.map((locationResult) => (
-                    <div class="locationsearchresults" key={locationResult.label}>
+                    <div className="locationsearchresults" key={locationResult.label}>
                     <ul>
                         <li>{locationResult.label}</li>
                     </ul>
@@ -122,14 +126,14 @@ export function NewPost({user}) {
                     </div>
                 ))}
             </div>
-                : <div class="locationsearchresults"><h5>No results</h5></div>}
+                : <div className="locationsearchresults"><h5>No results</h5></div>}
                 {selectedLocationResult ? <div id="selectedlocation"><h5>Location&ensp;|</h5><p>&ensp;
                 {selectedLocation}</p><TiDeleteOutline onClick={removeLocation}/></div> : ''}
             </div>
         <form onSubmit={savePost}>
-            <label for="picdate">Date of Photo</label>
+            <label htmlFor="picdate">Date of Photo</label>
             <input id="picdate" name="date" type="date" max={currentDate} onClick={dismissAlert}/>
-            <label id="contentlabel" for="content">Background Story</label>
+            <label id="contentlabel" htmlFor="content">Background Story</label>
             <TextAreaField size="large" autoComplete="off" id="content" name="content" type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
             <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => imageOnChangeHandler(e)}></input>
             <div id="formimage">
