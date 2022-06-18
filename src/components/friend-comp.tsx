@@ -1,13 +1,14 @@
-import '../css/friends.css'
+import React from "react";
+import "../css/friends.css";
+import { FriendType } from "../Shared/Types";
 
-export function Friend({friend}) {
-
-    return (
-        <a id="friendalink" href={'/user/' + friend.id}>
-        <div class="individualfriend" key={friend.id} id={friend.id}>
-            <p>Name | {friend.given_name + ' ' + friend.family_name}</p>
-            <p>Username | {friend.preferred_username}</p>
-        </div>
-        </a>
-    )
-}
+export const Friend: React.FC<{ friend: FriendType }> = ({ friend }) => {
+	return (
+		<a id="friendalink" href={"/user/" + friend.id}>
+			<div className="individualfriend" key={friend.id} id={friend.id}>
+				<p>Name | {friend.given_name + " " + friend.family_name}</p>
+				<p>Username | {friend.preferred_username}</p>
+			</div>
+		</a>
+	);
+};
