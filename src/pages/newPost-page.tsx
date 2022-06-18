@@ -1,7 +1,6 @@
 
 import { Storage, API, Geo } from "aws-amplify"
 import { createPost } from "../graphql/mutations"
-const createPost = require('../graphql/mutations')
 import { useState } from "react"
 import { TextAreaField, SearchField } from '@aws-amplify/ui-react';
 import { BsUpload } from 'react-icons/bs';
@@ -10,6 +9,7 @@ import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { GrPowerReset } from 'react-icons/gr'
 import { Alert } from '@aws-amplify/ui-react';
 import '../css/form.css'
+// const createPost = require('../graphql/mutations')
 const moment = require('moment')
 
 const currentDate = moment(new Date()).format('YYYY-MM-DD')
