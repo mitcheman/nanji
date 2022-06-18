@@ -16,13 +16,19 @@ import {
 import { useEffect, useState } from "react";
 import { BiUserPlus, BiUserMinus } from "react-icons/bi";
 import { TiCancelOutline } from "react-icons/ti";
+import {
+	IncomingFriendRequestType,
+	OutGoingFriendRequestType,
+	RequestListProps,
+} from "../Shared/Types";
+import { GraphQLResult } from "@aws-amplify/api-graphql";
 
-export const RequestList: React.FC = ({
+export const RequestList: React.FC<RequestListProps> = ({
 	user,
-	outGoing,
-	setOutGoing,
-	incoming,
-	setIncoming,
+	outGoingRequestsUsers,
+	setOutGoingRequestsUsers,
+	incomingRequestsUsers,
+	setIncomingRequestsUsers,
 	friends,
 	setFriends,
 }) => {
@@ -32,13 +38,13 @@ export const RequestList: React.FC = ({
 
 	useEffect(() => {
 		getOutgoingRequests(user.username).then((data) => {
-			setOutGoing(data);
+			setOutGoingRequestsUsers(data);
 		});
 	}, []);
 
 	useEffect(() => {
 		getIncomingRequests(user.username).then((data) => {
-			setIncoming(data);
+			setIncomingRequestsUsers(data);
 		});
 	}, []);
 
@@ -54,9 +60,12 @@ export const RequestList: React.FC = ({
 		setCancelledStatus(false);
 	}
 
-	const handleIncomingRequest = async (currentUser, oppositeUser) => {
+	const handleIncomingRequest = async (
+		currentUser: string,
+		oppositeUser: string
+	) => {
 		//get incoming requests
-		const incomingRequests = await API.graphql({
+		const incomingRequests: GraphQLResult<any> = await API.graphql({
 			query: getUserIncoming,
 			authMode: "AMAZON_COGNITO_USER_POOLS",
 			variables: { id: currentUser },
@@ -64,7 +73,7 @@ export const RequestList: React.FC = ({
 		const reqIncoming =
 			incomingRequests.data.getUser.incoming_friend_requests.items;
 		const selectedIncoming = reqIncoming.filter(
-			(el) => el.request_from === oppositeUser
+			(el: IncomingFriendRequestType) => el.request_from === oppositeUser
 		);
 		//delete incoming request that matches
 		const deleteIncomingRequest = await API.graphql({
@@ -74,13 +83,16 @@ export const RequestList: React.FC = ({
 		});
 		//update incoming state
 		getIncomingRequests(user.username).then((data) => {
-			setIncoming(data);
+			setIncomingRequestsUsers(data);
 		});
 	};
 
-	const handleOutgoingRequest = async (currentUser, oppositeUser) => {
+	const handleOutgoingRequest = async (
+		currentUser: string,
+		oppositeUser: string
+	) => {
 		//get outgoing request for other user
-		const outgoingRequests = await API.graphql({
+		const outgoingRequests: GraphQLResult<any> = await API.graphql({
 			query: getUserOutgoing,
 			authMode: "AMAZON_COGNITO_USER_POOLS",
 			variables: { id: oppositeUser },
@@ -88,7 +100,7 @@ export const RequestList: React.FC = ({
 		const reqOutgoing =
 			outgoingRequests.data.getUser.outgoing_friend_requests.items;
 		const selectedOutgoing = reqOutgoing.filter(
-			(el) => el.request_to === currentUser
+			(el: OutGoingFriendRequestType) => el.request_to === currentUser
 		);
 		// //delete outgoing request that matches
 		const deleteOutgoingRequest = await API.graphql({
@@ -98,7 +110,7 @@ export const RequestList: React.FC = ({
 		});
 	};
 
-	const acceptRequestHandler = async (selectedID) => {
+	const acceptRequestHandler = async (selectedID: string) => {
 		//accept request
 		const acceptedRequest = {
 			userFriendsId: user.username,
@@ -130,21 +142,21 @@ export const RequestList: React.FC = ({
 		setAcceptedStatus(true);
 	};
 
-	const denyRequestHandler = async (selectedID) => {
+	const denyRequestHandler = async (selectedID: string) => {
 		console.log(selectedID);
 		await handleIncomingRequest(user.username, selectedID);
 		await handleOutgoingRequest(user.username, selectedID);
 		getIncomingRequests(user.username).then((data) => {
-			setIncoming(data);
+			setIncomingRequestsUsers(data);
 			setDeniedStatus(true);
 		});
 	};
 
-	const cancelRequestHandler = async (selectedID) => {
+	const cancelRequestHandler = async (selectedID: string) => {
 		await handleIncomingRequest(selectedID, user.username);
 		await handleOutgoingRequest(selectedID, user.username);
 		getOutgoingRequests(user.username).then((data) => {
-			setOutGoing(data);
+			setOutGoingRequestsUsers(data);
 			setCancelledStatus(true);
 		});
 	};
@@ -156,7 +168,7 @@ export const RequestList: React.FC = ({
 				<h4>Friend Requests</h4>
 				<div className="outgoing">
 					<h5>Pending Sent Requests</h5>
-					{outGoing.map((req) => (
+					{outGoingRequestsUsers.map((req) => (
 						<div className="individualrequest" key={req.id} id={req.id}>
 							<div className="textinfo">
 								<p>Name: {req.given_name + " " + req.family_name}</p>
@@ -173,7 +185,7 @@ export const RequestList: React.FC = ({
 				</div>
 				<div className="incoming">
 					<h5>Pending Received Requests</h5>
-					{incoming.map((req) => (
+					{incomingRequestsUsers.map((req) => (
 						<div className="individualrequest" key={req.id} id={req.id}>
 							<div className="textinfo">
 								<p>Name: {req.given_name + " " + req.family_name}</p>

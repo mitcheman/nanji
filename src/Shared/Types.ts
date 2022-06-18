@@ -9,17 +9,15 @@ export type CognitoUserType = {
 };
 
 export type DynamoUserType = {
-	username: string;
-	attributes: {
-		family_name: string;
-		given_name: string;
-		preferred_username: string;
-		profile_pic?: string;
-		friends?: FriendType[];
-		posts?: PostType[];
-		outgoing_friend_requests?: OutGoingFriendRequestType[];
-		incoming_friend_requests?: IncomingFriendRequestType[];
-	};
+	id: string;
+	family_name: string;
+	given_name: string;
+	preferred_username: string;
+	profile_pic?: string;
+	friends?: FriendType[];
+	posts?: PostType[];
+	outgoing_friend_requests?: OutGoingFriendRequestType[];
+	incoming_friend_requests?: IncomingFriendRequestType[];
 };
 
 export type FriendType = {
@@ -79,4 +77,18 @@ export type PostProps = {
 	setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
 	setDeleted: React.Dispatch<React.SetStateAction<boolean>>;
 	setAllPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+};
+
+export type RequestListProps = {
+	user: CognitoUserType;
+	outGoingRequestsUsers: DynamoUserType[];
+	setOutGoingRequestsUsers: React.Dispatch<
+		React.SetStateAction<DynamoUserType[]>
+	>;
+	incomingRequestsUsers: DynamoUserType[];
+	setIncomingRequestsUsers: React.Dispatch<
+		React.SetStateAction<DynamoUserType[]>
+	>;
+	friends: FriendType[];
+	setFriends: React.Dispatch<React.SetStateAction<FriendType[]>>;
 };
