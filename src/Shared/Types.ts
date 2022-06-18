@@ -8,6 +8,20 @@ export type CognitoUserType = {
 	};
 };
 
+export type DynamoUserType = {
+	username: string;
+	attributes: {
+		family_name: string;
+		given_name: string;
+		preferred_username: string;
+		profile_pic?: string;
+		friends?: FriendType[];
+		posts?: PostType[];
+		outgoing_friend_requests?: OutGoingFriendRequestType[];
+		incoming_friend_requests?: IncomingFriendRequestType[];
+	};
+};
+
 export type FriendType = {
 	id: string;
 	createdAt: string;
@@ -27,6 +41,7 @@ export type PostType = {
 	type: string;
 	updatedAt: string;
 	userID: string;
+	s3ImageUrl: string;
 };
 
 export type MenuProps = {
@@ -39,4 +54,29 @@ export type MenuProps = {
 	setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
 	token: string;
 	setToken: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export type OutGoingFriendRequestType = {
+	id: string;
+	request_to: string;
+	createdAt: string;
+	updatedAt: string;
+	userOutgoing_friend_requestsId: string;
+};
+
+export type IncomingFriendRequestType = {
+	id: string;
+	request_from: string;
+	createdAt: string;
+	updatedAt: string;
+	userIncoming_friend_requestsId: string;
+};
+
+export type PostProps = {
+	currentFriend: DynamoUserType;
+	post: PostType;
+	posts: PostType[];
+	setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+	setDeleted: React.Dispatch<React.SetStateAction<boolean>>;
+	setAllPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
 };

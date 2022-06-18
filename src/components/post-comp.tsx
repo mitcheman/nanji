@@ -4,9 +4,12 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { useState } from "react";
 import { Storage, API } from "aws-amplify";
 import { deletePost } from "../graphql/mutations";
+import { PostProps } from "../Shared/Types";
+import { GraphQLResult } from "@aws-amplify/api-graphql";
+
 const moment = require("moment");
 
-export const Post: React.FC = ({
+export const Post: React.FC<PostProps> = ({
 	currentFriend,
 	post,
 	posts,
@@ -16,15 +19,16 @@ export const Post: React.FC = ({
 }) => {
 	const [style, setStyle] = useState({ display: "none" });
 
-	async function deleteHandler(selectedID) {
+	async function deleteHandler(selectedID: string) {
 		const deleteDetails = {
 			id: selectedID,
 		};
-		const deletedPost = await API.graphql({
+		const deletedPost: GraphQLResult<any> = await API.graphql({
 			query: deletePost,
 			authMode: "AMAZON_COGNITO_USER_POOLS",
 			variables: { input: deleteDetails },
 		});
+
 		await Storage.remove(deletedPost.data.deletePost.image, {
 			level: "public",
 		});
@@ -61,7 +65,7 @@ export const Post: React.FC = ({
 					) : (
 						<></>
 					)}
-					<img alt={post.id} src={post.s3Image} />
+					<img alt={post.id} src={post.s3ImageUrl} />
 					<div className="content">
 						<div id="contentlocation">
 							<h5>{post.location}</h5>
@@ -104,7 +108,7 @@ export const Post: React.FC = ({
 					) : (
 						<></>
 					)}
-					<img alt={post.id} src={post.s3Image} />
+					<img alt={post.id} src={post.s3ImageUrl} />
 					<div className="content">
 						<div id="contentlocation">
 							<h5>{post.location}</h5>
