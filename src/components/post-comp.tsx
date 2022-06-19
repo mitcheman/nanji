@@ -48,42 +48,9 @@ export const Post: React.FC<PostProps> = ({
 
   //this if/else is stupid and needs to be fixed
 
-  if (post.date === null) {
-    return (
-      <>
-        <div
-          id={post.id}
-          className="post"
-          onMouseEnter={e => {
-            setStyle({ display: 'block' });
-          }}
-          onMouseLeave={e => {
-            setStyle({ display: 'none' });
-          }}>
-          {!currentFriend ? (
-            <TiDeleteOutline
-              style={style}
-              onClick={() => deleteHandler(post.id)}
-            />
-          ) : (
-            <></>
-          )}
-          <img alt={post.id} src={post.s3ImageUrl} />
-          <div className="content">
-            <div id="contentlocation">
-              <h5>{post.location}</h5>
-            </div>
-            <p>{post.content}</p>
-          </div>
-        </div>
-        <div className="createdat">
-          <p>post created: {moment(post.createdAt).format('MMMM Do YYYY')}</p>
-        </div>
-      </>
-    );
-  } else {
-    return (
-      <>
+  return (
+    <>
+      {post.date !== null ? (
         <div className="timeinfo">
           <h3>{moment(post.date).format('MMMM Do YYYY')} - </h3>
           {moment(post.date).format('MMMM Do YYYY') ===
@@ -93,35 +60,35 @@ export const Post: React.FC<PostProps> = ({
             <p>{moment(post.date).fromNow()}</p>
           )}
         </div>
-        <div
-          id={post.id}
-          className="post"
-          onMouseEnter={e => {
-            setStyle({ display: 'block' });
-          }}
-          onMouseLeave={e => {
-            setStyle({ display: 'none' });
-          }}>
-          {!currentFriend ? (
-            <TiDeleteOutline
-              style={style}
-              onClick={() => deleteHandler(post.id)}
-            />
-          ) : (
-            <></>
-          )}
-          <img alt={post.id} src={post.s3ImageUrl} />
-          <div className="content">
-            <div id="contentlocation">
-              <h5>{post.location}</h5>
-            </div>
-            <p>{post.content}</p>
+      ) : null}
+      <div
+        id={post.id}
+        className="post"
+        onMouseEnter={e => {
+          setStyle({ display: 'block' });
+        }}
+        onMouseLeave={e => {
+          setStyle({ display: 'none' });
+        }}>
+        {!currentFriend ? (
+          <TiDeleteOutline
+            style={style}
+            onClick={() => deleteHandler(post.id)}
+          />
+        ) : (
+          <></>
+        )}
+        <img alt={post.id} src={post.s3ImageUrl} />
+        <div className="content">
+          <div id="contentlocation">
+            <h5>{post.location}</h5>
           </div>
+          <p>{post.content}</p>
         </div>
-        <div className="createdat">
-          <p>post created: {moment(post.createdAt).format('MMMM Do YYYY')}</p>
-        </div>
-      </>
-    );
-  }
+      </div>
+      <div className="createdat">
+        <p>post created: {moment(post.createdAt).format('MMMM Do YYYY')}</p>
+      </div>
+    </>
+  );
 };

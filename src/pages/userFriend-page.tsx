@@ -43,7 +43,7 @@ export const UserFriend: React.FC<UserFriendProps> = ({
   };
 
   const [posts, setPosts] = useState<PostType[]>([]);
-  const [allPosts, setAllPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState<PostType[]>([]);
   const [noPosts, setNoPosts] = useState(false);
   const [token, setToken] = useState<string>();
 

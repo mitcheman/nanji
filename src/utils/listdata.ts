@@ -1,4 +1,4 @@
-import { duplicates } from './duplicates';
+// import { duplicates } from './duplicates';
 import { postByUser } from '../graphql/queries';
 import { API, Storage } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
@@ -26,7 +26,7 @@ export const listUserPosts = async (
     }),
   );
 
-  duplicates(userPosts.data.postByUser.items);
+  //duplicates(userPosts.data.postByUser.items);
   return userPosts;
 };
 
@@ -50,7 +50,7 @@ export const listUserPostsTimeline = async (user, token, date) => {
     }),
   );
 
-  duplicates(userPosts.data.postByUser.items);
+  //duplicates(userPosts.data.postByUser.items);
   return userPosts;
 };
 
