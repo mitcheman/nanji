@@ -9,7 +9,7 @@ export const PostList: React.FC<{
   currentFriend?: DynamoUserType;
   posts: PostType[];
   setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
-  setAllPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+  setAllPosts?: React.Dispatch<React.SetStateAction<PostType[]>>;
 }> = ({ currentFriend, posts, setPosts, setAllPosts }) => {
   const [deleted, setDeleted] = useState(false);
 

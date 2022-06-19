@@ -27,7 +27,7 @@ function App({ signOut, user }) {
             element={
               <Dashboard
                 user={user}
-                signout={signOut}
+                signOut={signOut}
                 friends={friends}
                 setFriends={setFriends}
               />
@@ -49,6 +49,7 @@ function App({ signOut, user }) {
                 setFriends={setFriends}
                 currentFriend={currentFriend}
                 setCurrentFriend={setCurrentFriend}
+                signOut={signOut}
               />
             }
           />

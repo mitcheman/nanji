@@ -45,7 +45,7 @@ export type PostType = {
 };
 
 export type MenuProps = {
-  user: CognitoUserType;
+  user: CognitoUserType | DynamoUserType;
   signOut: () => Promise<any>;
   friends: FriendType[];
   setFriends: React.Dispatch<React.SetStateAction<FriendType[]>>;
@@ -53,7 +53,7 @@ export type MenuProps = {
   posts: PostType[];
   setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
   token?: string;
-  setToken: React.Dispatch<React.SetStateAction<string>>;
+  setToken: React.Dispatch<React.SetStateAction<string | undefined>>;
 };
 
 export type OutGoingFriendRequestType = {
@@ -78,7 +78,7 @@ export type PostProps = {
   posts: PostType[];
   setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
   setDeleted: React.Dispatch<React.SetStateAction<boolean>>;
-  setAllPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+  setAllPosts?: React.Dispatch<React.SetStateAction<PostType[]>>;
 };
 
 export type RequestListProps = {
@@ -96,10 +96,19 @@ export type RequestListProps = {
 };
 
 export type TimeLineProps = {
-  user: CognitoUserType;
+  user: CognitoUserType | DynamoUserType;
   allPosts: PostType[];
   posts: PostType[];
   setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
   token?: string;
-  setToken: React.Dispatch<React.SetStateAction<string>>;
+  setToken: React.Dispatch<React.SetStateAction<string | undefined>>;
+};
+
+export type UserFriendProps = {
+  user: CognitoUserType;
+  friends: FriendType[];
+  setFriends: React.Dispatch<React.SetStateAction<FriendType[]>>;
+  currentFriend: DynamoUserType;
+  setCurrentFriend: React.Dispatch<React.SetStateAction<DynamoUserType>>;
+  signOut: () => Promise<any>;
 };
