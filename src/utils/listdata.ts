@@ -2,6 +2,7 @@
 import { postByUser } from '../graphql/queries';
 import { API, Storage } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
+import { PostType } from '../Shared/Types';
 
 export const listUserPosts = async (
   user: string,
@@ -18,8 +19,8 @@ export const listUserPosts = async (
     },
   });
 
-  const posts = await Promise.all(
-    userPosts.data.postByUser.items.map(async post => {
+  await Promise.all(
+    userPosts.data.postByUser.items.map(async (post: PostType) => {
       const image = await Storage.get(post.image);
       post.s3ImageUrl = image;
       return post;
@@ -30,7 +31,11 @@ export const listUserPosts = async (
   return userPosts;
 };
 
-export const listUserPostsTimeline = async (user, token, date) => {
+export const listUserPostsTimeline = async (
+  user: string,
+  token: string,
+  date: string,
+) => {
   const userPosts: GraphQLResult<any> = await API.graphql({
     query: postByUser,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
@@ -42,8 +47,8 @@ export const listUserPostsTimeline = async (user, token, date) => {
     },
   });
 
-  const posts = await Promise.all(
-    userPosts.data.postByUser.items.map(async post => {
+  await Promise.all(
+    userPosts.data.postByUser.items.map(async (post: PostType) => {
       const image = await Storage.get(post.image);
       post.s3ImageUrl = image;
       return post;
