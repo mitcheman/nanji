@@ -25,10 +25,7 @@ type Post
     )
 }
 
-type User
-  @model
-  @auth(rules: [{ allow: owner, ownerField: "id" }])
-  @searchable {
+type User @model @auth(rules: [{ allow: private }]) @searchable {
   id: ID!
     @auth(
       rules: [
