@@ -16,6 +16,8 @@ export const createPost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      owner
+      friends
     }
   }
 `;
@@ -34,6 +36,8 @@ export const updatePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      owner
+      friends
     }
   }
 `;
@@ -52,6 +56,8 @@ export const deletePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      owner
+      friends
     }
   }
 `;
@@ -69,17 +75,12 @@ export const createUser = /* GraphQL */ `
       posts {
         nextToken
       }
-      friends {
-        nextToken
-      }
-      outgoing_friend_requests {
-        nextToken
-      }
-      incoming_friend_requests {
-        nextToken
-      }
+      friends
+      outgoing_friend_requests
+      incoming_friend_requests
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -97,17 +98,12 @@ export const updateUser = /* GraphQL */ `
       posts {
         nextToken
       }
-      friends {
-        nextToken
-      }
-      outgoing_friend_requests {
-        nextToken
-      }
-      incoming_friend_requests {
-        nextToken
-      }
+      friends
+      outgoing_friend_requests
+      incoming_friend_requests
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -125,146 +121,12 @@ export const deleteUser = /* GraphQL */ `
       posts {
         nextToken
       }
-      friends {
-        nextToken
-      }
-      outgoing_friend_requests {
-        nextToken
-      }
-      incoming_friend_requests {
-        nextToken
-      }
+      friends
+      outgoing_friend_requests
+      incoming_friend_requests
       createdAt
       updatedAt
-    }
-  }
-`;
-export const createFriend = /* GraphQL */ `
-  mutation CreateFriend(
-    $input: CreateFriendInput!
-    $condition: ModelFriendConditionInput
-  ) {
-    createFriend(input: $input, condition: $condition) {
-      id
-      friend_with
       owner
-      createdAt
-      updatedAt
-      userFriendsId
-    }
-  }
-`;
-export const updateFriend = /* GraphQL */ `
-  mutation UpdateFriend(
-    $input: UpdateFriendInput!
-    $condition: ModelFriendConditionInput
-  ) {
-    updateFriend(input: $input, condition: $condition) {
-      id
-      friend_with
-      owner
-      createdAt
-      updatedAt
-      userFriendsId
-    }
-  }
-`;
-export const deleteFriend = /* GraphQL */ `
-  mutation DeleteFriend(
-    $input: DeleteFriendInput!
-    $condition: ModelFriendConditionInput
-  ) {
-    deleteFriend(input: $input, condition: $condition) {
-      id
-      friend_with
-      owner
-      createdAt
-      updatedAt
-      userFriendsId
-    }
-  }
-`;
-export const createOutgoingFriendRequest = /* GraphQL */ `
-  mutation CreateOutgoingFriendRequest(
-    $input: CreateOutgoingFriendRequestInput!
-    $condition: ModelOutgoingFriendRequestConditionInput
-  ) {
-    createOutgoingFriendRequest(input: $input, condition: $condition) {
-      id
-      request_to
-      createdAt
-      updatedAt
-      userOutgoing_friend_requestsId
-    }
-  }
-`;
-export const updateOutgoingFriendRequest = /* GraphQL */ `
-  mutation UpdateOutgoingFriendRequest(
-    $input: UpdateOutgoingFriendRequestInput!
-    $condition: ModelOutgoingFriendRequestConditionInput
-  ) {
-    updateOutgoingFriendRequest(input: $input, condition: $condition) {
-      id
-      request_to
-      createdAt
-      updatedAt
-      userOutgoing_friend_requestsId
-    }
-  }
-`;
-export const deleteOutgoingFriendRequest = /* GraphQL */ `
-  mutation DeleteOutgoingFriendRequest(
-    $input: DeleteOutgoingFriendRequestInput!
-    $condition: ModelOutgoingFriendRequestConditionInput
-  ) {
-    deleteOutgoingFriendRequest(input: $input, condition: $condition) {
-      id
-      request_to
-      createdAt
-      updatedAt
-      userOutgoing_friend_requestsId
-    }
-  }
-`;
-export const createIncomingFriendRequest = /* GraphQL */ `
-  mutation CreateIncomingFriendRequest(
-    $input: CreateIncomingFriendRequestInput!
-    $condition: ModelIncomingFriendRequestConditionInput
-  ) {
-    createIncomingFriendRequest(input: $input, condition: $condition) {
-      id
-      request_from
-      createdAt
-      updatedAt
-      userIncoming_friend_requestsId
-    }
-  }
-`;
-export const updateIncomingFriendRequest = /* GraphQL */ `
-  mutation UpdateIncomingFriendRequest(
-    $input: UpdateIncomingFriendRequestInput!
-    $condition: ModelIncomingFriendRequestConditionInput
-  ) {
-    updateIncomingFriendRequest(input: $input, condition: $condition) {
-      id
-      request_from
-      createdAt
-      updatedAt
-      userIncoming_friend_requestsId
-    }
-  }
-`;
-export const deleteIncomingFriendRequest = /* GraphQL */ `
-  mutation DeleteIncomingFriendRequest(
-    $input: DeleteIncomingFriendRequestInput!
-    $condition: ModelIncomingFriendRequestConditionInput
-  ) {
-    deleteIncomingFriendRequest(input: $input, condition: $condition) {
-      id
-      request_from
-      createdAt
-      updatedAt
-      userIncoming_friend_requestsId
     }
   }
 `;

@@ -1,4 +1,11 @@
-type Post @model @auth(rules: [{ allow: private }]) {
+type Post
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, delete, update, read] }
+      { allow: owner, ownerField: "friends", operations: [read] }
+    ]
+  ) {
   id: ID!
   location: String
   date: AWSDate!
@@ -18,30 +25,34 @@ type Post @model @auth(rules: [{ allow: private }]) {
     )
 }
 
-type User @model @auth(rules: [{ allow: private }]) @searchable {
-  id: ID!
-  family_name: String!
-  given_name: String!
-  preferred_username: String
-  profile_pic: String
+type User
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, delete, update, read] }
+      { allow: owner, ownerField: "friends", operations: [read] }
+    ]
+  )
+  @searchable {
+  id: ID! @auth(rules: [{ allow: private, operations: [read] }])
+  family_name: String! @auth(rules: [{ allow: private, operations: [read] }])
+  given_name: String! @auth(rules: [{ allow: private, operations: [read] }])
+  preferred_username: String!
+    @auth(rules: [{ allow: private, operations: [read] }])
+  profile_pic: String @auth(rules: [{ allow: private, operations: [read] }])
   posts: [Post] @hasMany(indexName: "postByUser", fields: ["id"])
-  friends: [Friend] @hasMany
-  outgoing_friend_requests: [OutgoingFriendRequest] @hasMany
-  incoming_friend_requests: [IncomingFriendRequest] @hasMany
-}
-
-type Friend @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  friend_with: String!
-  owner: String
-}
-
-type OutgoingFriendRequest @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  request_to: String!
-}
-
-type IncomingFriendRequest @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  request_from: String!
+  friends: [String]
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "friends", operations: [read] }
+        {
+          allow: owner
+          ownerField: "incoming_friend_requests"
+          operations: [read]
+        }
+      ]
+    )
+  outgoing_friend_requests: [String]
+  incoming_friend_requests: [String]
+    @auth(rules: [{ allow: private, operations: [create] }])
 }

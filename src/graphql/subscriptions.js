@@ -2,8 +2,8 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreatePost = /* GraphQL */ `
-  subscription OnCreatePost {
-    onCreatePost {
+  subscription OnCreatePost($owner: String, $friends: String) {
+    onCreatePost(owner: $owner, friends: $friends) {
       id
       location
       date
@@ -13,12 +13,14 @@ export const onCreatePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      owner
+      friends
     }
   }
 `;
 export const onUpdatePost = /* GraphQL */ `
-  subscription OnUpdatePost {
-    onUpdatePost {
+  subscription OnUpdatePost($owner: String, $friends: String) {
+    onUpdatePost(owner: $owner, friends: $friends) {
       id
       location
       date
@@ -28,12 +30,14 @@ export const onUpdatePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      owner
+      friends
     }
   }
 `;
 export const onDeletePost = /* GraphQL */ `
-  subscription OnDeletePost {
-    onDeletePost {
+  subscription OnDeletePost($owner: String, $friends: String) {
+    onDeletePost(owner: $owner, friends: $friends) {
       id
       location
       date
@@ -43,12 +47,14 @@ export const onDeletePost = /* GraphQL */ `
       userID
       createdAt
       updatedAt
+      owner
+      friends
     }
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+  subscription OnCreateUser($owner: String, $id: String) {
+    onCreateUser(owner: $owner, id: $id) {
       id
       family_name
       given_name
@@ -57,23 +63,18 @@ export const onCreateUser = /* GraphQL */ `
       posts {
         nextToken
       }
-      friends {
-        nextToken
-      }
-      outgoing_friend_requests {
-        nextToken
-      }
-      incoming_friend_requests {
-        nextToken
-      }
+      friends
+      outgoing_friend_requests
+      incoming_friend_requests
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+  subscription OnUpdateUser($owner: String, $id: String) {
+    onUpdateUser(owner: $owner, id: $id) {
       id
       family_name
       given_name
@@ -82,23 +83,18 @@ export const onUpdateUser = /* GraphQL */ `
       posts {
         nextToken
       }
-      friends {
-        nextToken
-      }
-      outgoing_friend_requests {
-        nextToken
-      }
-      incoming_friend_requests {
-        nextToken
-      }
+      friends
+      outgoing_friend_requests
+      incoming_friend_requests
       createdAt
       updatedAt
+      owner
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+  subscription OnDeleteUser($owner: String, $id: String) {
+    onDeleteUser(owner: $owner, id: $id) {
       id
       family_name
       given_name
@@ -107,119 +103,12 @@ export const onDeleteUser = /* GraphQL */ `
       posts {
         nextToken
       }
-      friends {
-        nextToken
-      }
-      outgoing_friend_requests {
-        nextToken
-      }
-      incoming_friend_requests {
-        nextToken
-      }
+      friends
+      outgoing_friend_requests
+      incoming_friend_requests
       createdAt
       updatedAt
-    }
-  }
-`;
-export const onCreateFriend = /* GraphQL */ `
-  subscription OnCreateFriend {
-    onCreateFriend {
-      id
-      friend_with
       owner
-      createdAt
-      updatedAt
-      userFriendsId
-    }
-  }
-`;
-export const onUpdateFriend = /* GraphQL */ `
-  subscription OnUpdateFriend {
-    onUpdateFriend {
-      id
-      friend_with
-      owner
-      createdAt
-      updatedAt
-      userFriendsId
-    }
-  }
-`;
-export const onDeleteFriend = /* GraphQL */ `
-  subscription OnDeleteFriend {
-    onDeleteFriend {
-      id
-      friend_with
-      owner
-      createdAt
-      updatedAt
-      userFriendsId
-    }
-  }
-`;
-export const onCreateOutgoingFriendRequest = /* GraphQL */ `
-  subscription OnCreateOutgoingFriendRequest {
-    onCreateOutgoingFriendRequest {
-      id
-      request_to
-      createdAt
-      updatedAt
-      userOutgoing_friend_requestsId
-    }
-  }
-`;
-export const onUpdateOutgoingFriendRequest = /* GraphQL */ `
-  subscription OnUpdateOutgoingFriendRequest {
-    onUpdateOutgoingFriendRequest {
-      id
-      request_to
-      createdAt
-      updatedAt
-      userOutgoing_friend_requestsId
-    }
-  }
-`;
-export const onDeleteOutgoingFriendRequest = /* GraphQL */ `
-  subscription OnDeleteOutgoingFriendRequest {
-    onDeleteOutgoingFriendRequest {
-      id
-      request_to
-      createdAt
-      updatedAt
-      userOutgoing_friend_requestsId
-    }
-  }
-`;
-export const onCreateIncomingFriendRequest = /* GraphQL */ `
-  subscription OnCreateIncomingFriendRequest {
-    onCreateIncomingFriendRequest {
-      id
-      request_from
-      createdAt
-      updatedAt
-      userIncoming_friend_requestsId
-    }
-  }
-`;
-export const onUpdateIncomingFriendRequest = /* GraphQL */ `
-  subscription OnUpdateIncomingFriendRequest {
-    onUpdateIncomingFriendRequest {
-      id
-      request_from
-      createdAt
-      updatedAt
-      userIncoming_friend_requestsId
-    }
-  }
-`;
-export const onDeleteIncomingFriendRequest = /* GraphQL */ `
-  subscription OnDeleteIncomingFriendRequest {
-    onDeleteIncomingFriendRequest {
-      id
-      request_from
-      createdAt
-      updatedAt
-      userIncoming_friend_requestsId
     }
   }
 `;
