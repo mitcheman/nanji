@@ -29,12 +29,41 @@ type User
   @model
   @auth(rules: [{ allow: owner, ownerField: "id" }])
   @searchable {
-  id: ID! @auth(rules: [{ allow: private, operations: [read] }])
-  family_name: String! @auth(rules: [{ allow: private, operations: [read] }])
-  given_name: String! @auth(rules: [{ allow: private, operations: [read] }])
+  id: ID!
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
+  family_name: String!
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
+  given_name: String!
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
   preferred_username: String!
-    @auth(rules: [{ allow: private, operations: [read] }])
-  profile_pic: String @auth(rules: [{ allow: private, operations: [read] }])
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
+  profile_pic: String
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
   posts: [Post]
     @hasMany(indexName: "postByUser", fields: ["id"])
     @auth(
