@@ -36,7 +36,9 @@ export const NewPost = ({ user }: Props ) => {
     
     type locationSearchPayload = {
         payload?: string;
-        map: string;
+        results?: string[];
+        label?: string;
+       
     }
     
     type selectedLocationPayload = {
@@ -49,7 +51,7 @@ export const NewPost = ({ user }: Props ) => {
     const [currentImage, setCurrentImage] = React.useState('')
 
     //search for location
-    const [locationSearch, setLocationSearch] = React.useState<locationSearchPayload | null>(null);
+    const [locationSearch, setLocationSearch] = React.useState<locationSearchPayload[] | null>(null);
     const [locationSearchResult, setLocationSearchResult] = React.useState<boolean>(false);
 
     //select location
