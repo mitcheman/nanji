@@ -1,4 +1,3 @@
-
 import { Storage, API, Geo } from "aws-amplify"
 import { createPost } from "../graphql/mutations"
 import { useState } from "react"
@@ -9,45 +8,77 @@ import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { GrPowerReset } from 'react-icons/gr'
 import { Alert } from '@aws-amplify/ui-react';
 import '../css/form.css'
+import React from "react";
 const moment = require('moment')
 
 const currentDate = moment(new Date()).format('YYYY-MM-DD')
 
+type UserType = {
+    id: string,
+    family_name: string,
+    given_name: string,
+    preferred_username: string,
+    username: string,
+    profile_pic: string,   
+}
 
+type Props = {
+    user: UserType;
+}
 
+export const NewPost = ({ user }: Props ) => {
+    
+    
+    type filePayload = {
+        name: string,
+        size: number,
+    }
+    
+    type locationSearchPayload = {
+        payload?: string;
+        map: string;
+    }
+    
+    type selectedLocationPayload = {
+        payload?: string;
+    }
 
+    const [fileData, setFileData] = React.useState<filePayload | null>(null);
+    const [fileStatus, setFileStatus] = React.useState<boolean>(false)
 
-export function NewPost({user}) {
-
-    const [fileData, setFileData] = useState()
-    const [fileStatus, setFileStatus] = useState(false)
-
-    const [currentImage, setCurrentImage] = useState()
+    const [currentImage, setCurrentImage] = React.useState('')
 
     //search for location
-    const [locationSearch, setLocationSearch] = useState();
-    const [locationSearchResult, setLocationSearchResult] = useState(false);
+    const [locationSearch, setLocationSearch] = React.useState<locationSearchPayload | null>(null);
+    const [locationSearchResult, setLocationSearchResult] = React.useState<boolean>(false);
 
     //select location
-    const [selectedLocation, setSelectedLocation] = useState()
-    const [selectedLocationResult, setSelectedLocationResult] = useState(false);
+    const [selectedLocation, setSelectedLocation] = React.useState<selectedLocationPayload | null>(null)
+    const [selectedLocationResult, setSelectedLocationResult] = React.useState<boolean>(false);
 
     function imageOnChangeHandler(e) {
         setFileData(e.target.files[0])
-        setCurrentImage(URL.createObjectURL(e.target.files[0]));
+        setCurrentImage(() => URL.createObjectURL(e.target.files[0]));
     }
 
-    function resetFormHandler(e) {
-        document.getElementById('content').value = '';
-        document.getElementById('picdate').value = '';
-        document.getElementById('searchfield').value = '';
-        document.getElementById('fileupload').value = null;
-        setFileData();
-        setCurrentImage();
-        setLocationSearch();
+    function resetFormHandler(e): void {
+        const content = document.getElementById('content') as HTMLInputElement;
+        const picDate = document.getElementById('picdate') as HTMLInputElement;
+        const searchField = document.getElementById('searchfield') as HTMLInputElement;
+        const fileUpload = document.getElementById('fileupload') as HTMLButtonElement;
+       
+        content.value = '';
+        picDate.value = '';
+        searchField.value = '';
+        fileUpload.value = ''; //TODO: originally this should be set to null
+        // document.getElementById('fileupload').value = null;
+        
+        setFileData(null);
+        setCurrentImage('');
+        setLocationSearch(null);
         setLocationSearchResult(false)
         setSelectedLocationResult(false);
-        setSelectedLocation();
+        setSelectedLocation(null);
     }
 
     async function savePost (event) {
@@ -67,7 +98,7 @@ export function NewPost({user}) {
         const newPost = {location: selectedLocation, date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username, type: "Post"};
         const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
         setFileStatus(true);
-        setSelectedLocation()
+        setSelectedLocation(selectedLocation)
         setSelectedLocationResult(false);
 
         //reset form
@@ -94,7 +125,7 @@ export function NewPost({user}) {
     }
 
     function removeLocation() {
-        setSelectedLocation();
+        setSelectedLocation(null);
         setSelectedLocationResult(false);
     }
 
