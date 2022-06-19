@@ -33,7 +33,7 @@ export const listUserPosts = async (
 
 export const listUserPostsTimeline = async (
   user: string,
-  token: string,
+  token: string | undefined,
   date: string,
 ) => {
   const userPosts: GraphQLResult<any> = await API.graphql({
