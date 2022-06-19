@@ -27,12 +27,7 @@ type Post
 
 type User
   @model
-  @auth(
-    rules: [
-      { allow: owner, operations: [create, delete, update, read] }
-      { allow: owner, ownerField: "friends", operations: [read] }
-    ]
-  )
+  @auth(rules: [{ allow: owner, ownerField: "id" }])
   @searchable {
   id: ID! @auth(rules: [{ allow: private, operations: [read] }])
   family_name: String! @auth(rules: [{ allow: private, operations: [read] }])
@@ -40,19 +35,33 @@ type User
   preferred_username: String!
     @auth(rules: [{ allow: private, operations: [read] }])
   profile_pic: String @auth(rules: [{ allow: private, operations: [read] }])
-  posts: [Post] @hasMany(indexName: "postByUser", fields: ["id"])
+  posts: [Post]
+    @hasMany(indexName: "postByUser", fields: ["id"])
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: owner, ownerField: "friends", operations: [read] }
+      ]
+    )
   friends: [String]
     @auth(
       rules: [
+        { allow: owner, ownerField: "id" }
         { allow: owner, ownerField: "friends", operations: [read] }
-        {
-          allow: owner
-          ownerField: "incoming_friend_requests"
-          operations: [read]
-        }
       ]
     )
   outgoing_friend_requests: [String]
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: owner, ownerField: "friends", operations: [read] }
+      ]
+    )
   incoming_friend_requests: [String]
-    @auth(rules: [{ allow: private, operations: [create] }])
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [create] }
+      ]
+    )
 }

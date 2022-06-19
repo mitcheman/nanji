@@ -80,7 +80,6 @@ export const createUser = /* GraphQL */ `
       incoming_friend_requests
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -103,7 +102,6 @@ export const updateUser = /* GraphQL */ `
       incoming_friend_requests
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -126,7 +124,6 @@ export const deleteUser = /* GraphQL */ `
       incoming_friend_requests
       createdAt
       updatedAt
-      owner
     }
   }
 `;

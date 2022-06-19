@@ -53,8 +53,8 @@ export const onDeletePost = /* GraphQL */ `
   }
 `;
 export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser($owner: String, $id: String) {
-    onCreateUser(owner: $owner, id: $id) {
+  subscription OnCreateUser($id: String) {
+    onCreateUser(id: $id) {
       id
       family_name
       given_name
@@ -68,13 +68,12 @@ export const onCreateUser = /* GraphQL */ `
       incoming_friend_requests
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser($owner: String, $id: String) {
-    onUpdateUser(owner: $owner, id: $id) {
+  subscription OnUpdateUser($id: String) {
+    onUpdateUser(id: $id) {
       id
       family_name
       given_name
@@ -88,13 +87,12 @@ export const onUpdateUser = /* GraphQL */ `
       incoming_friend_requests
       createdAt
       updatedAt
-      owner
     }
   }
 `;
 export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser($owner: String, $id: String) {
-    onDeleteUser(owner: $owner, id: $id) {
+  subscription OnDeleteUser($id: String) {
+    onDeleteUser(id: $id) {
       id
       family_name
       given_name
@@ -108,7 +106,6 @@ export const onDeleteUser = /* GraphQL */ `
       incoming_friend_requests
       createdAt
       updatedAt
-      owner
     }
   }
 `;

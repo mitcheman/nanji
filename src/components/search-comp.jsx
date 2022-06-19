@@ -41,8 +41,10 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
             setSearchResult(false);
             return;
         }
+        console.log(user.username)
         //check if friend request already exists
         const RequestExists = await API.graphql({query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: user.username} });
+        console.log('request', RequestExists)
         const requests = RequestExists.data.getUser.outgoing_friend_requests;
         if (requests !== null) {
         const filtered = requests.filter(el => el.request_to === selectedID)

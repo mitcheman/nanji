@@ -126,7 +126,6 @@ export const getUser = /* GraphQL */ `
       incoming_friend_requests
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -148,7 +147,6 @@ export const listUsers = /* GraphQL */ `
         incoming_friend_requests
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }
@@ -182,7 +180,6 @@ export const searchUsers = /* GraphQL */ `
         incoming_friend_requests
         createdAt
         updatedAt
-        owner
       }
       nextToken
       total
