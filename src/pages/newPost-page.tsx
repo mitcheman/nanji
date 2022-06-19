@@ -102,7 +102,7 @@ export const NewPost = ({ user }: Props ) => {
         setSelectedLocationResult(false);
 
         //reset form
-        resetFormHandler();
+        resetFormHandler(event); //TODO: check that adding an event doesn't alter the behavior
     }
 
     async function searchLocation (event) {
