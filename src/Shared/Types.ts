@@ -53,7 +53,7 @@ export type MenuProps = {
   posts: PostType[];
   setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
   token?: string;
-  setToken: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setToken: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export type OutGoingFriendRequestType = {

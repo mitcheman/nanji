@@ -22,7 +22,7 @@ export const Dashboard: React.FC<{
   const [posts, setPosts] = useState<PostType[]>([]);
   const [allPosts, setAllPosts] = useState<PostType[]>([]);
   const [noPosts, setNoPosts] = useState(false);
-  const [token, setToken] = useState<string>();
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     listUserPosts(user.username, token)
