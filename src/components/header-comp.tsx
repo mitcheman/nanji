@@ -1,8 +1,8 @@
-import '../css/header.css';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from 'react-icons/md';
-import { BsPersonLinesFill, BsPersonFill } from 'react-icons/bs';
-import { isMobile } from 'react-device-detect';
+import "../css/header.css";
+import { BrowserRouter as Router } from "react-router-dom";
+import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
+import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
+import { isMobile } from "react-device-detect";
 
 type UserType = {
   id: string;
@@ -22,7 +22,7 @@ type Props = {
 };
 
 export const Header: React.FC = ({ signOut, user, currentFriend }: Props) => {
-  const name = user.attributes.given_name + ' ' + user.attributes.family_name;
+  const name = user.attributes.given_name + " " + user.attributes.family_name;
 
   if (!isMobile) {
     return (
@@ -40,11 +40,11 @@ export const Header: React.FC = ({ signOut, user, currentFriend }: Props) => {
                 <h5>Current Profile&ensp;|</h5>
                 <p>
                   &ensp;
-                  {currentFriend.given_name + ' ' + currentFriend.family_name}
+                  {currentFriend.given_name + " " + currentFriend.family_name}
                 </p>
               </div>
             ) : (
-              ''
+              ""
             )}
           </div>
           <nav>
@@ -79,7 +79,7 @@ export const Header: React.FC = ({ signOut, user, currentFriend }: Props) => {
                 <h5>Current Profile&ensp;|</h5>
                 <p>
                   &ensp;
-                  {currentFriend.given_name + ' ' + currentFriend.family_name}
+                  {currentFriend.given_name + " " + currentFriend.family_name}
                 </p>
               </div>
             ) : (

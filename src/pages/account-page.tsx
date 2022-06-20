@@ -1,9 +1,8 @@
 import { AccountInfo } from "../components/accountInfo-comp";
 import { Auth } from "aws-amplify";
 import "../css/account.css";
-import { User } from "../models";
 
-type UserType = {
+type UserModel = {
   id: string;
   username: string;
   attributes: {
@@ -14,7 +13,7 @@ type UserType = {
   };
 };
 
-type Props = { user: UserType };
+type Props = { user: UserModel };
 
 export const Account = ({ user }: Props) => {
   //just deletes account - can trigger a lambda function to clean up s3/dynamo after
