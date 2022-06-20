@@ -5,7 +5,7 @@ import { FaUserFriends } from "react-icons/fa";
 import { isMobile } from "react-device-detect";
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import "../css/menu.css";
 
 type UserType = {
@@ -16,11 +16,27 @@ type UserType = {
   preferred_username: string;
 };
 
+type PostType = {
+  id: string;
+  date: Date;
+  s3Image: string;
+  location: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 type Props = {
   user: UserType;
   friends: UserType[];
-  setFriends: any;
+  setFriends: React.Dispatch<React.SetStateAction<any[]>>;
   signOut: any;
+  allPosts: PostType[];
+  setPosts: Dispatch<SetStateAction<PostType[]>>;
+  posts: PostType[];
+  token: string;
+  setToken: React.Dispatch<React.SetStateAction<string>>;
+  setUserCred: (value: React.SetStateAction<string>) => void;
 };
 
 export function Menu({
@@ -33,6 +49,7 @@ export function Menu({
   setPosts,
   token,
   setToken,
+  setUserCred,
 }: Props) {
   const [menu, setMenu] = useState(true);
 
@@ -64,6 +81,7 @@ export function Menu({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
+            setUserCred={setUserCred}
           />
         )}
       </div>
@@ -95,6 +113,7 @@ export function Menu({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
+            setUserCred={setUserCred}
           />
         ) : (
           ""

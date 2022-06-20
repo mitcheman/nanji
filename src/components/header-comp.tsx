@@ -4,7 +4,7 @@ import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
 import { isMobile } from "react-device-detect";
 
-type UserType = {
+type UserModel = {
   id: string;
   attributes: {
     family_name: string;
@@ -13,11 +13,14 @@ type UserType = {
 };
 
 type Props = {
-  user: UserType;
+  user: UserModel;
   signOut: any;
   currentFriend?: {
+    username: string;
+    id: string;
     family_name: string;
     given_name: string;
+    preferred_username: string;
   };
 };
 

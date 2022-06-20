@@ -26,10 +26,15 @@ type Props = {
   friends: UserType[];
   setFriends: any;
   currentFriend?: {
+    username: string;
+    id: string;
     family_name: string;
     given_name: string;
+    preferred_username: string;
   };
   setCurrentFriend?: any;
+  signOut: any;
+  setUserCred: (value: React.SetStateAction<string>) => void;
 };
 
 export function UserFriend({
@@ -37,6 +42,8 @@ export function UserFriend({
   setFriends,
   currentFriend,
   setCurrentFriend,
+  signOut,
+  setUserCred,
 }: Props) {
   const { id } = useParams<string>();
 
@@ -58,7 +65,7 @@ export function UserFriend({
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [noPosts, setNoPosts] = useState<boolean>(false);
-  const [token, setToken] = useState();
+  const [token, setToken] = useState<string>();
 
   useEffect(() => {
     listUserPosts(id).then((data) => {
@@ -104,6 +111,8 @@ export function UserFriend({
           setPosts={setPosts}
           token={token}
           setToken={setToken}
+          signOut={signOut}
+          setUserCred={setUserCred}
         />
         <div id="nodata">
           <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
@@ -113,7 +122,7 @@ export function UserFriend({
   } else {
     return (
       <>
-        <div class="container">
+        <div className="container">
           <PostList
             posts={posts}
             setPosts={setPosts}
@@ -128,6 +137,8 @@ export function UserFriend({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
+            signOut={signOut}
+            setUserCred={setUserCred}
           />
           <button id="footer" onClick={newPage}>
             <BsChevronDown />

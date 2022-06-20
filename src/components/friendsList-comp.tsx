@@ -17,7 +17,7 @@ type UserType = {
 type Props = {
   user: UserType;
   friends: UserType[];
-  setFriends: any;
+  setFriends: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
 export function FriendsList({ user, friends, setFriends }: Props) {
