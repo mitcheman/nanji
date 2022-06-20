@@ -4,7 +4,7 @@ import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { API, Storage } from 'aws-amplify';
 
 //TODO: check that the token is actually needed
-export const listUserPosts = async (userID:string, token) => {
+export const listUserPosts = async (userID:string, token?) => {
   const userPosts: GraphQLResult<any> = await API.graphql({
     query: postByUser,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
