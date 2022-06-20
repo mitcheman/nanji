@@ -7,7 +7,6 @@ import {
 } from '../graphql/custom';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import {
-  FriendType,
   GetUserAPIResponse,
   GetUserFriendsAPIResponse,
   GetUserIncomingAPIResponse,

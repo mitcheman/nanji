@@ -67,11 +67,9 @@ export const Dashboard: React.FC<{
 
   if (noPosts === true) {
     return (
-      //   <div className="container">
       <div id="nodata">
         <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
       </div>
-      //   </div>
     );
   } else {
     return (
