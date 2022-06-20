@@ -10,6 +10,9 @@ import { UserFriend } from './pages/userFriend-page';
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+// type Props =
+
+
 function App({ signOut, user }) {
   const [friends, setFriends] = useState([]);
   const [currentFriend, setCurrentFriend] = useState();
