@@ -139,7 +139,7 @@ export type SearchUsersAPIResponse = {
   };
 };
 
-export type GetUserByUserAPIResponse = {
+export type GetUserAPIResponse = {
   getUser: DynamoUserType;
   // {
   //   posts: {

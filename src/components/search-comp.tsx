@@ -13,7 +13,7 @@ import '../css/search.css';
 import {
   CognitoUserType,
   DynamoUserType,
-  GetUserByUserAPIResponse,
+  GetUserAPIResponse,
   GetUserOutGoingAPIResponse,
   OutGoingFriendRequestType,
   SearchUsersAPIResponse,
@@ -101,7 +101,7 @@ export const Search: React.FC<SearchProps> = ({
       query: getUserByUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { id: selectedID },
-    })) as GraphQLResult<GetUserByUserAPIResponse>;
+    })) as GraphQLResult<GetUserAPIResponse>;
     //update ougoing state
     setOutGoingRequestsUsers(prev => {
       if (newOutGoing.data) {
