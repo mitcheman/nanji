@@ -147,3 +147,17 @@ export type GetUserAPIResponse = {
   //   };
   // };
 };
+
+export type GetUserFriendsAPIResponse = {
+  getUser: {
+    friends: {
+      items: {
+        createdAt: string;
+        updatedAt: string;
+        id: string;
+        owner: string;
+        friend_with: string;
+      }[];
+    };
+  };
+};
