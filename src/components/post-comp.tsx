@@ -1,6 +1,6 @@
 import '../css/post.css'
 import { TiDeleteOutline } from 'react-icons/ti'
-import { useState, Dispatch, Set } from 'react'
+import { useState, Dispatch, SetStateAction } from 'react'
 import { Storage, API } from "aws-amplify"
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { deletePost } from "../graphql/mutations"
