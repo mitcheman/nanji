@@ -50,12 +50,12 @@ export const listUserPostsTimeline = async (user, token, date) => {
   return userPosts;
 };
 
-export const listAllUserPosts = async (user) => {
+export const listAllUserPosts = async (userID) => {
   const allPostData = await API.graphql({
     query: postByUser,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: {
-      userID: user,
+      userID,
       sortDirection: 'DESC',
     },
   });

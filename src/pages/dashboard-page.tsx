@@ -12,6 +12,7 @@ import { BsChevronDown } from 'react-icons/bs';
 import { PostType } from "../types/PostType";
 import { UserType } from '../types/UserType';
 import '../css/dashboard.css'
+import { Console } from "console"
 
 //temp set to public - this needs to change and implement groups for friends !fix
 Storage.configure({ level: 'public' });

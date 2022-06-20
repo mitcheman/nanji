@@ -56,18 +56,18 @@ export const getIncomingRequests = async ({user}: Props) => {
   return results;
 };
 
-export const getFriends = async ({user}: Props) => {
+export const getFriends = async ( username : string) => {
   //get friends list for current user
   const listFriends: GraphQLResult<any> = await API.graphql({
     query: getUserFriends,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
-    variables: { id: user },
+    variables: { id: username },
   });
   const req = listFriends.data.getUser.friends.items;
 
   //get user information for each request (incomingRequests only contains data on specific request - no user info besides ID)
   const results = [];
-  for (let i = 0; i < req.length; i++) {
+  for (let i = 0, len = req.length; i < len; i++) {
     const call: GraphQLResult<any> = await API.graphql({
       query: getUserByUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
