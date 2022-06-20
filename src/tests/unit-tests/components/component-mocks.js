@@ -29,6 +29,18 @@ export const user = {
   },
 };
 
+export const realUser = {
+  username: 'ab55beb6-eb08-4d82-89f2-91cc5578e425',
+  attributes: {
+    sub: 'ab55beb6-eb08-4d82-89f2-91cc5578e425',
+    email_verified: true,
+    preferred_username: 'Xavi',
+    given_name: 'Xavier',
+    family_name: 'Fabregat',
+    email: 'xavi.fabregat.pous@gmail.com',
+  },
+};
+
 export const currentFriend = {
   given_name: 'Captain',
   family_name: 'Jack Sparrow',
@@ -67,6 +79,44 @@ export const allPosts = [
     userID: 'ab55beb6-eb08-4d82-89f2-91cc5578e425',
     createdAt: '2022-06-19T14:15:13.355Z',
     updatedAt: '2022-06-19T14:15:13.355Z',
+  },
+];
+
+export const outGoingRequestsUsers = [
+  {
+    id: '400078eb-719b-4a5e-9448-1a8d64ad2ffd',
+    family_name: 'Fernandez',
+    given_name: 'Sebastian',
+    preferred_username: 'Sebas',
+    createdAt: '2022-06-18T09:47:45.926Z',
+    updatedAt: '2022-06-18T09:47:45.926Z',
+  },
+  {
+    id: '23bc6ed7-0eae-4752-9ac0-07a1f46b7fce',
+    family_name: 'El Pozzo',
+    given_name: 'Gozzo',
+    preferred_username: 'Goezza',
+    createdAt: '2022-06-18T14:07:59.462Z',
+    updatedAt: '2022-06-18T14:07:59.462Z',
+  },
+];
+
+export const incomingRequestsUsers = [
+  {
+    id: '18450803-8a53-44f5-8abf-8f4f7c286a0e',
+    family_name: 'Fernandez',
+    given_name: 'Sebastian',
+    preferred_username: 'Sebas',
+    createdAt: '2022-06-20T11:29:38.315Z',
+    updatedAt: '2022-06-20T11:29:38.315Z',
+  },
+  {
+    id: '23bc6ed7-0eae-4752-9ac0-07a1f46b7fce',
+    family_name: 'El Pozzo',
+    given_name: 'Gozzo',
+    preferred_username: 'Goezza',
+    createdAt: '2022-06-18T14:07:59.462Z',
+    updatedAt: '2022-06-18T14:07:59.462Z',
   },
 ];
 
