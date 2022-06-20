@@ -1,10 +1,22 @@
 
 import { Post } from './post-comp'
+import { PostType } from "../types/PostType";
 import { Alert } from '@aws-amplify/ui-react';
-import { useState } from 'react'
+import { useState, Dispatch, SetStateAction } from 'react'
 import '../css/postlist.css'
 
-export function PostList ({currentFriend, posts, setPosts, setAllPosts}) {
+type FriendType = {
+    
+}
+
+type Props = {
+  currentFriend?: FriendType | null;
+  posts: PostType[];
+  setPosts: Dispatch<SetStateAction<PostType[]>>;
+  setAllPosts: any; //TODO: review this;
+}
+
+export function PostList ({currentFriend, posts, setPosts, setAllPosts}: Props) {
 
     const [deleted, setDeleted] = useState(false)
 
