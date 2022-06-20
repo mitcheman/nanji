@@ -1,11 +1,27 @@
 import '../css/header.css';
-import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from 'react-icons/md';
 import { BsPersonLinesFill, BsPersonFill } from 'react-icons/bs';
 import { isMobile } from 'react-device-detect';
 
-export function Header({ signOut, user, currentFriend }) {
+type UserType = {
+  id: string;
+  attributes: {
+    family_name: string;
+    given_name: string;
+  };
+};
+
+type Props = {
+  user: UserType;
+  signOut: any;
+  currentFriend?: {
+    family_name: string;
+    given_name: string;
+  };
+};
+
+export const Header: React.FC = ({ signOut, user, currentFriend }: Props) => {
   const name = user.attributes.given_name + ' ' + user.attributes.family_name;
 
   if (!isMobile) {
@@ -76,4 +92,4 @@ export function Header({ signOut, user, currentFriend }) {
       </div>
     );
   }
-}
+};
