@@ -24,6 +24,7 @@ type UserType = {
 
 type Props = {
     user: UserType;
+    children?: JSX.Element|JSX.Element[];
 }
 
 export const NewPost = ({ user }: Props ) => {
@@ -38,12 +39,12 @@ export const NewPost = ({ user }: Props ) => {
         payload?: string;
         results?: string[];
         label?: string;
-       
     }
     
-    type selectedLocationPayload = {
-        payload?: string;
-    }
+    // type selectedLocationPayload = {
+    //     payload?: string;
+    //     children?: JSX.Element|JSX.Element[];
+    // }
 
     const [fileData, setFileData] = React.useState<filePayload | null>(null);
     const [fileStatus, setFileStatus] = React.useState<boolean>(false)
@@ -55,7 +56,7 @@ export const NewPost = ({ user }: Props ) => {
     const [locationSearchResult, setLocationSearchResult] = React.useState<boolean>(false);
 
     //select location
-    const [selectedLocation, setSelectedLocation] = React.useState<selectedLocationPayload | null>(null)
+    const [selectedLocation, setSelectedLocation] = React.useState<string | null>(null)
     const [selectedLocationResult, setSelectedLocationResult] = React.useState<boolean>(false);
 
     function imageOnChangeHandler(e) {
@@ -98,13 +99,18 @@ export const NewPost = ({ user }: Props ) => {
         const filename = currentDate + '_' + fileData.name;
         await Storage.put(filename, fileData, {level: 'public'});
         const newPost = {location: selectedLocation, date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username, type: "Post"};
-        const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
-        setFileStatus(true);
-        setSelectedLocation(selectedLocation)
-        setSelectedLocationResult(false);
-
-        //reset form
-        resetFormHandler(event); //TODO: check that adding an event doesn't alter the behavior
+        console.log(newPost);
+        try {
+          const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
+          setFileStatus(true);
+          setSelectedLocation('')
+          setSelectedLocationResult(false);
+          //reset form
+          resetFormHandler(event); 
+          console.log(result);
+        } catch(err) {
+          console.log(err)
+        };
     }
 
     async function searchLocation (event) {
@@ -135,7 +141,7 @@ export const NewPost = ({ user }: Props ) => {
         setFileStatus(false);
         setLocationSearchResult(false);
     }
-
+    
     return (
     <>
     <div id="newpost">
@@ -159,18 +165,26 @@ export const NewPost = ({ user }: Props ) => {
                     </div>
                 ))}
             </div>
-                : <div className="locationsearchresults"><h5>No results</h5></div>}
-                {selectedLocationResult ? <div id="selectedlocation"><h5>Location&ensp;|</h5><p>&ensp;
-                {selectedLocation}</p><TiDeleteOutline onClick={removeLocation}/></div> : ''}
+                : 
+                <div className="locationsearchresults"><h5>No results</h5></div>
+             }
+             {selectedLocationResult ?
+              
+              <div id="selectedlocation">
+                <h5>Location&ensp;|</h5>
+                <p>&ensp;{selectedLocation}</p>
+                <TiDeleteOutline onClick={removeLocation}/>
+              </div>
+            : ''}
             </div>
         <form onSubmit={savePost}>
             <label htmlFor="picdate">Date of Photo</label>
             <input id="picdate" name="date" type="date" max={currentDate} onClick={dismissAlert}/>
             <label id="contentlabel" htmlFor="content">Background Story</label>
-            <TextAreaField size="large" autoComplete="off" id="content" name="content" type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
+            <TextAreaField label="contentlabel" size="large" autoComplete="off" id="content" name="content" data-type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
             <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => imageOnChangeHandler(e)}></input>
             <div id="formimage">
-                <img id="frame" alt="" src={currentImage} name="frame"/>
+                <img id="frame" alt="" src={currentImage} data-name="frame"/>
             </div>
             <button id="submitbutton" type="submit"><BsUpload /></button>
         </form>
