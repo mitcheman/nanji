@@ -9,7 +9,7 @@ import { listUserPosts, listAllUserPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
 import { getFriends } from "../utils/friendRequests"
 import { BsChevronDown } from 'react-icons/bs';
-import { postType } from '../components/post-comp'
+import { PostType } from "../types/PostType";
 import { UserType } from '../types/UserType';
 import '../css/dashboard.css'
 
@@ -25,8 +25,8 @@ type Props = {
 }
 
 export function Dashboard({user, signOut, friends, setFriends}: Props) {
-    const [posts, setPosts] = React.useState<postType[] | null>([]);
-    const [allPosts, setAllPosts] = React.useState([]);
+    const [posts, setPosts] = React.useState<PostType[] | null>([]);
+    const [allPosts, setAllPosts] = React.useState<PostType[] | null>([]);
     const [noPosts, setNoPosts] = React.useState<boolean>(false);
     const [token, setToken] = React.useState();
 
@@ -56,7 +56,7 @@ export function Dashboard({user, signOut, friends, setFriends}: Props) {
             setFriends(data)
         })
     }, []);
-
+//TODO: refactor to async/await
     async function newPage () {
         listUserPosts(user.username, token)
         .then((data) => {
@@ -79,15 +79,15 @@ export function Dashboard({user, signOut, friends, setFriends}: Props) {
             </div>
         )
     }
-    else {
+
         return (
-            <>
+            
             <div className="container">
                 <PostList posts={posts} setPosts={setPosts} setAllPosts={setAllPosts}/>
                 <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
             </div>
-            </>
+
         )
-    }
+    
 }

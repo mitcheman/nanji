@@ -2,7 +2,7 @@
 import { Post } from './post-comp'
 import { PostType } from "../types/PostType";
 import { Alert } from '@aws-amplify/ui-react';
-import { useState } from 'react'
+import { useState, Dispatch, SetStateAction } from 'react'
 import '../css/postlist.css'
 
 type FriendType = {
@@ -10,9 +10,9 @@ type FriendType = {
 }
 
 type Props = {
-  currentFriend: FriendType | null;
+  currentFriend?: FriendType | null;
   posts: PostType[];
-  setPosts: () => void; //TODO: review this;
+  setPosts: Dispatch<SetStateAction<PostType[]>>; //TODO: review this;
   setAllPosts: any; //TODO: review this;
 }
 
