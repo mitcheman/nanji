@@ -1,6 +1,6 @@
-import '../css/account.css';
+import "../css/account.css";
 
-type UserType = {
+type UserModel = {
   id: string;
   attributes: {
     family_name: string;
@@ -10,7 +10,7 @@ type UserType = {
   };
 };
 
-type Props = { user: UserType };
+type Props = { user: UserModel };
 
 export const AccountInfo = ({ user }: Props) => {
   return (

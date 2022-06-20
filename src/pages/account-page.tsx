@@ -1,10 +1,10 @@
-import { AccountInfo } from '../components/accountInfo-comp';
-import { Auth } from 'aws-amplify';
-import '../css/account.css';
-import { User } from '../models';
+import { AccountInfo } from "../components/accountInfo-comp";
+import { Auth } from "aws-amplify";
+import "../css/account.css";
 
-type UserType = {
+type UserModel = {
   id: string;
+  username: string;
   attributes: {
     family_name: string;
     given_name: string;
@@ -13,7 +13,7 @@ type UserType = {
   };
 };
 
-type Props = { user: UserType };
+type Props = { user: UserModel };
 
 export const Account = ({ user }: Props) => {
   //just deletes account - can trigger a lambda function to clean up s3/dynamo after
@@ -22,7 +22,7 @@ export const Account = ({ user }: Props) => {
       const result = await Auth.deleteUser();
       return result;
     } catch (error) {
-      console.log('Error deleting user', error);
+      console.log("Error deleting user", error);
     }
   }
 
