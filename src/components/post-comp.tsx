@@ -43,7 +43,6 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
         return deletedPost;
 };
 
-
     //this if/else is stupid and needs to be fixed
 
     if (post.date === null) {
