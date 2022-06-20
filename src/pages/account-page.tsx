@@ -1,7 +1,5 @@
 import { AccountInfo } from '../components/accountInfo-comp';
-import { useNavigate } from 'react-router-dom';
-import { Auth, API, Storage } from 'aws-amplify';
-import { deletePost } from '../graphql/mutations';
+import { Auth } from 'aws-amplify';
 import '../css/account.css';
 import React from 'react';
 import { CognitoUserType } from '../Shared/Types';
