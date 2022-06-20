@@ -11,18 +11,11 @@ const moment = require('moment');
 export const Timeline: React.FC<TimeLineProps> = ({
   user,
   allPosts,
-  posts,
   setPosts,
   token,
   setToken,
 }) => {
   const { id } = useParams();
-
-  // if (!id) {
-  // 	user = user.username;
-  // } else {
-  // 	user = id;
-  // }
 
   const userId = id || (user as CognitoUserType).username;
 
@@ -46,7 +39,7 @@ export const Timeline: React.FC<TimeLineProps> = ({
       <ul>
         <h4>Timeline</h4>
         {allPosts.map(post => (
-          <div key={post.date}>
+          <div key={post.date} data-testid="timeline-date">
             <li onClick={() => clickHandler(post.date)} id={post.date}>
               {moment(post.date).format('MMMM YYYY')}
             </li>

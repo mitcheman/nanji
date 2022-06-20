@@ -21,7 +21,7 @@ export const PostList: React.FC<{
     <>
       <div id="postlist" onClick={dismissAlert}>
         {posts.map(post => (
-          <div data-testid="post">
+          <div data-testid="post" key={post.id}>
             <Post
               currentFriend={currentFriend}
               post={post}
