@@ -1,6 +1,6 @@
 import '../css/post.css'
 import { TiDeleteOutline } from 'react-icons/ti'
-import { useState } from 'react'
+import { useState, Dispatch, Set } from 'react'
 import { Storage, API } from "aws-amplify"
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { deletePost } from "../graphql/mutations"
@@ -18,7 +18,7 @@ type Props = {
     currentFriend: currentFriendType,
     post: PostType,
     posts: PostType[],
-    setPosts: any, //TODO: fix this
+    setPosts: Dispatch<SetStateAction<PostType[]>>;
     setDeleted: any, //TODO: fix this
     setAllPosts: any, //TODO: fix this
 }

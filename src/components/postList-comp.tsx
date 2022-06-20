@@ -12,7 +12,7 @@ type FriendType = {
 type Props = {
   currentFriend?: FriendType | null;
   posts: PostType[];
-  setPosts: Dispatch<SetStateAction<PostType[]>>; //TODO: review this;
+  setPosts: Dispatch<SetStateAction<PostType[]>>;
   setAllPosts: any; //TODO: review this;
 }
 
