@@ -2,6 +2,7 @@ import '../css/post.css'
 import { TiDeleteOutline } from 'react-icons/ti'
 import { useState } from 'react'
 import { Storage, API } from "aws-amplify"
+import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { deletePost } from "../graphql/mutations"
 const moment = require('moment')
 
@@ -11,7 +12,7 @@ type currentFriendType = {
     
 }
 
-type postType = {
+export type postType = {
     id: string,
     date: Date,
     s3Image: string,
@@ -29,6 +30,7 @@ type Props = {
     setDeleted: any, //TODO: fix this
     setAllPosts: any, //TODO: fix this
 }
+
 export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllPosts}: Props) {
 
     const [style, setStyle] = useState({display: 'none'});
@@ -37,7 +39,7 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
         const deleteDetails = {
             id: selectedID,
         };
-        const deletedPost = await API.graphql({ query: deletePost, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: deleteDetails} });
+        const deletedPost: GraphQLResult<any> = await API.graphql({ query: deletePost, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: deleteDetails} });
         await Storage.remove(deletedPost.data.deletePost.image, {level: 'public'})
         setPosts(prev => {
             return prev.filter(data => data.id !== selectedID)
