@@ -9,7 +9,7 @@ import { Friends } from './pages/friends-page';
 import { UserFriend } from './pages/userFriend-page';
 import { useState } from 'react';
 
-// this is the legacy branch
+// this is the development branch
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -23,25 +23,25 @@ function App({ signOut, user }) {
       <Router>
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={
               <Dashboard
                 user={user}
-                signout={signOut}
+                signOut={signOut}
                 friends={friends}
                 setFriends={setFriends}
               />
             }
           />
           <Route
-            path='/Friends'
+            path="/Friends"
             element={
               <Friends user={user} friends={friends} setFriends={setFriends} />
             }
           />
-          <Route path='/NewPost' element={<NewPost user={user} />} />
+          <Route path="/NewPost" element={<NewPost user={user} />} />
           <Route
-            path='/user/:id'
+            path="/user/:id"
             element={
               <UserFriend
                 user={user}
@@ -49,11 +49,12 @@ function App({ signOut, user }) {
                 setFriends={setFriends}
                 currentFriend={currentFriend}
                 setCurrentFriend={setCurrentFriend}
+                signOut={signOut}
               />
             }
           />
           <Route
-            path='/Account'
+            path="/Account"
             element={<Account user={user} signOut={signOut} />}
           />
         </Routes>
