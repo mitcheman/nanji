@@ -34,8 +34,8 @@ export const Timeline: React.FC<TimeLineProps> = ({
     if (allPosts.length <= limitNum) return;
     const data = await listUserPostsTimeline(userId, token, date);
 
-    setPosts(data.data.postByUser.items);
-    const tokenID = data.data.postByUser.nextToken;
+    data.data && setPosts(data.data.postByUser.items);
+    const tokenID = data.data && data.data.postByUser.nextToken;
     setToken(tokenID);
 
     window.scrollTo(0, 0);

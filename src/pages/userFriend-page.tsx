@@ -11,7 +11,7 @@ import { sortData } from '../utils/sort';
 import { BsChevronDown } from 'react-icons/bs';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import React from 'react';
-import { UserFriendProps, PostType } from '../Shared/Types';
+import { UserFriendProps, PostType, GetUserAPIResponse } from '../Shared/Types';
 
 //would love to reuse a lot of the dashboard and tried.
 //Some confusion and funkiness between using user token on initial login vs grabbing data and using current friend. !fix
@@ -29,16 +29,16 @@ export const UserFriend: React.FC<UserFriendProps> = ({
 
   useEffect(() => {
     getUserinfo().then(data => {
-      setCurrentFriend(data.data.getUser);
+      data.data && setCurrentFriend(data.data.getUser);
     });
   }, []);
 
   const getUserinfo = async () => {
-    const userData: GraphQLResult<any> = await API.graphql({
+    const userData = (await API.graphql({
       query: getUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { id: id },
-    });
+    })) as GraphQLResult<GetUserAPIResponse>;
     return userData;
   };
 
@@ -49,15 +49,16 @@ export const UserFriend: React.FC<UserFriendProps> = ({
 
   useEffect(() => {
     listUserPosts(id, token).then(data => {
-      setPosts(data.data.postByUser.items);
-      const tokenID = data.data.postByUser.nextToken;
+      data.data && setPosts(data.data.postByUser.items);
+      const tokenID = data.data && data.data.postByUser.nextToken;
       setToken(tokenID);
     });
   }, []);
 
   useEffect(() => {
     listAllUserPosts(id).then(data => {
-      const listData = data.data.postByUser.items;
+      const listData: PostType[] =
+        (data.data && data.data.postByUser.items) || [];
       sortData(listData);
       setAllPosts(duplicatesByMonth(listData));
       if (listData.length === 0) {
@@ -71,10 +72,11 @@ export const UserFriend: React.FC<UserFriendProps> = ({
   async function newPage() {
     listUserPosts(id, token).then(data => {
       if (token === null || undefined) return;
+
       setPosts(prev => {
-        return [...prev, ...data.data.postByUser.items];
+        return data.data ? [...prev, ...data.data.postByUser.items] : [...prev];
       });
-      const tokenID = data.data.postByUser.nextToken;
+      const tokenID = data.data && data.data.postByUser.nextToken;
       setToken(tokenID);
     });
   }

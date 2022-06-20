@@ -2,13 +2,13 @@
 import { postByUser } from '../graphql/queries';
 import { API, Storage } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
-import { PostType } from '../Shared/Types';
+import { PostByUserAPIResponse, PostType } from '../Shared/Types';
 
 export const listUserPosts = async (
   user: string,
   token: string | undefined,
 ) => {
-  const userPosts: GraphQLResult<any> = await API.graphql({
+  const userPosts = (await API.graphql({
     query: postByUser,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: {
@@ -17,15 +17,16 @@ export const listUserPosts = async (
       nextToken: token,
       sortDirection: 'DESC',
     },
-  });
+  })) as GraphQLResult<PostByUserAPIResponse>;
 
-  await Promise.all(
-    userPosts.data.postByUser.items.map(async (post: PostType) => {
-      const image = await Storage.get(post.image);
-      post.s3ImageUrl = image;
-      return post;
-    }),
-  );
+  userPosts.data &&
+    (await Promise.all(
+      userPosts.data.postByUser.items.map(async (post: PostType) => {
+        const image = await Storage.get(post.image);
+        post.s3ImageUrl = image;
+        return post;
+      }),
+    ));
 
   //duplicates(userPosts.data.postByUser.items);
   return userPosts;
@@ -36,7 +37,7 @@ export const listUserPostsTimeline = async (
   token: string | undefined,
   date: string,
 ) => {
-  const userPosts: GraphQLResult<any> = await API.graphql({
+  const userPosts = (await API.graphql({
     query: postByUser,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: {
@@ -45,28 +46,29 @@ export const listUserPostsTimeline = async (
       sortDirection: 'DESC',
       date: { le: date },
     },
-  });
+  })) as GraphQLResult<PostByUserAPIResponse>;
 
-  await Promise.all(
-    userPosts.data.postByUser.items.map(async (post: PostType) => {
-      const image = await Storage.get(post.image);
-      post.s3ImageUrl = image;
-      return post;
-    }),
-  );
+  userPosts.data &&
+    (await Promise.all(
+      userPosts.data.postByUser.items.map(async (post: PostType) => {
+        const image = await Storage.get(post.image);
+        post.s3ImageUrl = image;
+        return post;
+      }),
+    ));
 
   //duplicates(userPosts.data.postByUser.items);
   return userPosts;
 };
 
 export const listAllUserPosts = async (user: string) => {
-  const allPostData: GraphQLResult<any> = await API.graphql({
+  const allPostData = (await API.graphql({
     query: postByUser,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: {
       userID: user,
       sortDirection: 'DESC',
     },
-  });
+  })) as GraphQLResult<PostByUserAPIResponse>;
   return allPostData;
 };

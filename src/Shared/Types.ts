@@ -112,3 +112,59 @@ export type UserFriendProps = {
   setCurrentFriend: React.Dispatch<React.SetStateAction<DynamoUserType>>;
   signOut: () => Promise<any>;
 };
+
+export type DeletePostAPIResponse = {
+  deletePost: PostType;
+};
+
+export type GetUserIncomingAPIResponse = {
+  getUser: {
+    incoming_friend_requests: {
+      items: IncomingFriendRequestType[];
+    };
+  };
+};
+
+export type GetUserOutGoingAPIResponse = {
+  getUser: {
+    outgoing_friend_requests: {
+      items: OutGoingFriendRequestType[];
+    };
+  };
+};
+
+export type SearchUsersAPIResponse = {
+  searchUsers: {
+    items: DynamoUserType[];
+  };
+};
+
+export type GetUserAPIResponse = {
+  getUser: DynamoUserType;
+  // {
+  //   posts: {
+  //     items: PostType[];
+  //   };
+  // };
+};
+
+export type GetUserFriendsAPIResponse = {
+  getUser: {
+    friends: {
+      items: {
+        createdAt: string;
+        updatedAt: string;
+        id: string;
+        owner: string;
+        friend_with: string;
+      }[];
+    };
+  };
+};
+
+export type PostByUserAPIResponse = {
+  postByUser: {
+    items: PostType[];
+    nextToken: string | undefined;
+  };
+};
