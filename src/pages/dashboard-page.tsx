@@ -57,6 +57,7 @@ export function Dashboard({user, signOut, friends, setFriends}: Props) {
             setFriends(data)
         })
     }, []);
+    
 //TODO: refactor to async/await
     async function newPage () {
         listUserPosts(user.username, token)
