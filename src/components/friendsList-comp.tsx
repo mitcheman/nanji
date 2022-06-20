@@ -16,7 +16,6 @@ export const FriendsList: React.FC<{
   useEffect(() => {
     const userId = id || (user as CognitoUserType).username;
     getFriends(userId).then(data => {
-      console.log(data);
       setFriends(data);
     });
   }, []);
