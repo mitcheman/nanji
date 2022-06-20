@@ -1,6 +1,6 @@
 
 import { Post } from './post-comp'
-import { postType } from './post-comp'
+import { PostType } from "../types/PostType";
 import { Alert } from '@aws-amplify/ui-react';
 import { useState } from 'react'
 import '../css/postlist.css'
@@ -11,7 +11,7 @@ type FriendType = {
 
 type Props = {
   currentFriend: FriendType | null;
-  posts: postType[];
+  posts: PostType[];
   setPosts: () => void; //TODO: review this;
   setAllPosts: any; //TODO: review this;
 }

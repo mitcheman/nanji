@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Storage, API } from "aws-amplify"
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { deletePost } from "../graphql/mutations"
+import { PostType } from "../types/PostType";
 const moment = require('moment')
 
 
@@ -12,20 +13,11 @@ type currentFriendType = {
     
 }
 
-export type postType = {
-    id: string,
-    date: Date,
-    s3Image: string,
-    location: string,
-    content: string,
-    createdAt: Date,
-    updatedAt: Date   
-}
 
 type Props = {
     currentFriend: currentFriendType,
-    post: postType,
-    posts: postType[],
+    post: PostType,
+    posts: PostType[],
     setPosts: any, //TODO: fix this
     setDeleted: any, //TODO: fix this
     setAllPosts: any, //TODO: fix this

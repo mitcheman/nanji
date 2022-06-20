@@ -1,5 +1,6 @@
 
 import { Storage } from "aws-amplify"
+import React from "react"
 import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
 import { Menu } from "../components/menu-comp"
@@ -8,19 +9,13 @@ import { listUserPosts, listAllUserPosts } from "../utils/listdata"
 import { sortData } from "../utils/sort"
 import { getFriends } from "../utils/friendRequests"
 import { BsChevronDown } from 'react-icons/bs';
+import { postType } from '../components/post-comp'
+import { UserType } from '../types/UserType';
 import '../css/dashboard.css'
 
 //temp set to public - this needs to change and implement groups for friends !fix
 Storage.configure({ level: 'public' });
 //Shared Types will have their own file
-type UserType = {
-    id: string,
-    family_name: string,
-    given_name: string,
-    preferred_username: string,
-    username: string,
-    profile_pic: string,   
-}
 
 type Props = {
     user: UserType;
@@ -30,10 +25,10 @@ type Props = {
 }
 
 export function Dashboard({user, signOut, friends, setFriends}: Props) {
-    const [posts, setPosts] = useState([]);
-    const [allPosts, setAllPosts] = useState([]);
-    const [noPosts, setNoPosts] = useState(false);
-    const [token, setToken] = useState();
+    const [posts, setPosts] = React.useState<postType[] | null>([]);
+    const [allPosts, setAllPosts] = React.useState([]);
+    const [noPosts, setNoPosts] = React.useState<boolean>(false);
+    const [token, setToken] = React.useState();
 
     useEffect(() => {
         listUserPosts(user.username).then((data) => {
