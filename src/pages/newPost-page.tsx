@@ -103,7 +103,7 @@ export const NewPost = ({ user }: Props ) => {
         try {
           const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
           setFileStatus(true);
-          setSelectedLocation('')
+          setSelectedLocation('');
           setSelectedLocationResult(false);
           //reset form
           resetFormHandler(event); 
