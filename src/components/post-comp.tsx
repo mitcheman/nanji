@@ -5,7 +5,31 @@ import { Storage, API } from "aws-amplify"
 import { deletePost } from "../graphql/mutations"
 const moment = require('moment')
 
-export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllPosts}) {
+
+
+type currentFriendType = {
+    
+}
+
+type postType = {
+    id: string,
+    date: Date,
+    s3Image: string,
+    location: string,
+    content: string,
+    createdAt: Date,
+    updatedAt: Date   
+}
+
+type Props = {
+    currentFriend: currentFriendType,
+    post: postType,
+    posts: postType[],
+    setPosts: any, //TODO: fix this
+    setDeleted: any, //TODO: fix this
+    setAllPosts: any, //TODO: fix this
+}
+export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllPosts}: Props) {
 
     const [style, setStyle] = useState({display: 'none'});
 
@@ -31,7 +55,7 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
     if (post.date === null) {
         return (
             <>
-            <div id={post.id} class="post"
+            <div id={post.id} className="post"
                 onMouseEnter={e => {
                 setStyle({display: 'block'});
                 }}
@@ -40,14 +64,14 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
                 }}>
                 { (!currentFriend) ? <TiDeleteOutline style={style} onClick={() => deleteHandler(post.id)}/>: <></>}
                 <img alt={post.id} src={post.s3Image} />
-                <div class="content">
+                <div className="content">
                     <div id="contentlocation">
                         <h5>{post.location}</h5>
                     </div>
                     <p>{post.content}</p>
                 </div>
             </div>
-            <div class="createdat">
+            <div className="createdat">
             <p>post created: {moment(post.createdAt).format('MMMM Do YYYY')}</p>
             </div>
             </>
@@ -56,11 +80,11 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
     } else {
     return (
         <>
-        <div class="timeinfo">
+        <div className="timeinfo">
             <h3>{moment(post.date).format('MMMM Do YYYY')} - </h3>
             {(moment(post.date).format('MMMM Do YYYY') === moment(new Date()).format('MMMM Do YYYY')) ? <p>Today</p>:<p>{moment(post.date).fromNow()}</p>}
         </div>
-        <div id={post.id} class="post"
+        <div id={post.id} className="post"
                 onMouseEnter={e => {
                 setStyle({display: 'block'});
                 }}
@@ -69,14 +93,14 @@ export function Post ({currentFriend, post, posts, setPosts, setDeleted, setAllP
                 }}>
                 { (!currentFriend) ? <TiDeleteOutline style={style} onClick={() => deleteHandler(post.id)}/>: <></>}
             <img alt={post.id} src={post.s3Image} />
-            <div class="content">
+            <div className="content">
                 <div id="contentlocation">
                     <h5>{post.location}</h5>
                 </div>
                     <p>{post.content}</p>
             </div>
         </div>
-        <div class="createdat">
+        <div className="createdat">
         <p>post created: {moment(post.createdAt).format('MMMM Do YYYY')}</p>
         </div>
         </>

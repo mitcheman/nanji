@@ -12,8 +12,24 @@ import '../css/dashboard.css'
 
 //temp set to public - this needs to change and implement groups for friends !fix
 Storage.configure({ level: 'public' });
+//Shared Types will have their own file
+type UserType = {
+    id: string,
+    family_name: string,
+    given_name: string,
+    preferred_username: string,
+    username: string,
+    profile_pic: string,   
+}
 
-export function Dashboard({user, signOut, friends, setFriends}) {
+type Props = {
+    user: UserType;
+    signOut: any; //TODO: adjust this
+    friends: UserType[];
+    setFriends: any; //TODO: adjust this
+}
+
+export function Dashboard({user, signOut, friends, setFriends}: Props) {
     const [posts, setPosts] = useState([]);
     const [allPosts, setAllPosts] = useState([]);
     const [noPosts, setNoPosts] = useState(false);
@@ -60,7 +76,7 @@ export function Dashboard({user, signOut, friends, setFriends}) {
 
     if (noPosts === true) {
         return (
-            <div cass="container">
+            <div className="container">
                 <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
             <div id="nodata">
                 <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
@@ -71,7 +87,7 @@ export function Dashboard({user, signOut, friends, setFriends}) {
     else {
         return (
             <>
-            <div class="container">
+            <div className="container">
                 <PostList posts={posts} setPosts={setPosts} setAllPosts={setAllPosts}/>
                 <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken}/>
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
