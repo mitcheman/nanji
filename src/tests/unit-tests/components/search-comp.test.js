@@ -2,7 +2,6 @@ import './mockJsdom';
 import { Search } from '../../../components/search-comp';
 import { render, screen } from '@testing-library/react';
 import { user } from './component-mocks';
-import userEvent from '@testing-library/user-event';
 
 describe('Search component tests', () => {
   it('should render the search component', () => {

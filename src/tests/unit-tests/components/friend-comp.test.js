@@ -1,8 +1,5 @@
 import { Friend } from '../../../components/friend-comp';
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-import userEvent from '@testing-library/user-event';
-import { createMemoryHistory } from 'history';
 import { friends } from './component-mocks';
 
 it("should render a friend's info", () => {
