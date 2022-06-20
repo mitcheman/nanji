@@ -44,14 +44,12 @@ export const Post: React.FC<PostProps> = ({
     return deletedPost;
   }
 
-  useEffect(() => console.log(`Post number ${post.id}: `, post), [post]);
-
   //this if/else is stupid and needs to be fixed
 
   return (
     <>
       {post.date !== null ? (
-        <div className="timeinfo">
+        <div className="timeinfo" data-testid="date">
           <h3>{moment(post.date).format('MMMM Do YYYY')} - </h3>
           {moment(post.date).format('MMMM Do YYYY') ===
           moment(new Date()).format('MMMM Do YYYY') ? (
@@ -78,15 +76,15 @@ export const Post: React.FC<PostProps> = ({
         ) : (
           <></>
         )}
-        <img alt={post.id} src={post.s3ImageUrl} />
-        <div className="content">
+        <img alt="Post" src={post.s3ImageUrl} />
+        <div className="content" data-testid="content">
           <div id="contentlocation">
             <h5>{post.location}</h5>
           </div>
           <p>{post.content}</p>
         </div>
       </div>
-      <div className="createdat">
+      <div className="createdat" data-testid="creation-date">
         <p>post created: {moment(post.createdAt).format('MMMM Do YYYY')}</p>
       </div>
     </>
