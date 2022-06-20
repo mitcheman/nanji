@@ -38,8 +38,15 @@ export const Menu: React.FC<MenuProps> = ({
     return (
       <div id="menu">
         <div id="menusvg">
-          <GiBackwardTime onClick={() => setMenu(true)} />
-          <FaUserFriends id="menufriends" onClick={() => setMenu(false)} />
+          <GiBackwardTime
+            onClick={() => setMenu(true)}
+            data-testid="toggleMenuToTimeline"
+          />
+          <FaUserFriends
+            id="menufriends"
+            onClick={() => setMenu(false)}
+            data-testid="toggleMenuToFriends"
+          />
         </div>
         {!menu ? (
           <FriendsList user={user} friends={friends} setFriends={setFriends} />

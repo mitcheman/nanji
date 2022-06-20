@@ -3,16 +3,10 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import userEvent from '@testing-library/user-event';
 import { createMemoryHistory } from 'history';
+import { friends } from './component-mocks';
 
 it("should render a friend's info", () => {
-  const friendInfo = {
-    id: 'eifefiief-ii32839240-2nefn2n4in29f',
-    given_name: 'Jhon',
-    family_name: 'Doe',
-    preferred_username: 'Jhonny',
-  };
-
-  render(<Friend friend={friendInfo} />);
+  render(<Friend friend={friends[0]} />);
 
   const fullName = screen.getByText(/Jhon Doe/);
   const preferredUsername = screen.getByText(/Jhonny/);

@@ -1,15 +1,11 @@
 import { Header } from '../../../components/header-comp';
 import { render, screen } from '@testing-library/react';
 import { Auth } from 'aws-amplify';
+import { user, currentFriend } from './component-mocks';
 
 it('should render a header for users own dashboard if on computer', () => {
   const currentFriend = undefined;
-  const user = {
-    attributes: {
-      given_name: 'Jhon',
-      family_name: 'Doe',
-    },
-  };
+
   render(
     <Header user={user} currentFriend={currentFriend} signOut={Auth.signOut} />,
   );
@@ -17,7 +13,7 @@ it('should render a header for users own dashboard if on computer', () => {
   const nanjiText = screen.getByText('Nanji');
   expect(nanjiText).toBeInTheDocument();
 
-  const usersFullName = screen.getByText('Jhon Doe');
+  const usersFullName = screen.getByText('John Doe');
   expect(usersFullName).toBeInTheDocument();
 
   const friends = screen.getByTestId('friends');
@@ -31,17 +27,6 @@ it('should render a header for users own dashboard if on computer', () => {
 });
 
 it('should display a header for friends when in their dashboard', () => {
-  const currentFriend = {
-    given_name: 'Captain',
-    family_name: 'Jack Sparrow',
-  };
-  const user = {
-    attributes: {
-      given_name: 'Jhon',
-      family_name: 'Doe',
-    },
-  };
-
   render(
     <Header user={user} currentFriend={currentFriend} signOut={Auth.signOut} />,
   );
