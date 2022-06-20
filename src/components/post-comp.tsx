@@ -6,7 +6,6 @@ import { Storage, API } from 'aws-amplify';
 import { deletePost } from '../graphql/mutations';
 import { PostProps } from '../Shared/Types';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
-import { useEffect } from 'react';
 
 const moment = require('moment');
 
