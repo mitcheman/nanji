@@ -1,7 +1,6 @@
 import { API } from 'aws-amplify';
 import { getUser } from '../graphql/queries';
 import { useParams } from 'react-router-dom';
-import { isMobile } from 'react-device-detect';
 import { useState, useEffect } from 'react';
 import { PostList } from '../components/postList-comp';
 import { Menu } from '../components/menu-comp';
