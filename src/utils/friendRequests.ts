@@ -35,7 +35,7 @@ export const getOutgoingRequests = async ({user}: Props) => {
   return results;
 };
 
-export const getIncomingRequests = async (user) => {
+export const getIncomingRequests = async ({user}: Props) => {
   //get incoming friend requests for user
   const incomingRequests: GraphQLResult<any> = await API.graphql({
     query: getUserIncoming,
@@ -56,7 +56,7 @@ export const getIncomingRequests = async (user) => {
   return results;
 };
 
-export const getFriends = async (user) => {
+export const getFriends = async ({user}: Props) => {
   //get friends list for current user
   const listFriends: GraphQLResult<any> = await API.graphql({
     query: getUserFriends,
