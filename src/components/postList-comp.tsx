@@ -21,15 +21,17 @@ export const PostList: React.FC<{
     <>
       <div id="postlist" onClick={dismissAlert}>
         {posts.map(post => (
-          <Post
-            currentFriend={currentFriend}
-            post={post}
-            posts={posts}
-            setPosts={setPosts}
-            setAllPosts={setAllPosts}
-            setDeleted={setDeleted}
-            key={post.id}
-          />
+          <div data-testid="post" key={post.id}>
+            <Post
+              currentFriend={currentFriend}
+              post={post}
+              posts={posts}
+              setPosts={setPosts}
+              setAllPosts={setAllPosts}
+              setDeleted={setDeleted}
+              key={post.id}
+            />
+          </div>
         ))}
         {deleted ? (
           <Alert variation="success" isDismissible={true}>

@@ -39,21 +39,30 @@ export const RequestList: React.FC<RequestListProps> = ({
   const [cancelledStatus, setCancelledStatus] = useState(false);
 
   useEffect(() => {
-    getOutgoingRequests(user.username).then(data => {
-      setOutGoingRequestsUsers(data);
-    });
+    console.log(user.username);
+    getOutgoingRequests(user.username)
+      .then(data => {
+        setOutGoingRequestsUsers(data);
+      })
+      .catch(err => console.error(err));
   }, []);
 
   useEffect(() => {
-    getIncomingRequests(user.username).then(data => {
-      setIncomingRequestsUsers(data);
-    });
+    console.log(user.username);
+    getIncomingRequests(user.username)
+      .then(data => {
+        setIncomingRequestsUsers(data);
+      })
+      .catch(err => console.log(err));
   }, []);
 
   useEffect(() => {
-    getFriends(user.username).then(data => {
-      setFriends(data);
-    });
+    console.log(user.username);
+    getFriends(user.username)
+      .then(data => {
+        setFriends(data);
+      })
+      .catch(err => console.error(err));
   }, []);
 
   function dismissAlerts() {
@@ -88,9 +97,11 @@ export const RequestList: React.FC<RequestListProps> = ({
       variables: { input: { id: selectedIncoming && selectedIncoming[0].id } },
     });
     //update incoming state
-    getIncomingRequests(user.username).then(data => {
-      setIncomingRequestsUsers(data);
-    });
+    getIncomingRequests(user.username)
+      .then(data => {
+        setIncomingRequestsUsers(data);
+      })
+      .catch(error => console.log(error));
   };
 
   const handleOutgoingRequest = async (
@@ -143,12 +154,14 @@ export const RequestList: React.FC<RequestListProps> = ({
       variables: { input: friendAcceptedRequest },
     });
     //handle requests
-    handleIncomingRequest(user.username, selectedID);
-    handleOutgoingRequest(user.username, selectedID);
+    await handleIncomingRequest(user.username, selectedID);
+    await handleOutgoingRequest(user.username, selectedID);
     //update friends list
-    getFriends(user.username).then(data => {
-      setFriends(data);
-    });
+    getFriends(user.username)
+      .then(data => {
+        setFriends(data);
+      })
+      .catch(err => console.error(err));
     setAcceptedStatus(true);
   };
 
@@ -156,25 +169,32 @@ export const RequestList: React.FC<RequestListProps> = ({
     console.log(selectedID);
     await handleIncomingRequest(user.username, selectedID);
     await handleOutgoingRequest(user.username, selectedID);
-    getIncomingRequests(user.username).then(data => {
-      setIncomingRequestsUsers(data);
-      setDeniedStatus(true);
-    });
+    getIncomingRequests(user.username)
+      .then(data => {
+        setIncomingRequestsUsers(data);
+        setDeniedStatus(true);
+      })
+      .catch(err => console.error(err));
   };
 
   const cancelRequestHandler = async (selectedID: string) => {
     await handleIncomingRequest(selectedID, user.username);
     await handleOutgoingRequest(selectedID, user.username);
-    getOutgoingRequests(user.username).then(data => {
-      setOutGoingRequestsUsers(data);
-      setCancelledStatus(true);
-    });
+    getOutgoingRequests(user.username)
+      .then(data => {
+        setOutGoingRequestsUsers(data);
+        setCancelledStatus(true);
+      })
+      .catch(err => console.error(err));
   };
 
   //requests should be their own component !fix
   return (
     <>
-      <div id="requestlist" onClick={dismissAlerts}>
+      <div
+        id="requestlist"
+        onClick={dismissAlerts}
+        data-testid="friend-request">
         <h4>Friend Requests</h4>
         <div className="outgoing">
           <h5>Pending Sent Requests</h5>

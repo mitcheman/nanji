@@ -132,6 +132,7 @@ export const Search: React.FC<SearchProps> = ({
           label="Search for friends and family"
           placeholder="Search here..."
           onSubmit={searchHandler}
+          data-testid="search-input"
         />
 
         <div>
@@ -139,6 +140,7 @@ export const Search: React.FC<SearchProps> = ({
             <div>
               {userSearch.map(userResult => (
                 <div
+                  data-testid="search-result"
                   id={userResult.id}
                   key={userResult.id}
                   className="searchresults">
