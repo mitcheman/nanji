@@ -11,19 +11,16 @@ import {
 import { getUserOutgoing, getUserByUser } from "../graphql/custom";
 import "../css/search.css";
 
-type UserType = {
+type UserSearch = {
   id: string;
   username: string;
   family_name: string;
   given_name: string;
   preferred_username: string;
-  email: string;
 };
 
-type Props = { userSearch: UserType; userResult: UserType };
-
 export function Search({ user, setOutGoing }) {
-  const [userSearch, setUserSearch] = useState<Props[]>();
+  const [userSearch, setUserSearch] = useState<UserSearch[]>();
   const [searchResult, setSearchResult] = useState<boolean>(false);
 
   const searchHandler = async (event) => {
@@ -53,9 +50,7 @@ export function Search({ user, setOutGoing }) {
     }
   };
 
-  const friendRequestHandler = async (
-    selectedID: React.FormEvent<EventTarget>
-  ) => {
+  const friendRequestHandler = async (selectedID) => {
     //confirm user is not the same user
     if (selectedID === user.username) {
       setSearchResult(false);

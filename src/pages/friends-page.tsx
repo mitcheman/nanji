@@ -28,7 +28,7 @@ export function Friends({ user, friends, setFriends }: Props) {
     <>
       <div id="friends">
         <div id="addfriends">
-          <Search user={user} outGoing={outGoing} setOutGoing={setOutGoing} />
+          <Search user={user} setOutGoing={setOutGoing} />
           <RequestList
             user={user}
             outGoing={outGoing}
