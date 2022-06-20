@@ -65,7 +65,6 @@ export const NewPost = ({ user }: Props ) => {
         const picDate = document.getElementById('picdate') as HTMLInputElement;
         const searchField = document.getElementById('searchfield') as HTMLInputElement;
         const fileUpload = document.getElementById('fileupload') as HTMLButtonElement;
-       
         content.value = '';
         picDate.value = '';
         searchField.value = '';
