@@ -1,4 +1,5 @@
 import { API } from 'aws-amplify';
+import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { UserType } from '../types/UserType'
 
 import {
@@ -12,11 +13,10 @@ type Props = {
   user: UserType;
 }
 
-
 //I could put the user info in the actual friend request but what if the user changes info? sure there is a better/faster way to handle this.
 export const getOutgoingRequests = async ({user}: Props) => {
   //get outgoing friend requests for user
-  const outGoingRequests = await API.graphql({
+  const outGoingRequests: GraphQLResult<any> = await API.graphql({
     query: getUserOutgoing,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: { id: user },
@@ -25,7 +25,7 @@ export const getOutgoingRequests = async ({user}: Props) => {
   //get user information on each user for a request - (outgoing requests only contain data on specific request - no user info besides ID)
   const results = [];
   for (let i = 0; i < req.length; i++) {
-    const call = await API.graphql({
+    const call: GraphQLResult<any> = await API.graphql({
       query: getUserByUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { id: req[i].request_to },
@@ -37,7 +37,7 @@ export const getOutgoingRequests = async ({user}: Props) => {
 
 export const getIncomingRequests = async (user) => {
   //get incoming friend requests for user
-  const incomingRequests = await API.graphql({
+  const incomingRequests: GraphQLResult<any> = await API.graphql({
     query: getUserIncoming,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: { id: user },
@@ -46,7 +46,7 @@ export const getIncomingRequests = async (user) => {
   //get user information for each request (incomingRequests only contains data on specific request - no user info besides ID)
   const results = [];
   for (let i = 0; i < req.length; i++) {
-    const call = await API.graphql({
+    const call: GraphQLResult<any> = await API.graphql({
       query: getUserByUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { id: req[i].request_from },
@@ -58,7 +58,7 @@ export const getIncomingRequests = async (user) => {
 
 export const getFriends = async (user) => {
   //get friends list for current user
-  const listFriends = await API.graphql({
+  const listFriends: GraphQLResult<any> = await API.graphql({
     query: getUserFriends,
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: { id: user },
@@ -68,7 +68,7 @@ export const getFriends = async (user) => {
   //get user information for each request (incomingRequests only contains data on specific request - no user info besides ID)
   const results = [];
   for (let i = 0; i < req.length; i++) {
-    const call = await API.graphql({
+    const call: GraphQLResult<any> = await API.graphql({
       query: getUserByUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { id: req[i].friend_with },
