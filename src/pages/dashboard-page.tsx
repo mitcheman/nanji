@@ -24,11 +24,11 @@ type Props = {
     setFriends: any; //TODO: adjust this
 }
 
-export function Dashboard({user, signOut, friends, setFriends}: Props) {
+export const Dashboard = ({user, signOut, friends, setFriends}: Props) => {
     const [posts, setPosts] = React.useState<PostType[] | null>([]);
     const [allPosts, setAllPosts] = React.useState<PostType[] | null>([]);
     const [noPosts, setNoPosts] = React.useState<boolean>(false);
-    const [token, setToken] = React.useState();
+    const [token, setToken] = React.useState<string>('');
 
     useEffect(() => {
         listUserPosts(user.username, token).then((data) => {
@@ -36,7 +36,7 @@ export function Dashboard({user, signOut, friends, setFriends}: Props) {
             const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
         })
-    }, [])
+    }, []);
 
     useEffect(() => {
         listAllUserPosts(user.username).then((data) => {
@@ -49,7 +49,7 @@ export function Dashboard({user, signOut, friends, setFriends}: Props) {
                 setNoPosts(false);
             }
         })
-    }, [])
+    }, []);
 
     useEffect(() => {
         getFriends(user.username).then((data) => {
@@ -58,7 +58,7 @@ export function Dashboard({user, signOut, friends, setFriends}: Props) {
     }, []);
     
 //TODO: refactor to async/await
-    async function newPage () {
+    const newPage = async () => {
         listUserPosts(user.username, token)
         .then((data) => {
             if (token === null || undefined) return;
@@ -66,6 +66,7 @@ export function Dashboard({user, signOut, friends, setFriends}: Props) {
                 return [...prev, ...data.data.postByUser.items]
             })
             const tokenID = data.data.postByUser.nextToken;
+            console.log(tokenID, 'tokeeeeeeen IDDDDDD');
             setToken(tokenID);
         })
     }
