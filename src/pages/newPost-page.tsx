@@ -1,4 +1,3 @@
-
 import { Storage, API, Geo } from "aws-amplify"
 import { createPost } from "../graphql/mutations"
 import { useState } from "react"
@@ -9,41 +8,76 @@ import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { GrPowerReset } from 'react-icons/gr'
 import { Alert } from '@aws-amplify/ui-react';
 import '../css/form.css'
+import React from "react";
 const moment = require('moment')
 
 const currentDate = moment(new Date()).format('YYYY-MM-DD')
 
-export function NewPost({user}) {
+type UserType = {
+    id: string,
+    family_name: string,
+    given_name: string,
+    preferred_username: string,
+    username: string,
+    profile_pic: string,   
+}
 
-    const [fileData, setFileData] = useState()
-    const [fileStatus, setFileStatus] = useState(false)
+type Props = {
+    user: UserType;
+    children?: JSX.Element|JSX.Element[];
+}
 
-    const [currentImage, setCurrentImage] = useState()
+export const NewPost = ({ user }: Props ) => {
+    
+    
+    type filePayload = {
+        name: string,
+        size: number,
+    }
+    
+    type locationSearchPayload = {
+        payload?: string;
+        results?: string[];
+        label?: string;
+    }
+    
+
+    const [fileData, setFileData] = React.useState<filePayload | null>(null);
+    const [fileStatus, setFileStatus] = React.useState<boolean>(false);
+
+    const [currentImage, setCurrentImage] = React.useState('');
 
     //search for location
-    const [locationSearch, setLocationSearch] = useState();
-    const [locationSearchResult, setLocationSearchResult] = useState(false);
+    const [locationSearch, setLocationSearch] = React.useState<locationSearchPayload[] | null>(null);
+    const [locationSearchResult, setLocationSearchResult] = React.useState<boolean>(false);
 
     //select location
-    const [selectedLocation, setSelectedLocation] = useState()
-    const [selectedLocationResult, setSelectedLocationResult] = useState(false);
+    const [selectedLocation, setSelectedLocation] = React.useState<string | null>(null)
+    const [selectedLocationResult, setSelectedLocationResult] = React.useState<boolean>(false);
 
     function imageOnChangeHandler(e) {
         setFileData(e.target.files[0])
-        setCurrentImage(URL.createObjectURL(e.target.files[0]));
+        setCurrentImage(() => URL.createObjectURL(e.target.files[0]));
     }
 
-    function resetFormHandler(e) {
-        document.getElementById('content').value = '';
-        document.getElementById('picdate').value = '';
-        document.getElementById('searchfield').value = '';
-        document.getElementById('fileupload').value = null;
-        setFileData();
-        setCurrentImage();
-        setLocationSearch();
+    function resetFormHandler(e): void {
+        const content = document.getElementById('content') as HTMLInputElement;
+        const picDate = document.getElementById('picdate') as HTMLInputElement;
+        const searchField = document.getElementById('searchfield') as HTMLInputElement;
+        const fileUpload = document.getElementById('fileupload') as HTMLButtonElement;
+       
+        content.value = '';
+        picDate.value = '';
+        searchField.value = '';
+        fileUpload.value = '';
+        // document.getElementById('fileupload').value = null;
+        
+        setFileData(null);
+        setCurrentImage('');
+        setLocationSearch(null);
         setLocationSearchResult(false)
         setSelectedLocationResult(false);
-        setSelectedLocation();
+        setSelectedLocation(null);
     }
 
     async function savePost (event) {
@@ -61,13 +95,18 @@ export function NewPost({user}) {
         const filename = currentDate + '_' + fileData.name;
         await Storage.put(filename, fileData, {level: 'public'});
         const newPost = {location: selectedLocation, date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username, type: "Post"};
-        const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
-        setFileStatus(true);
-        setSelectedLocation()
-        setSelectedLocationResult(false);
-
-        //reset form
-        resetFormHandler();
+        console.log(newPost);
+        try {
+          const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
+          setFileStatus(true);
+          setSelectedLocation('');
+          setSelectedLocationResult(false);
+          //reset form
+          resetFormHandler(event); 
+          console.log(result);
+        } catch(err) {
+          console.log(err)
+        };
     }
 
     async function searchLocation (event) {
@@ -90,7 +129,7 @@ export function NewPost({user}) {
     }
 
     function removeLocation() {
-        setSelectedLocation();
+        setSelectedLocation(null);
         setSelectedLocationResult(false);
     }
 
@@ -98,7 +137,7 @@ export function NewPost({user}) {
         setFileStatus(false);
         setLocationSearchResult(false);
     }
-
+    
     return (
     <>
     <div id="newpost">
@@ -114,7 +153,7 @@ export function NewPost({user}) {
             {(locationSearchResult) ?
             <div>
                 {locationSearch.map((locationResult) => (
-                    <div class="locationsearchresults" key={locationResult.label}>
+                    <div className="locationsearchresults" key={locationResult.label}>
                     <ul>
                         <li>{locationResult.label}</li>
                     </ul>
@@ -122,18 +161,26 @@ export function NewPost({user}) {
                     </div>
                 ))}
             </div>
-                : <div class="locationsearchresults"><h5>No results</h5></div>}
-                {selectedLocationResult ? <div id="selectedlocation"><h5>Location&ensp;|</h5><p>&ensp;
-                {selectedLocation}</p><TiDeleteOutline onClick={removeLocation}/></div> : ''}
+                : 
+                <div className="locationsearchresults"><h5>No results</h5></div>
+             }
+             {selectedLocationResult ?
+              
+              <div id="selectedlocation">
+                <h5>Location&ensp;|</h5>
+                <p>&ensp;{selectedLocation}</p>
+                <TiDeleteOutline onClick={removeLocation}/>
+              </div>
+            : ''}
             </div>
         <form onSubmit={savePost}>
-            <label for="picdate">Date of Photo</label>
+            <label htmlFor="picdate">Date of Photo</label>
             <input id="picdate" name="date" type="date" max={currentDate} onClick={dismissAlert}/>
-            <label id="contentlabel" for="content">Background Story</label>
-            <TextAreaField size="large" autoComplete="off" id="content" name="content" type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
+            <label id="contentlabel" htmlFor="content">Background Story</label>
+            <TextAreaField label="contentlabel" size="large" autoComplete="off" id="content" name="content" data-type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
             <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => imageOnChangeHandler(e)}></input>
             <div id="formimage">
-                <img id="frame" alt="" src={currentImage} name="frame"/>
+                <img id="frame" alt="" src={currentImage} data-name="frame"/>
             </div>
             <button id="submitbutton" type="submit"><BsUpload /></button>
         </form>
