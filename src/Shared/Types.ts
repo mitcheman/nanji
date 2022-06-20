@@ -132,3 +132,18 @@ export type GetUserOutGoingAPIResponse = {
     };
   };
 };
+
+export type SearchUsersAPIResponse = {
+  searchUsers: {
+    items: DynamoUserType[];
+  };
+};
+
+export type GetUserByUserAPIResponse = {
+  getUser: DynamoUserType;
+  // {
+  //   posts: {
+  //     items: PostType[];
+  //   };
+  // };
+};
