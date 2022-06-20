@@ -7,6 +7,8 @@ import { deletePost } from '../graphql/mutations';
 import { PostProps } from '../Shared/Types';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
 import { useEffect } from 'react';
+import { DeletePostAPIResponse } from '../Shared/Types';
+import { Observable } from '../../node_modules/zen-observable-ts';
 
 const moment = require('moment');
 
@@ -24,15 +26,16 @@ export const Post: React.FC<PostProps> = ({
     const deleteDetails = {
       id: selectedID,
     };
-    const deletedPost: GraphQLResult<any> = await API.graphql({
+    const deletedPost = (await API.graphql({
       query: deletePost,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { input: deleteDetails },
-    });
+    })) as GraphQLResult<DeletePostAPIResponse>;
 
-    await Storage.remove(deletedPost.data.deletePost.image, {
-      level: 'public',
-    });
+    deletedPost.data &&
+      (await Storage.remove(deletedPost.data.deletePost.image, {
+        level: 'public',
+      }));
     setPosts(prev => {
       return prev.filter(data => data.id !== selectedID);
     });
