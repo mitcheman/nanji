@@ -49,15 +49,16 @@ export const UserFriend: React.FC<UserFriendProps> = ({
 
   useEffect(() => {
     listUserPosts(id, token).then(data => {
-      setPosts(data.data.postByUser.items);
-      const tokenID = data.data.postByUser.nextToken;
+      data.data && setPosts(data.data.postByUser.items);
+      const tokenID = data.data && data.data.postByUser.nextToken;
       setToken(tokenID);
     });
   }, []);
 
   useEffect(() => {
     listAllUserPosts(id).then(data => {
-      const listData = data.data.postByUser.items;
+      const listData: PostType[] =
+        (data.data && data.data.postByUser.items) || [];
       sortData(listData);
       setAllPosts(duplicatesByMonth(listData));
       if (listData.length === 0) {
@@ -71,10 +72,11 @@ export const UserFriend: React.FC<UserFriendProps> = ({
   async function newPage() {
     listUserPosts(id, token).then(data => {
       if (token === null || undefined) return;
+
       setPosts(prev => {
-        return [...prev, ...data.data.postByUser.items];
+        return data.data ? [...prev, ...data.data.postByUser.items] : [...prev];
       });
-      const tokenID = data.data.postByUser.nextToken;
+      const tokenID = data.data && data.data.postByUser.nextToken;
       setToken(tokenID);
     });
   }

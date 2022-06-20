@@ -161,3 +161,10 @@ export type GetUserFriendsAPIResponse = {
     };
   };
 };
+
+export type PostByUserAPIResponse = {
+  postByUser: {
+    items: PostType[];
+    nextToken: string | undefined;
+  };
+};

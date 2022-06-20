@@ -27,8 +27,8 @@ export const Dashboard: React.FC<{
   useEffect(() => {
     listUserPosts(user.username, token)
       .then(data => {
-        setPosts(data.data.postByUser.items);
-        const tokenID = data.data.postByUser.nextToken;
+        data.data && setPosts(data.data.postByUser.items);
+        const tokenID = data.data && data.data.postByUser.nextToken;
         setToken(tokenID);
       })
       .catch(err => console.log(err));
@@ -36,7 +36,8 @@ export const Dashboard: React.FC<{
 
   useEffect(() => {
     listAllUserPosts(user.username).then(data => {
-      const listData = data.data.postByUser.items;
+      const listData: PostType[] =
+        (data.data && data.data.postByUser.items) || [];
       sortData(listData);
       setAllPosts(duplicatesByMonth(listData));
       if (listData.length === 0) {
@@ -57,9 +58,9 @@ export const Dashboard: React.FC<{
     listUserPosts(user.username, token).then(data => {
       if (token === null || undefined) return;
       setPosts(prev => {
-        return [...prev, ...data.data.postByUser.items];
+        return data.data ? [...prev, ...data.data.postByUser.items] : [...prev];
       });
-      const tokenID = data.data.postByUser.nextToken;
+      const tokenID = data.data && data.data.postByUser.nextToken;
       setToken(tokenID);
     });
   }
