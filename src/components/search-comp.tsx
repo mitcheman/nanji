@@ -92,7 +92,7 @@ export const Search: React.FC<SearchProps> = ({
       userOutgoing_friend_requestsId: user.username,
       request_to: selectedID,
     };
-    const createOutGoing = await API.graphql({
+    await API.graphql({
       query: createOutgoingFriendRequest,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { input: friendRequest },
@@ -116,7 +116,7 @@ export const Search: React.FC<SearchProps> = ({
       userIncoming_friend_requestsId: selectedID,
       request_from: user.username,
     };
-    const createIncoming = await API.graphql({
+    await API.graphql({
       query: createIncomingFriendRequest,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { input: fromFriendRequest },

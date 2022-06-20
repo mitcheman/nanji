@@ -18,7 +18,7 @@ export const FriendsList: React.FC<{
     getFriends(userId).then(data => {
       setFriends(data);
     });
-  }, []);
+  }, [id, user, setFriends]);
 
   return (
     <div id="friendlist">

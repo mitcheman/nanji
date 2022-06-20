@@ -45,7 +45,7 @@ export const RequestList: React.FC<RequestListProps> = ({
         setOutGoingRequestsUsers(data);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [setOutGoingRequestsUsers, user.username]);
 
   useEffect(() => {
     console.log(user.username);
@@ -54,7 +54,7 @@ export const RequestList: React.FC<RequestListProps> = ({
         setIncomingRequestsUsers(data);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [setIncomingRequestsUsers, user.username]);
 
   useEffect(() => {
     console.log(user.username);
@@ -63,7 +63,7 @@ export const RequestList: React.FC<RequestListProps> = ({
         setFriends(data);
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [setFriends, user.username]);
 
   function dismissAlerts() {
     setAcceptedStatus(false);
@@ -91,7 +91,7 @@ export const RequestList: React.FC<RequestListProps> = ({
       (el: IncomingFriendRequestType) => el.request_from === oppositeUser,
     );
     //delete incoming request that matches
-    const deleteIncomingRequest = await API.graphql({
+    await API.graphql({
       query: deleteIncomingFriendRequest,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { input: { id: selectedIncoming && selectedIncoming[0].id } },
@@ -124,7 +124,7 @@ export const RequestList: React.FC<RequestListProps> = ({
       (el: OutGoingFriendRequestType) => el.request_to === currentUser,
     );
     // //delete outgoing request that matches
-    const deleteOutgoingRequest = await API.graphql({
+    await API.graphql({
       query: deleteOutgoingFriendRequest,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { input: { id: selectedOutgoing[0].id } },
@@ -138,7 +138,7 @@ export const RequestList: React.FC<RequestListProps> = ({
       friend_with: selectedID,
       owner: user.username,
     };
-    const createAcceptedRequest = await API.graphql({
+    await API.graphql({
       query: createFriend,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { input: acceptedRequest },
@@ -148,7 +148,7 @@ export const RequestList: React.FC<RequestListProps> = ({
       friend_with: user.username,
       owner: selectedID,
     };
-    const createFriendAcceptedRequest = await API.graphql({
+    await API.graphql({
       query: createFriend,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
       variables: { input: friendAcceptedRequest },

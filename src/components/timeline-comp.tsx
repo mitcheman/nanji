@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../css/timeline.css';
-import { Storage, API } from 'aws-amplify';
 import { listUserPostsTimeline } from '../utils/listdata';
-import { duplicates } from '../utils/duplicates';
 import { useParams } from 'react-router-dom';
 import { CognitoUserType, TimeLineProps } from '../Shared/Types';
 
@@ -19,7 +17,6 @@ export const Timeline: React.FC<TimeLineProps> = ({
 
   const userId = id || (user as CognitoUserType).username;
 
-  // let tokenID;
   //passing this var in too many places !fix
   let limitNum = 1;
 
