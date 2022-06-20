@@ -15,17 +15,20 @@ export const listUserPosts = async (userID:string, token) => {
       sortDirection: 'DESC',
     },
   });
-
-  const posts = await Promise.all(
-    userPosts.data.postByUser.items.map(async (post) => {
-      const image = await Storage.get(post.image);
-      post.s3Image = image;
-      return post;
-    })
-  );
-
-  duplicates(userPosts.data.postByUser.items);
-  return userPosts;
+  
+  try {
+    const posts = await Promise.all(
+      userPosts.data.postByUser.items.map(async (post) => {
+        const image = await Storage.get(post.image);
+        post.s3Image = image;
+        return post;
+      })
+    );
+    duplicates(userPosts.data.postByUser.items);
+    return userPosts;
+  } catch (err) {
+    console.log(err);
+  };
 };
 
 export const listUserPostsTimeline = async (user, token, date) => {
