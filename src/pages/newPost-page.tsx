@@ -41,15 +41,11 @@ export const NewPost = ({ user }: Props ) => {
         label?: string;
     }
     
-    // type selectedLocationPayload = {
-    //     payload?: string;
-    //     children?: JSX.Element|JSX.Element[];
-    // }
 
     const [fileData, setFileData] = React.useState<filePayload | null>(null);
-    const [fileStatus, setFileStatus] = React.useState<boolean>(false)
+    const [fileStatus, setFileStatus] = React.useState<boolean>(false);
 
-    const [currentImage, setCurrentImage] = React.useState('')
+    const [currentImage, setCurrentImage] = React.useState('');
 
     //search for location
     const [locationSearch, setLocationSearch] = React.useState<locationSearchPayload[] | null>(null);
@@ -73,7 +69,7 @@ export const NewPost = ({ user }: Props ) => {
         content.value = '';
         picDate.value = '';
         searchField.value = '';
-        fileUpload.value = ''; //TODO: originally this should be set to null
+        fileUpload.value = '';
         // document.getElementById('fileupload').value = null;
         
         setFileData(null);
