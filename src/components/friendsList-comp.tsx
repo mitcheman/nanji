@@ -1,5 +1,6 @@
 import "../css/friends.css";
 import { Friend } from "./friend-comp";
+import { UserType } from '../types/UserType';
 import { getFriends } from "../utils/friendRequests";
 import { Dispatch, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
@@ -7,31 +8,23 @@ import React from "react";
 
 // TODO: confirm type SetFriends
 
-type UserType = {
-  username: string;
-  id: string;
-  family_name: string;
-  given_name: string;
-  preferred_username: string;
-};
-
 type Props = {
   user: UserType;
   friends: UserType[];
   setFriends: React.Dispatch<React.SetStateAction<any[]>>;
 };
 
-export function FriendsList({ user, friends, setFriends }: Props) {
+export const FriendsList = ({ user, friends, setFriends }: Props) => {
   const { id } = useParams<string>();
-  const [userCred, setUserCred] = useState<string | null>("");
+
 
   useEffect(() => {
-    if (!id) {
-      setUserCred(user.username);
-    } else {
-      setUserCred(id);
-    }
-    getFriends(userCred).then((data) => {
+ 
+    const userId: string = id || user.username;
+    console.log('userId at friendsList component:', userId);
+    
+    getFriends(userId).then((data) => {
+      console.log(data, 'data coming from getFriends at Friendslist');
       setFriends(data);
     });
   }, []);

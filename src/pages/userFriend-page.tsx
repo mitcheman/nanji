@@ -35,7 +35,6 @@ type Props = {
   };
   setCurrentFriend?: any;
   signOut: any;
-  userCred:string
 };
 
 export function UserFriend({
@@ -44,7 +43,6 @@ export function UserFriend({
   currentFriend,
   setCurrentFriend,
   signOut,
-  userCred,
 }: Props) {
   const { id } = useParams<string>();
 
@@ -114,7 +112,6 @@ export function UserFriend({
           token={token}
           setToken={setToken}
           signOut={signOut}
-          userCred={userCred}
         />
         <div id="nodata">
           <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
@@ -139,7 +136,6 @@ export function UserFriend({
             token={token}
             setToken={setToken}
             signOut={signOut}
-            userCred={userCred}
           />
           <button id="footer" onClick={newPage}>
             <BsChevronDown />

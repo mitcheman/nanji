@@ -11,7 +11,6 @@ const moment = require("moment");
 
 type Props = {
   user: UserType;
-  userCred: string;
   allPosts: PostType[];
   posts: PostType[];
   setPosts: React.Dispatch<SetStateAction<PostType[]>>;
@@ -19,15 +18,11 @@ type Props = {
   setToken: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export function Timeline({ user, allPosts, setPosts, token, setToken, userCred}: Props) {
+export function Timeline({ user, allPosts, setPosts, token, setToken}: Props) {
   const { id } = useParams<string>();
 
-  if (!id) {
-    userCred = user.username;
-  } else {
-    userCred = id;
-  }
-
+  // 
+  const userId: string = id || user.username;
   // let tokenID;
   //passing this var in too many places !fix
   let limitNum = 5;

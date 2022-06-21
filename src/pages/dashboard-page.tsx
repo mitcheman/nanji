@@ -21,10 +21,9 @@ type Props = {
     signOut: any; //TODO: adjust this
     friends: UserType[];
     setFriends: any; //TODO: adjust this
-    userCred: string;
 }
 
-export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props) => {
+export const Dashboard = ({user, signOut, friends, setFriends }: Props) => {
     const [posts, setPosts] = React.useState<PostType[] | null>([]);
     const [allPosts, setAllPosts] = React.useState<PostType[] | null>([]);
     const [noPosts, setNoPosts] = React.useState<boolean>(false);
@@ -71,7 +70,7 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
     if (noPosts === true) {
         return (
             <div className="container">
-                <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} userCred={userCred}/>
+                <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} />
 
                 <div id="nodata">
                     <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
@@ -84,7 +83,7 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
             
             <div className="container">
                 <PostList posts={posts} setPosts={setPosts} setAllPosts={setAllPosts}/>
-                <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} userCred={userCred}/>
+                <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} />
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
             </div>
 

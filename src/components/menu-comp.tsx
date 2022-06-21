@@ -1,4 +1,5 @@
 import { FriendsList } from "./friendsList-comp";
+import { UserType } from '../types/UserType';
 import { PostType } from '../types/PostType';
 import { Timeline } from "./timeline-comp";
 import { GiBackwardTime } from "react-icons/gi";
@@ -8,14 +9,6 @@ import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
 import React, { useState, SetStateAction } from "react";
 import "../css/menu.css";
-
-type UserType = {
-  username: string;
-  id: string;
-  family_name: string;
-  given_name: string;
-  preferred_username: string;
-};
 
 
 type Props = {
@@ -28,10 +21,9 @@ type Props = {
   posts: PostType[];
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
-  userCred: string;
 };
 
-export function Menu({
+export const Menu = ({
   user,
   signOut,
   friends,
@@ -41,10 +33,10 @@ export function Menu({
   setPosts,
   token,
   setToken,
-  userCred,
-}: Props) {
+}: Props) => {
+  
+  // HOOKS
   const [menu, setMenu] = useState<boolean>(true);
-
   const [showTimeline, setShowTimeline] = useState<boolean>(false);
   const [showFriends, setShowFriends] = useState<boolean>(false);
 
@@ -73,7 +65,6 @@ export function Menu({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
-            userCred={userCred}
           />
         )}
       </div>
@@ -83,7 +74,7 @@ export function Menu({
       <>
         <div id="menumobile">
           <GiBackwardTime onClick={toggleTimeline} />
-          <FaUserFriends onClick={toggleFriendList} />
+          <FaUserFriends id="menufriends" onClick={toggleFriendList} />
           <a href="/Friends">
             <BsPersonLinesFill />
           </a>
@@ -105,7 +96,6 @@ export function Menu({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
-            userCred={userCred}
           />
         ) : (
           ""
