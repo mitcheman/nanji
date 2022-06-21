@@ -67,8 +67,23 @@ export const Dashboard: React.FC<{
 
   if (noPosts === true) {
     return (
-      <div id="nodata">
-        <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
+      <div className="containerWithNoData">
+        <div className="menuContainer">
+          <Menu
+            user={user}
+            signOut={signOut}
+            friends={friends}
+            setFriends={setFriends}
+            allPosts={allPosts}
+            posts={posts}
+            setPosts={setPosts}
+            token={token}
+            setToken={setToken}
+          />
+        </div>
+        <div id="nodata">
+          <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
+        </div>
       </div>
     );
   } else {
