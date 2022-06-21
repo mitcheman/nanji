@@ -15,7 +15,6 @@ import '../css/dashboard.css'
 
 //temp set to public - this needs to change and implement groups for friends !fix
 Storage.configure({ level: 'public' });
-//Shared Types will have their own file
 
 type Props = {
     user: UserType;
@@ -32,7 +31,6 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
     const [token, setToken] = React.useState<string>('');
 
     useEffect(() => {
-        // console.log('listUserPosts', user, {token});
         listUserPosts(user.username).then((data) => {
             setPosts(data.data.postByUser.items);
             const tokenID = data.data.postByUser.nextToken;
@@ -61,14 +59,12 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
     
 
     const newPage = async () => {
-        
         const data = await listUserPosts(user.username, token);
         if (token === null || undefined) return;
         setPosts(prev => {
             return [...prev, ...data.data.postByUser.items]
         })
         const tokenID = data.data.postByUser.nextToken;
-        console.log(tokenID, 'tokeeeeeeen IDDDDDD');
         setToken(tokenID);
     }
 

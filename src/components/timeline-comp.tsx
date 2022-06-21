@@ -34,11 +34,22 @@ export function Timeline({ user, allPosts, setPosts, token, setToken, userCred}:
 
   const clickHandler = async (date) => {
     if (allPosts.length <= limitNum) return;
-    listUserPostsTimeline(user, token, date).then((data) => {
-      setPosts(data.data.postByUser.items);
-      const tokenID = data.data.postByUser.nextToken;
-      setToken(tokenID);
-    });
+    console.log(date, ' date at clickHandler');
+
+      const data = await listUserPostsTimeline(user.username, token, date);
+        console.log(data, 'data at clickHandler')
+        setPosts(data.data.postByUser.items);
+        const tokenID = data.data.postByUser.nextToken;
+        setToken(tokenID);
+  
+    
+    
+    // listUserPostsTimeline(user, token, date).then((data) => {
+    //   console.log(data, 'data at clickHandler')
+    //   setPosts(data.data.postByUser.items);
+    //   const tokenID = data.data.postByUser.nextToken;
+    //   setToken(tokenID);
+    // }).catch((err) => { console.log('Error at clickHandler()', err); });
 
     window.scrollTo(0, 0);
   };
