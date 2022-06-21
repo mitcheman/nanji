@@ -20,6 +20,11 @@ export const Post: React.FC<PostProps> = ({
   setAllPosts,
 }) => {
   const [style, setStyle] = useState({ display: 'none' });
+  const [checkDelete, setCheckDelete] = useState(false);
+
+  const checkDeleteHandler = () => {
+    setCheckDelete(true);
+  };
 
   async function deleteHandler(selectedID: string) {
     const deleteDetails = {
@@ -61,6 +66,12 @@ export const Post: React.FC<PostProps> = ({
           )}
         </div>
       ) : null}
+      {checkDelete && (
+        <div className="modal">
+          <button onClick={() => deleteHandler(post.id)}>Delete</button>
+          <button onClick={() => setCheckDelete(false)}>Cancel</button>
+        </div>
+      )}
       <div
         id={post.id}
         className="post"
@@ -71,10 +82,7 @@ export const Post: React.FC<PostProps> = ({
           setStyle({ display: 'none' });
         }}>
         {!currentFriend ? (
-          <TiDeleteOutline
-            style={style}
-            onClick={() => deleteHandler(post.id)}
-          />
+          <TiDeleteOutline style={style} onClick={checkDeleteHandler} />
         ) : (
           <></>
         )}
