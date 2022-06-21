@@ -4,10 +4,10 @@ import { API } from "aws-amplify";
 import { searchUsers } from "../graphql/queries";
 import { useState } from "react";
 import { BsFillPersonPlusFill } from "react-icons/bs";
-// import {
-//   createOutgoingFriendRequest,
-//   createIncomingFriendRequest,
-// } from "../graphql/mutations";
+import {
+  createOutgoingFriendRequest,
+  createIncomingFriendRequest,
+} from "../graphql/mutations";
 import { getUserOutgoing, getUserByUser } from "../graphql/custom";
 import "../css/search.css";
 import React from "react";
@@ -70,15 +70,15 @@ export function Search({ user, setOutGoing }) {
       return;
     }
     //create an outgoing friend request
-    // const friendRequest = {
-    //   userOutgoing_friend_requestsId: user.username,
-    //   request_to: selectedID,
-    // };
-    // const createOutGoing = await API.graphql({
-    //   query: createOutgoingFriendRequest,
-    //   authMode: "AMAZON_COGNITO_USER_POOLS",
-    //   variables: { input: friendRequest },
-    // });
+    const friendRequest = {
+      userOutgoing_friend_requestsId: user.username,
+      request_to: selectedID,
+    };
+    const createOutGoing = await API.graphql({
+      query: createOutgoingFriendRequest,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      variables: { input: friendRequest },
+    });
     const newOutGoing: GraphQLResult<any> = await API.graphql({
       query: getUserByUser,
       authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -89,16 +89,16 @@ export function Search({ user, setOutGoing }) {
       return [...prev, newOutGoing.data.getUser];
     });
 
-    //update incoming requests for requested user
-    // const fromFriendRequest = {
-    //   userIncoming_friend_requestsId: selectedID,
-    //   request_from: user.username,
-    // };
-    // const createIncoming = await API.graphql({
-    //   query: createIncomingFriendRequest,
-    //   authMode: "AMAZON_COGNITO_USER_POOLS",
-    //   variables: { input: fromFriendRequest },
-    // });
+    // update incoming requests for requested user
+    const fromFriendRequest = {
+      userIncoming_friend_requestsId: selectedID,
+      request_from: user.username,
+    };
+    const createIncoming = await API.graphql({
+      query: createIncomingFriendRequest,
+      authMode: "AMAZON_COGNITO_USER_POOLS",
+      variables: { input: fromFriendRequest },
+    });
     setSearchResult(false);
   };
 

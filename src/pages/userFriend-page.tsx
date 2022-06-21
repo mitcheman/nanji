@@ -3,6 +3,7 @@ import { getUser } from "../graphql/queries";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { PostList } from "../components/postList-comp";
+import { UserType } from "../types/UserType";
 import { Menu } from "../components/menu-comp";
 import { duplicatesByMonth } from "../utils/duplicates";
 import { listAllUserPosts, listUserPosts } from "../utils/listdata";
@@ -14,13 +15,6 @@ import React from "react";
 //would love to reuse a lot of the dashboard and tried.
 //Some confusion and funkiness between using user token on initial login vs grabbing data and using current friend. !fix
 //future me note - can switch between user if id params exist - see friendslist component
-type UserType = {
-  username: string;
-  id: string;
-  family_name: string;
-  given_name: string;
-  preferred_username: string;
-};
 
 type Props = {
   user: UserType;

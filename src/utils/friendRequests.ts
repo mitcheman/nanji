@@ -14,13 +14,13 @@ type Props = {
 }
 
 //I could put the user info in the actual friend request but what if the user changes info? sure there is a better/faster way to handle this.
-export const getOutgoingRequests = async (username : string) => {
+export const getOutgoingRequests = async (id : string) => {
   try {
     //get outgoing friend requests for user
     const outGoingRequests: GraphQLResult<any> = await API.graphql({
       query: getUserOutgoing,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
-      variables: { id: username },
+      variables: { id: id },
     });
     const req = outGoingRequests.data.getUser.outgoing_friend_requests.items;
     //get user information on each user for a request - (outgoing requests only contain data on specific request - no user info besides ID)
@@ -39,13 +39,13 @@ export const getOutgoingRequests = async (username : string) => {
     }
 };
 
-export const getIncomingRequests = async (username : string) => {
+export const getIncomingRequests = async (id : string) => {
   try {
     //get incoming friend requests for user
     const incomingRequests: GraphQLResult<any> = await API.graphql({
       query: getUserIncoming,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
-      variables: { id: username },
+      variables: { id: id },
     });
     const req = incomingRequests.data.getUser.incoming_friend_requests.items;
     //get user information for each request (incomingRequests only contains data on specific request - no user info besides ID)
