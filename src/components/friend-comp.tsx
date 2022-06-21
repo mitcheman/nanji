@@ -1,16 +1,10 @@
 import React from "react";
+import { UserType } from '../types/UserType'
 import "../css/friends.css";
-
-type UserType = {
-  id: string;
-  family_name: string;
-  given_name: string;
-  preferred_username: string;
-};
 
 type Props = { friend: UserType };
 
-export function Friend({ friend }: Props) {
+export const Friend = ({ friend }: Props) => {
   return (
     <a id="friendalink" href={"/user/" + friend.id}>
       <div className="individualfriend" key={friend.id} id={friend.id}>
