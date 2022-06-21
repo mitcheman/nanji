@@ -1,17 +1,8 @@
 import React from "react";
 import "../css/account.css";
+import { UserType } from '../types/UserType';
 
-type UserModel = {
-  id: string;
-  attributes: {
-    family_name: string;
-    given_name: string;
-    preferred_username: string;
-    email: string;
-  };
-};
-
-type Props = { user: UserModel };
+type Props = { user: UserType };
 
 export const AccountInfo = ({ user }: Props) => {
   return (

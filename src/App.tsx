@@ -17,7 +17,6 @@ type Props = {
   signOut: boolean;
 }
 
-
 const App = ({ signOut, user }: Props) => {
   const [friends, setFriends] = useState([]);
   const [currentFriend, setCurrentFriend] = useState();

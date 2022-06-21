@@ -3,18 +3,11 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
 import { isMobile } from "react-device-detect";
+import { UserType } from '../types/UserType';
 import React from "react";
 
-type UserModel = {
-  id: string;
-  attributes?: {
-    family_name: string;
-    given_name: string;
-  };
-};
-
 type Props = {
-  user: UserModel;
+  user: UserType;
   signOut: any;
   currentFriend?: {
     username: string;
