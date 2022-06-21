@@ -2,27 +2,21 @@ import React from "react";
 import { Search } from "../components/search-comp";
 import { FriendsList } from "../components/friendsList-comp";
 import { RequestList } from "../components/requestList-comp";
+import { UserType } from '../types/UserType';
 import "../css/friends.css";
 
 // TODO: check setFriends
 
-type UserType = {
-  username: string;
-  id: string;
-  family_name: string;
-  given_name: string;
-  preferred_username: string;
-};
 
 type Props = {
   user: UserType;
   friends: UserType[];
-  setFriends: any;
+  setFriends: React.Dispatch<React.SetStateAction<UserType[]>>;
 };
 
 export function Friends({ user, friends, setFriends }: Props) {
-  const [outGoing, setOutGoing] = React.useState<string[]>([]);
-  const [incoming, setIncoming] = React.useState<string[]>([]);
+  const [outGoing, setOutGoing] = React.useState<UserType[]>([]);
+  const [incoming, setIncoming] = React.useState<UserType[]>([]);
 
   return (
     <>

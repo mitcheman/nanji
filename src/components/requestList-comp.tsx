@@ -1,35 +1,47 @@
 import '../css/friends.css'
 import { API } from "aws-amplify"
 import { Alert } from '@aws-amplify/ui-react';
+import { UserType } from '../types/UserType';
 import { getOutgoingRequests, getIncomingRequests, getFriends } from '../utils/friendRequests';
 import { getUserOutgoing, getUserIncoming } from '../graphql/custom'
 import { createFriend, deleteIncomingFriendRequest, deleteOutgoingFriendRequest } from '../graphql/mutations'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { GraphQLResult } from "@aws-amplify/api-graphql";
 import { BiUserPlus, BiUserMinus } from 'react-icons/bi'
 import { TiCancelOutline } from 'react-icons/ti'
 
-export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming, friends, setFriends}) {
+type Props = {
+    user: UserType;
+    outGoing: UserType[];
+    setOutGoing: React.Dispatch<React.SetStateAction<UserType[]>>;
+    incoming: UserType[];
+    setIncoming: React.Dispatch<React.SetStateAction<UserType[]>>;
+    setFriends: React.Dispatch<React.SetStateAction<UserType[]>>;
+    friends: UserType[];
+};
 
-    const [acceptedStatus, setAcceptedStatus] = useState(false);
-    const [deniedStatus, setDeniedStatus] = useState(false);
-    const [cancelledStatus, setCancelledStatus] = useState(false);
+export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming, friends, setFriends}: Props) {
+
+    const [acceptedStatus, setAcceptedStatus] = useState<boolean>(false);
+    const [deniedStatus, setDeniedStatus] = useState<boolean>(false);
+    const [cancelledStatus, setCancelledStatus] = useState<boolean>(false);
 
     useEffect(() => {
         getOutgoingRequests(user.username).then((data) => {
             setOutGoing(data);
-        });
+        }).catch((err)=> {console.log(err);});
     }, [])
 
     useEffect(() => {
         getIncomingRequests(user.username).then((data) => {
             setIncoming(data);
-        })
+        }).catch((err)=> {console.log(err);});
     }, [])
 
     useEffect(() => {
         getFriends(user.username).then((data) => {
             setFriends(data);
-        })
+        }).catch((err)=> {console.log(err);});
     }, [])
 
     function dismissAlerts() {
@@ -40,7 +52,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
 
     const handleIncomingRequest = async (currentUser, oppositeUser) => {
                 //get incoming requests
-                const incomingRequests = await API.graphql({ query: getUserIncoming, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: currentUser} });
+                const incomingRequests: GraphQLResult<any> = await API.graphql({ query: getUserIncoming, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: currentUser} });
                 const reqIncoming = incomingRequests.data.getUser.incoming_friend_requests.items;
                 const selectedIncoming = reqIncoming.filter(el => el.request_from === oppositeUser);
                 //delete incoming request that matches
@@ -53,7 +65,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
 
     const handleOutgoingRequest = async (currentUser, oppositeUser) => {
                 //get outgoing request for other user
-                const outgoingRequests = await API.graphql({ query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: oppositeUser} });
+                const outgoingRequests: GraphQLResult<any> = await API.graphql({ query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: oppositeUser} });
                 const reqOutgoing = outgoingRequests.data.getUser.outgoing_friend_requests.items;
                 const selectedOutgoing = reqOutgoing.filter(el => el.request_to === currentUser);
                 // //delete outgoing request that matches
@@ -63,9 +75,9 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     const acceptRequestHandler = async (selectedID) => {
         //accept request
         const acceptedRequest = {userFriendsId: user.username, friend_with: selectedID, owner: user.username};
-        const createAcceptedRequest = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: acceptedRequest}});
+        const createAcceptedRequest: GraphQLResult<any> = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: acceptedRequest}});
         const friendAcceptedRequest = {userFriendsId: selectedID, friend_with: user.username, owner: selectedID};
-        const createFriendAcceptedRequest = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendAcceptedRequest}});
+        const createFriendAcceptedRequest: GraphQLResult<any> = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendAcceptedRequest}});
         //handle requests
         handleIncomingRequest(user.username, selectedID);
         handleOutgoingRequest(user.username, selectedID);
