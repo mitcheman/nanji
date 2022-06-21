@@ -1,8 +1,9 @@
 import "../css/friends.css";
 import { Friend } from "./friend-comp";
 import { getFriends } from "../utils/friendRequests";
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import React from "react";
 
 // TODO: confirm type SetFriends
 
@@ -22,7 +23,7 @@ type Props = {
 
 export function FriendsList({ user, friends, setFriends }: Props) {
   const { id } = useParams<string>();
-  const [userCred, setUserCred] = useState<string>("");
+  const [userCred, setUserCred] = useState<string | null>("");
 
   useEffect(() => {
     if (!id) {

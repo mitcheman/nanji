@@ -1,6 +1,7 @@
 import { AccountInfo } from "../components/accountInfo-comp";
 import { Auth } from "aws-amplify";
 import "../css/account.css";
+import React from "react";
 
 type UserModel = {
   id: string;

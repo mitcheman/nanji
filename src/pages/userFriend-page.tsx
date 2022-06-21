@@ -9,6 +9,7 @@ import { listAllUserPosts, listUserPosts } from "../utils/listdata";
 import { sortData } from "../utils/sort";
 import { BsChevronDown } from "react-icons/bs";
 import { GraphQLResult } from "@aws-amplify/api-graphql";
+import React from "react";
 
 //would love to reuse a lot of the dashboard and tried.
 //Some confusion and funkiness between using user token on initial login vs grabbing data and using current friend. !fix
@@ -34,7 +35,7 @@ type Props = {
   };
   setCurrentFriend?: any;
   signOut: any;
-  setUserCred: (value: React.SetStateAction<string>) => void;
+  userCred:string
 };
 
 export function UserFriend({
@@ -43,11 +44,12 @@ export function UserFriend({
   currentFriend,
   setCurrentFriend,
   signOut,
-  setUserCred,
+  userCred,
 }: Props) {
   const { id } = useParams<string>();
 
   useEffect(() => {
+    
     getUserinfo().then((data) => {
       setCurrentFriend(data.data.getUser);
     });
@@ -112,7 +114,7 @@ export function UserFriend({
           token={token}
           setToken={setToken}
           signOut={signOut}
-          setUserCred={setUserCred}
+          userCred={userCred}
         />
         <div id="nodata">
           <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
@@ -126,8 +128,7 @@ export function UserFriend({
           <PostList
             posts={posts}
             setPosts={setPosts}
-            currentFriend={currentFriend}
-          />
+            currentFriend={currentFriend} setAllPosts={setAllPosts}/>
           <Menu
             user={currentFriend}
             friends={friends}
@@ -138,7 +139,7 @@ export function UserFriend({
             token={token}
             setToken={setToken}
             signOut={signOut}
-            setUserCred={setUserCred}
+            userCred={userCred}
           />
           <button id="footer" onClick={newPage}>
             <BsChevronDown />

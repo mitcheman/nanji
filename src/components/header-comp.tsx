@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
 import { isMobile } from "react-device-detect";
+import React from "react";
 
 type UserModel = {
   id: string;

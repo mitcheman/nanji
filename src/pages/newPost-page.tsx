@@ -1,5 +1,8 @@
 import { Storage, API, Geo } from "aws-amplify"
 import { createPost } from "../graphql/mutations"
+import React from "react";
+import { UserType } from "../types/UserType";
+import { MouseEvent , FormEvent, SyntheticEvent} from 'react';
 import { useState } from "react"
 import { TextAreaField, SearchField } from '@aws-amplify/ui-react';
 import { BsUpload } from 'react-icons/bs';
@@ -8,19 +11,10 @@ import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { GrPowerReset } from 'react-icons/gr'
 import { Alert } from '@aws-amplify/ui-react';
 import '../css/form.css'
-import React from "react";
+import { PostType } from "../types/PostType";
 const moment = require('moment')
-
 const currentDate = moment(new Date()).format('YYYY-MM-DD')
 
-type UserType = {
-    id: string,
-    family_name: string,
-    given_name: string,
-    preferred_username: string,
-    username: string,
-    profile_pic: string,   
-}
 
 type Props = {
     user: UserType;
@@ -60,7 +54,7 @@ export const NewPost = ({ user }: Props ) => {
         setCurrentImage(() => URL.createObjectURL(e.target.files[0]));
     }
 
-    function resetFormHandler(e): void {
+    function resetFormHandler(e: MouseEvent): void {
         const content = document.getElementById('content') as HTMLInputElement;
         const picDate = document.getElementById('picdate') as HTMLInputElement;
         const searchField = document.getElementById('searchfield') as HTMLInputElement;
@@ -79,9 +73,11 @@ export const NewPost = ({ user }: Props ) => {
         setSelectedLocation(null);
     }
 
-    async function savePost (event) {
+    async function savePost (event: MouseEvent<HTMLFormElement>) {
         event.preventDefault()
-        if (event.target.content.value.length === 0 || event.target.fileupload.value === null) {
+        const target = event.target as unknown as HTMLInputElement;
+        const fUpload = document.getElementById('fileupload') as HTMLInputElement;
+        if (target.value.length === 0 || fUpload.value === null) {
             alert('please input all required data')
             return;
         }
@@ -90,27 +86,36 @@ export const NewPost = ({ user }: Props ) => {
             alert('file size too large');
             return;
         }
+        
+        //TODO: 
+        
+        const dateInput = document.getElementById('picdate') as HTMLInputElement;
+        const content = document.getElementById('content') as HTMLInputElement;
+
+        
         //this is a stupid file naming system - need to change this
         const filename = currentDate + '_' + fileData.name;
         await Storage.put(filename, fileData, {level: 'public'});
-        const newPost = {location: selectedLocation, date: event.target.date.value, content: event.target.content.value, image: filename, userID: user.username, type: "Post"};
+        const newPost = {location: selectedLocation, date: (dateInput.value), content: content.value, image: filename, userID: user.username, type: "Post"};
         console.log(newPost);
         try {
-          const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
-          setFileStatus(true);
-          setSelectedLocation('');
-          setSelectedLocationResult(false);
+            const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
+            setFileStatus(true);
+            setSelectedLocation('');
+            setSelectedLocationResult(false);
           //reset form
-          resetFormHandler(event); 
-          console.log(result);
+            resetFormHandler(event); 
+            console.log(result);
         } catch(err) {
-          console.log(err)
+            console.log(err)
         };
     }
 
-    async function searchLocation (event) {
+    async function searchLocation () {
+        const searchInput = document.getElementById('searchfield') as HTMLInputElement;
+        
         const searchOptions = {maxResults: 10, language: 'en'}
-        const results = await Geo.searchByText(event, searchOptions);
+        const results = await Geo.searchByText(searchInput.value, searchOptions);
         if (results.length > 0) {
             setLocationSearchResult(true);
             setLocationSearch(results);
@@ -121,7 +126,7 @@ export const NewPost = ({ user }: Props ) => {
         }
     }
 
-    function selectLocation(location) {
+    function selectLocation(location: string) {
         setSelectedLocation(location);
         setLocationSearchResult(false)
         setSelectedLocationResult(true);

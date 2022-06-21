@@ -10,6 +10,7 @@ import { BsFillPersonPlusFill } from "react-icons/bs";
 // } from "../graphql/mutations";
 import { getUserOutgoing, getUserByUser } from "../graphql/custom";
 import "../css/search.css";
+import React from "react";
 
 type UserSearch = {
   id: string;

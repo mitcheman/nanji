@@ -4,5 +4,5 @@ export type UserType = {
   given_name: string,
   preferred_username: string,
   username: string,
-  profile_pic: string,   
+  profile_pic?: string,   
 }

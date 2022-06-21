@@ -5,7 +5,7 @@ import { FaUserFriends } from "react-icons/fa";
 import { isMobile } from "react-device-detect";
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from "react-icons/md";
 import { BsPersonLinesFill, BsPersonFill } from "react-icons/bs";
-import { useState, Dispatch, SetStateAction } from "react";
+import React, { useState, SetStateAction } from "react";
 import "../css/menu.css";
 
 type UserType = {
@@ -32,11 +32,11 @@ type Props = {
   setFriends: React.Dispatch<React.SetStateAction<any[]>>;
   signOut: any;
   allPosts: PostType[];
-  setPosts: Dispatch<SetStateAction<PostType[]>>;
+  setPosts: React.Dispatch<SetStateAction<PostType[]>>;
   posts: PostType[];
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
-  setUserCred: (value: React.SetStateAction<string>) => void;
+  userCred: string;
 };
 
 export function Menu({
@@ -49,7 +49,7 @@ export function Menu({
   setPosts,
   token,
   setToken,
-  setUserCred,
+  userCred,
 }: Props) {
   const [menu, setMenu] = useState(true);
 
@@ -81,7 +81,7 @@ export function Menu({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
-            setUserCred={setUserCred}
+            userCred={userCred}
           />
         )}
       </div>
@@ -113,7 +113,7 @@ export function Menu({
             setPosts={setPosts}
             token={token}
             setToken={setToken}
-            setUserCred={setUserCred}
+            userCred={userCred}
           />
         ) : (
           ""

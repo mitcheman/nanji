@@ -2,50 +2,30 @@ import "../css/timeline.css";
 import { listUserPostsTimeline } from "../utils/listdata";
 import { useParams } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
+import { UserType } from "../types/UserType"
+import { PostType } from "../types/PostType"
+import React from "react";
 const moment = require("moment");
 
-type UserType = {
-  username: string;
-  id: string;
-  family_name: string;
-  given_name: string;
-  preferred_username: string;
-};
 
-type PostType = {
-  id: string;
-  date: Date;
-  s3Image: string;
-  location: string;
-  content: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
 
 type Props = {
   user: UserType;
-  setUserCred: (value: React.SetStateAction<string>) => void;
+  userCred: string;
   allPosts: PostType[];
   posts: PostType[];
-  setPosts: Dispatch<SetStateAction<PostType[]>>;
+  setPosts: React.Dispatch<SetStateAction<PostType[]>>;
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export function Timeline({
-  user,
-  allPosts,
-  setPosts,
-  token,
-  setToken,
-  setUserCred,
-}: Props) {
+export function Timeline({ user, allPosts, setPosts, token, setToken, userCred}: Props) {
   const { id } = useParams<string>();
 
   if (!id) {
-    setUserCred(user.username);
+    userCred = user.username;
   } else {
-    setUserCred(id);
+    userCred = id;
   }
 
   // let tokenID;
