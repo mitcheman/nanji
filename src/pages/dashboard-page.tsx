@@ -59,7 +59,7 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
         })
     }, []);
     
-//TODO: refactor to async/await
+
     const newPage = async () => {
         
         const data = await listUserPosts(user.username, token);
@@ -70,20 +70,6 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
         const tokenID = data.data.postByUser.nextToken;
         console.log(tokenID, 'tokeeeeeeen IDDDDDD');
         setToken(tokenID);
-        
-        
-        
-        // console.log(user, 'useeeernamee');
-        // listUserPosts(user.username)
-        // .then((data) => {
-        //     if (token === null || undefined) return;
-        //     setPosts(prev => {
-        //         return [...prev, ...data.data.postByUser.items]
-        //     })
-        //     const tokenID = data.data.postByUser.nextToken;
-        //     console.log(tokenID, 'tokeeeeeeen IDDDDDD');
-        //     setToken(tokenID);
-        // })
     }
 
     if (noPosts === true) {
