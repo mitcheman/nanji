@@ -11,7 +11,7 @@ import React from "react";
 type Props = {
   user: UserType;
   friends: UserType[];
-  setFriends: React.Dispatch<React.SetStateAction<any[]>>;
+  setFriends: React.Dispatch<React.SetStateAction<UserType[]>>;
 };
 
 export const FriendsList = ({ user, friends, setFriends }: Props) => {
@@ -32,7 +32,7 @@ export const FriendsList = ({ user, friends, setFriends }: Props) => {
   return (
     <div id="friendlist">
       <h4>Friends and Family</h4>
-      {friends.map((friend) => (
+      {friends && friends.map((friend) => (
         <Friend key={friend.id} friend={friend} />
       ))}
     </div>
