@@ -34,7 +34,6 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
     useEffect(() => {
         // console.log('listUserPosts', user, {token});
         listUserPosts(user.username).then((data) => {
-            console.log(data, 'dataaaaaa');
             setPosts(data.data.postByUser.items);
             const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
@@ -51,7 +50,7 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
             } else {
                 setNoPosts(false);
             }
-        })
+        }).catch((err) => {console.log(err);})
     }, []);
 
     useEffect(() => {
@@ -63,7 +62,7 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
 //TODO: refactor to async/await
     const newPage = async () => {
         
-        const data = await listUserPosts(user.id, token);
+        const data = await listUserPosts(user.username, token);
         if (token === null || undefined) return;
         setPosts(prev => {
             return [...prev, ...data.data.postByUser.items]
@@ -74,8 +73,8 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
         
         
         
-        
-        // listUserPosts(user.username, token)
+        // console.log(user, 'useeeernamee');
+        // listUserPosts(user.username)
         // .then((data) => {
         //     if (token === null || undefined) return;
         //     setPosts(prev => {
