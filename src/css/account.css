@@ -4,6 +4,7 @@
 }
 
 #accountdetails {
+  overflow-x: hidden;
   align-self: center;
   overflow-x: scroll;
   display: flex;
@@ -38,7 +39,7 @@
 }
 
 #accountdelete button {
-  padding: 10px;
+  padding: 20px;
   width: 20%;
   border: none;
   border-radius: 0.2em;
@@ -46,6 +47,9 @@
   background-color: rgb(195, 8, 8);
   color: white;
   align-self: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
 #accountdelete button:hover {
@@ -54,6 +58,7 @@
 }
 
 .deleteAccountPromp {
+  padding: 5%;
   position: absolute;
   top: 60%;
   left: 30%;
@@ -69,6 +74,8 @@
 }
 
 .deleteAccountDefButton {
+  min-height: 30px;
+  min-width: 100px;
   cursor: pointer;
   height: 10%;
   width: 40%;
@@ -77,13 +84,15 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  font-size: larger;
+  font-size: small;
   border-radius: 5px;
   color: white;
   border-width: 0;
 }
 
 .cancelDeleteAccount {
+  min-height: 30px;
+  min-width: 100px;
   cursor: pointer;
   height: 10%;
   align-items: center;
@@ -91,7 +100,7 @@
   display: flex;
   width: 40%;
   padding: 5%;
-  font-size: larger;
+  font-size: small;
   border-radius: 5px;
 }
 
@@ -100,4 +109,8 @@
   flex-direction: row;
   width: 70%;
   justify-content: space-around;
+}
+
+.warningContainer {
+  padding: 5%;
 }

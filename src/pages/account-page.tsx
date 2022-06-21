@@ -35,10 +35,10 @@ export const Account: React.FC<{ user: CognitoUserType }> = ({ user }) => {
       </div>
       {isVisible ? (
         <div className="deleteAccountPromp">
-          <div>
+          <div className="warningContainer">
             <h1>WARNING</h1>
             <div>
-              This action is permenent and cannot be undone, are you sure?
+              This action is permanent and cannot be undone, are you sure?
             </div>
           </div>
           <div className="buttonContainer">
