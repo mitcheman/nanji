@@ -49,7 +49,7 @@ export function Timeline({ user, allPosts, setPosts, token, setToken, userCred}:
         <h4>Timeline</h4>
         {allPosts.map((post) =>
           post.date === null ? (
-            <></>
+            null
           ) : (
             <div key={JSON.stringify(post.date)}>
               <li

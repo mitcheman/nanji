@@ -1,6 +1,6 @@
 import { Storage, API, Geo } from "aws-amplify"
 import { createPost } from "../graphql/mutations"
-import React from "react";
+import React, { DetailedHTMLProps, ExoticComponent, FormEventHandler, FormHTMLAttributes } from "react";
 import { UserType } from "../types/UserType";
 import { MouseEvent , FormEvent, SyntheticEvent} from 'react';
 import { useState } from "react"
@@ -54,7 +54,7 @@ export const NewPost = ({ user }: Props ) => {
         setCurrentImage(() => URL.createObjectURL(e.target.files[0]));
     }
 
-    function resetFormHandler(e: MouseEvent): void {
+    function resetFormHandler(e: React.SyntheticEvent): void {
         const content = document.getElementById('content') as HTMLInputElement;
         const picDate = document.getElementById('picdate') as HTMLInputElement;
         const searchField = document.getElementById('searchfield') as HTMLInputElement;
@@ -73,11 +73,14 @@ export const NewPost = ({ user }: Props ) => {
         setSelectedLocation(null);
     }
 
-    async function savePost (event: MouseEvent<HTMLFormElement>) {
+    async function savePost (event: React.SyntheticEvent) {
         event.preventDefault()
-        const target = event.target as unknown as HTMLInputElement;
-        const fUpload = document.getElementById('fileupload') as HTMLInputElement;
-        if (target.value.length === 0 || fUpload.value === null) {
+        const contentInput = document.getElementById('content') as unknown as HTMLTextAreaElement;
+        console.log(contentInput.value, 'event target NOOOWWWW')
+        const fUpload = document.getElementById('fileupload') as unknown as HTMLInputElement;
+        console.log(fUpload, ' fUploadddd')
+
+        if (contentInput.value.length === 0 || fUpload.value === null) {
             alert('please input all required data')
             return;
         }

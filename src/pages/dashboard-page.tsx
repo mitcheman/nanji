@@ -32,11 +32,13 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
     const [token, setToken] = React.useState<string>('');
 
     useEffect(() => {
-        listUserPosts(user.username, token).then((data) => {
+        // console.log('listUserPosts', user, {token});
+        listUserPosts(user.username).then((data) => {
+            console.log(data, 'dataaaaaa');
             setPosts(data.data.postByUser.items);
             const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
-        })
+        }).catch((err)=> {console.log(err)});
     }, []);
 
     useEffect(() => {
@@ -53,7 +55,7 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
     }, []);
 
     useEffect(() => {
-        getFriends(user.username).then((data) => {
+        getFriends(user.id).then((data) => {
             setFriends(data)
         })
     }, []);
@@ -61,18 +63,28 @@ export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props
 //TODO: refactor to async/await
     const newPage = async () => {
         
-        const data = await listUserPosts(user.username, token);
-        
-        listUserPosts(user.username, token)
-        .then((data) => {
-            if (token === null || undefined) return;
-            setPosts(prev => {
-                return [...prev, ...data.data.postByUser.items]
-            })
-            const tokenID = data.data.postByUser.nextToken;
-            console.log(tokenID, 'tokeeeeeeen IDDDDDD');
-            setToken(tokenID);
+        const data = await listUserPosts(user.id, token);
+        if (token === null || undefined) return;
+        setPosts(prev => {
+            return [...prev, ...data.data.postByUser.items]
         })
+        const tokenID = data.data.postByUser.nextToken;
+        console.log(tokenID, 'tokeeeeeeen IDDDDDD');
+        setToken(tokenID);
+        
+        
+        
+        
+        // listUserPosts(user.username, token)
+        // .then((data) => {
+        //     if (token === null || undefined) return;
+        //     setPosts(prev => {
+        //         return [...prev, ...data.data.postByUser.items]
+        //     })
+        //     const tokenID = data.data.postByUser.nextToken;
+        //     console.log(tokenID, 'tokeeeeeeen IDDDDDD');
+        //     setToken(tokenID);
+        // })
     }
 
     if (noPosts === true) {

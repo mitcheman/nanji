@@ -99,31 +99,31 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     return (
         <><div id="requestlist" onClick={dismissAlerts}>
             <h4>Friend Requests</h4>
-            <div class="outgoing">
+            <div className="outgoing">
                 <h5>Pending Sent Requests</h5>
                 {outGoing.map((req) => (
-                    <div class="individualrequest" key={req.id} id={req.id}>
-                        <div class="textinfo">
+                    <div className="individualrequest" key={req.id} id={req.id}>
+                        <div className="textinfo">
                             <p>Name: {req.given_name + ' ' + req.family_name}</p>
                             <p>Username: {req.preferred_username}</p>
                         </div>
-                        <div class="iconinfo">
-                            <TiCancelOutline class="denyrequest" onClick={() => cancelRequestHandler(req.id)}/>
+                        <div className="iconinfo">
+                            <TiCancelOutline className="denyrequest" onClick={() => cancelRequestHandler(req.id)}/>
                         </div>
                     </div>
                 ))}
             </div>
-            <div class="incoming">
+            <div className="incoming">
                 <h5>Pending Received Requests</h5>
                 {incoming.map((req) => (
-                    <div class="individualrequest" key={req.id} id={req.id}>
-                        <div class="textinfo">
+                    <div className="individualrequest" key={req.id} id={req.id}>
+                        <div className="textinfo">
                             <p>Name: {req.given_name + ' ' + req.family_name}</p>
                             <p>Username: {req.preferred_username}</p>
                         </div>
-                        <div class="iconinfo">
-                            <BiUserPlus class="acceptrequest" onClick={() => acceptRequestHandler(req.id)}/>
-                            <BiUserMinus class="denyrequest" onClick={() => denyRequestHandler(req.id)}/>
+                        <div className="iconinfo">
+                            <BiUserPlus className="acceptrequest" onClick={() => acceptRequestHandler(req.id)}/>
+                            <BiUserMinus className="denyrequest" onClick={() => denyRequestHandler(req.id)}/>
                         </div>
                     </div>
                 ))}
