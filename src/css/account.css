@@ -52,3 +52,52 @@
   background-color: red;
   cursor: pointer;
 }
+
+.deleteAccountPromp {
+  position: absolute;
+  top: 60%;
+  left: 30%;
+  height: 20%;
+  width: 40%;
+  box-shadow: 5px 5px 10px #d9d7d7;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.deleteAccountDefButton {
+  cursor: pointer;
+  height: 10%;
+  width: 40%;
+  background-color: rgb(180, 83, 83);
+  padding: 5%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: larger;
+  border-radius: 5px;
+  color: white;
+  border-width: 0;
+}
+
+.cancelDeleteAccount {
+  cursor: pointer;
+  height: 10%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 40%;
+  padding: 5%;
+  font-size: larger;
+  border-radius: 5px;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+  justify-content: space-around;
+}
