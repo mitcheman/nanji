@@ -17,15 +17,6 @@ type UserType = {
   preferred_username: string;
 };
 
-// type PostType = {
-//   id: string;
-//   date: Date;
-//   s3Image: string;
-//   location: string;
-//   content: string;
-//   createdAt: Date;
-//   updatedAt: Date;
-// };
 
 type Props = {
   user: UserType;
@@ -52,7 +43,7 @@ export function Menu({
   setToken,
   userCred,
 }: Props) {
-  const [menu, setMenu] = useState(true);
+  const [menu, setMenu] = useState<boolean>(true);
 
   const [showTimeline, setShowTimeline] = useState<boolean>(false);
   const [showFriends, setShowFriends] = useState<boolean>(false);
