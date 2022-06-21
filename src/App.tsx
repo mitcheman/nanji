@@ -7,13 +7,18 @@ import { Dashboard } from './pages/dashboard-page';
 import { Account } from './pages/account-page';
 import { Friends } from './pages/friends-page';
 import { UserFriend } from './pages/userFriend-page';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { UserType } from './types/UserType';
 
-// type Props =
+
+type Props = {
+  user: UserType;
+  signOut: boolean;
+}
 
 
-function App({ signOut, user }) {
+const App = ({ signOut, user }: Props) => {
   const [friends, setFriends] = useState([]);
   const [currentFriend, setCurrentFriend] = useState();
 
@@ -27,7 +32,7 @@ function App({ signOut, user }) {
             element={
               <Dashboard
                 user={user}
-                signout={signOut}
+                signOut={signOut}
                 friends={friends}
                 setFriends={setFriends}
               />
@@ -43,13 +48,16 @@ function App({ signOut, user }) {
           <Route
             path="/user/:id"
             element={
-              <UserFriend
-                user={user}
-                friends={friends}
-                setFriends={setFriends}
-                currentFriend={currentFriend}
-                setCurrentFriend={setCurrentFriend}
-              />
+              <>
+                <UserFriend
+                  user={user}
+                  friends={friends}
+                  setFriends={setFriends}
+                  currentFriend={currentFriend}
+                  setCurrentFriend={setCurrentFriend}
+                  signOut={signOut}
+                />
+              </>
             }
           />
           <Route

@@ -14,7 +14,7 @@ type UserModel = {
   };
 };
 
-type Props = { user: UserModel };
+type Props = { user: UserModel, signOut: boolean };
 
 export const Account = ({ user }: Props) => {
   //just deletes account - can trigger a lambda function to clean up s3/dynamo after

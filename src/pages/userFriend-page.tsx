@@ -19,15 +19,9 @@ import React from "react";
 type Props = {
   user: UserType;
   friends: UserType[];
-  setFriends: any;
-  currentFriend?: {
-    username: string;
-    id: string;
-    family_name: string;
-    given_name: string;
-    preferred_username: string;
-  };
-  setCurrentFriend?: any;
+  setFriends: React.Dispatch<React.SetStateAction<UserType[]>>;
+  currentFriend?: UserType;
+  setCurrentFriend?: React.Dispatch<React.SetStateAction<UserType>>;
   signOut: any;
 };
 

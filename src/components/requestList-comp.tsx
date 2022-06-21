@@ -122,9 +122,9 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
             setIncoming(data);
             setDeniedStatus(true)
         })
-      } catch(err) {
-        console.log(err, 'err at denyRequestHandler');
-      }
+        } catch(err) {
+            console.log(err, 'err at denyRequestHandler');
+        }
     }
     //TODO: Debug issue here 
     const cancelRequestHandler = async (selectedID) => {
@@ -137,9 +137,9 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
             setOutGoing(data);
             setCancelledStatus(true)
         });
-      } catch (err) {
-          console.log(err, 'error at cancelRequestHandler');
-      }
+        } catch (err) {
+            console.log(err, 'error at cancelRequestHandler');
+        }
     }
 
     //requests should be their own component !fix

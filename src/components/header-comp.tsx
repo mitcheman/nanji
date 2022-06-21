@@ -7,7 +7,7 @@ import React from "react";
 
 type UserModel = {
   id: string;
-  attributes: {
+  attributes?: {
     family_name: string;
     given_name: string;
   };
@@ -25,7 +25,7 @@ type Props = {
   };
 };
 
-export const Header: React.FC = ({ signOut, user, currentFriend }: Props) => {
+export const Header = ({ signOut, user, currentFriend }: Props) => {
   const name = user.attributes.given_name + " " + user.attributes.family_name;
 
   if (!isMobile) {
