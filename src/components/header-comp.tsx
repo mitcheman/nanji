@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/header.css';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { MdOutlineAddPhotoAlternate, MdOutlineLogout } from 'react-icons/md';
@@ -12,7 +12,11 @@ export const Header: React.FC<{
   signOut: () => Promise<any>;
 }> = ({ signOut, user, currentFriend }) => {
   const name = user.attributes.given_name + ' ' + user.attributes.family_name;
+  const [logout, setLogout] = useState(false);
 
+  const handleSignout = () => {
+    setLogout(!logout);
+  };
   if (!isMobile) {
     return (
       <div className="header">
@@ -47,9 +51,15 @@ export const Header: React.FC<{
               <a href="/Account" data-testid="account">
                 <BsPersonFill />
               </a>
-              <button onClick={signOut} data-testid="signOut">
+              <button onClick={handleSignout} data-testid="signOut">
                 <MdOutlineLogout />
               </button>
+              {logout && (
+                <div className="modal">
+                  <button onClick={signOut}>Logout</button>
+                  <button onClick={() => setLogout(false)}>Cancel</button>
+                </div>
+              )}
             </div>
           </nav>
         </Router>
