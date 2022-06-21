@@ -85,6 +85,7 @@
   justify-content: center;
   display: flex;
   font-size: small;
+  font-weight: bolder;
   border-radius: 5px;
   color: white;
   border-width: 0;
@@ -101,6 +102,7 @@
   width: 40%;
   padding: 5%;
   font-size: small;
+  font-weight: bolder;
   border-radius: 5px;
 }
 

@@ -50,7 +50,7 @@ export const Account: React.FC<{ user: CognitoUserType }> = ({ user }) => {
             <button
               onClick={() => deleteUser(user.username)}
               className="deleteAccountDefButton">
-              Delete Account
+              Confirm
             </button>
           </div>
         </div>
