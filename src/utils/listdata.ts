@@ -1,3 +1,4 @@
+//@ts-ignore
 import { postByUser } from '../graphql/queries';
 import { API, Storage } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api-graphql';

@@ -1,4 +1,5 @@
 import { API } from 'aws-amplify';
+//@ts-ignore
 import { getUser } from '../graphql/queries';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';

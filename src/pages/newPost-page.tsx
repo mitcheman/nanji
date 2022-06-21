@@ -1,4 +1,5 @@
 import { Storage, API, Geo } from 'aws-amplify';
+//@ts-ignore
 import { createPost } from '../graphql/mutations';
 import React, { useState } from 'react';
 import { TextAreaField, SearchField } from '@aws-amplify/ui-react';
