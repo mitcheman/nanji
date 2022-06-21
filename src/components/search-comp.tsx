@@ -1,12 +1,14 @@
 import React from 'react';
 import { SearchField } from '@aws-amplify/ui-react';
 import { API } from 'aws-amplify';
+//@ts-ignore
 import { searchUsers } from '../graphql/queries';
 import { useState } from 'react';
 import { BsFillPersonPlusFill } from 'react-icons/bs';
 import {
   createOutgoingFriendRequest,
   createIncomingFriendRequest,
+  //@ts-ignore
 } from '../graphql/mutations';
 import { getUserOutgoing, getUserByUser } from '../graphql/custom';
 import '../css/search.css';

@@ -12,6 +12,7 @@ import {
   createFriend,
   deleteIncomingFriendRequest,
   deleteOutgoingFriendRequest,
+  //@ts-ignore
 } from '../graphql/mutations';
 import { useEffect, useState } from 'react';
 import { BiUserPlus, BiUserMinus } from 'react-icons/bi';

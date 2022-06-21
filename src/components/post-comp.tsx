@@ -3,6 +3,7 @@ import '../css/post.css';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { useState } from 'react';
 import { Storage, API } from 'aws-amplify';
+//@ts-ignore
 import { deletePost } from '../graphql/mutations';
 import { PostProps } from '../Shared/Types';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
