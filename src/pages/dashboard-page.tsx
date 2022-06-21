@@ -22,10 +22,10 @@ type Props = {
     signOut: any; //TODO: adjust this
     friends: UserType[];
     setFriends: any; //TODO: adjust this
-    setUserCred: React.Dispatch<React.SetStateAction<string>>;
+    userCred: string;
 }
 
-export const Dashboard = ({user, signOut, friends, setFriends, setUserCred }: Props) => {
+export const Dashboard = ({user, signOut, friends, setFriends, userCred }: Props) => {
     const [posts, setPosts] = React.useState<PostType[] | null>([]);
     const [allPosts, setAllPosts] = React.useState<PostType[] | null>([]);
     const [noPosts, setNoPosts] = React.useState<boolean>(false);
@@ -60,6 +60,9 @@ export const Dashboard = ({user, signOut, friends, setFriends, setUserCred }: Pr
     
 //TODO: refactor to async/await
     const newPage = async () => {
+        
+        const data = await listUserPosts(user.username, token);
+        
         listUserPosts(user.username, token)
         .then((data) => {
             if (token === null || undefined) return;
@@ -75,11 +78,11 @@ export const Dashboard = ({user, signOut, friends, setFriends, setUserCred }: Pr
     if (noPosts === true) {
         return (
             <div className="container">
-              {/* <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} setUserCred={setUserCred}/> */}
+                <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} userCred={userCred}/>
 
-            <div id="nodata">
-                <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
-            </div>
+                <div id="nodata">
+                    <h3>No posts to display ʕ ´•̥̥̥ ᴥ•̥̥̥`ʔ</h3>
+                </div>
             </div>
         )
     }
@@ -88,7 +91,7 @@ export const Dashboard = ({user, signOut, friends, setFriends, setUserCred }: Pr
             
             <div className="container">
                 <PostList posts={posts} setPosts={setPosts} setAllPosts={setAllPosts}/>
-                {/* <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} setUserCred={setUserCred}/> */}
+                <Menu user={user} signOut={signOut} friends={friends} setFriends={setFriends} allPosts={allPosts} posts={posts} setPosts={setPosts} token={token} setToken={setToken} userCred={userCred}/>
                 <button id="footer" onClick={newPage}><BsChevronDown /></button>
             </div>
 

@@ -1,4 +1,5 @@
 import { FriendsList } from "./friendsList-comp";
+import { PostType } from '../types/PostType';
 import { Timeline } from "./timeline-comp";
 import { GiBackwardTime } from "react-icons/gi";
 import { FaUserFriends } from "react-icons/fa";
@@ -16,15 +17,15 @@ type UserType = {
   preferred_username: string;
 };
 
-type PostType = {
-  id: string;
-  date: Date;
-  s3Image: string;
-  location: string;
-  content: string;
-  createdAt: Date;
-  updatedAt: Date;
-};
+// type PostType = {
+//   id: string;
+//   date: Date;
+//   s3Image: string;
+//   location: string;
+//   content: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+// };
 
 type Props = {
   user: UserType;
