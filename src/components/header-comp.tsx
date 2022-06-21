@@ -56,7 +56,9 @@ export const Header: React.FC<{
               </button>
               {logout && (
                 <div className="modal">
-                  <button onClick={signOut}>Logout</button>
+                  <button onClick={signOut} id="logout">
+                    Logout
+                  </button>
                   <button onClick={() => setLogout(false)}>Cancel</button>
                 </div>
               )}

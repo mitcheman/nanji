@@ -68,7 +68,9 @@ export const Post: React.FC<PostProps> = ({
       ) : null}
       {checkDelete && (
         <div className="modal">
-          <button onClick={() => deleteHandler(post.id)}>Delete</button>
+          <button onClick={() => deleteHandler(post.id)} id="deletePost">
+            Delete
+          </button>
           <button onClick={() => setCheckDelete(false)}>Cancel</button>
         </div>
       )}
