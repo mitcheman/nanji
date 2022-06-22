@@ -115,18 +115,20 @@ export const NewPost = ({ user }: Props ) => {
     }
 
     async function searchLocation () {
-        const searchInput = document.getElementById('searchfield') as HTMLInputElement;
         
+        console.log('hello darkness')
+        const searchInput = document.getElementById('searchfield') as HTMLInputElement;
+        console.log(searchInput.value, 'search input value')
         const searchOptions = {maxResults: 10, language: 'en'}
-        const results = await Geo.searchByText(searchInput.value, searchOptions);
-        if (results.length > 0) {
-            setLocationSearchResult(true);
-            setLocationSearch(results);
-        }
-        if (results.length <= 0) {
-            setLocationSearch([]);
-            setLocationSearchResult(false);
-        }
+            const results = await Geo.searchByText(searchInput.value, searchOptions);
+            if (results.length > 0) {
+                setLocationSearchResult(true);
+                setLocationSearch(results);
+            }
+            if (results.length <= 0) {
+                setLocationSearch([]);
+                setLocationSearchResult(false);
+            }   
     }
 
     function selectLocation(location: string) {
