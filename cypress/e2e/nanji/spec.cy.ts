@@ -9,7 +9,7 @@ describe('Launching Nanji', () => {
 
 
 describe('Creating an account on Nanji', () => {
-  it('should visit Nanji Sign up Page', () => {
+  it('should visit Nanji Create Account Page', () => {
     cy.visit('http://localhost:3000')
   })
   
@@ -22,7 +22,7 @@ describe('Creating an account on Nanji', () => {
   })
   
   it('should be able to find email input field and type in it', () => {
-    cy.get('[placeholder="Email"]').type('karl.marx@gmail.com');
+    cy.get('[placeholder="Email"]').type('unreal.karlmarx@gmail.com');
   })
   
   it('should be able to find password input field and type in it', () => {
@@ -64,3 +64,31 @@ describe('Creating an account on Nanji', () => {
 })
 
 
+describe('Signing in on Nanji', () => {
+  it('should visit Nanji Create Account Page', () => {
+    cy.visit('http://localhost:3000')
+  })
+  
+  it('finds the content "Sign In"', () => {
+    cy.contains('Sign In')
+  })
+  
+  it('clicks the content "Sign In"', () => {
+    cy.contains('Sign In').click();
+  })
+  
+  it('should be able to find email input field and type in it', () => {
+    cy.get('[placeholder="Email"]').type('unreal.karlmarx@gmail.com');
+  })
+  
+  it('should be able to find password input field and type in it', () => {
+    cy.get('[placeholder="Password"]').type('DasK4pit4L$$$');
+  })
+  
+  it('should be able to click the sign in button. if the account does not exist it in the database it should prompt the user. else it should login', () => {
+    cy.get('[type="submit"]').click();
+  })
+  
+
+  
+});
