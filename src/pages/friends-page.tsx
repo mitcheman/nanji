@@ -5,8 +5,6 @@ import { RequestList } from "../components/requestList-comp";
 import { UserType } from '../types/UserType';
 import "../css/friends.css";
 
-// TODO: check setFriends
-
 
 type Props = {
   user: UserType;
