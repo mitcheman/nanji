@@ -14,14 +14,14 @@ export const getOutgoingRequests = async (user) => {
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: { id: user },
   });
-  const req = outGoingRequests.data.getUser.outgoing_friend_requests.items;
+  const req = outGoingRequests.data.getUser.outgoing_friend_requests;
   //get user information on each user for a request - (outgoing requests only contain data on specific request - no user info besides ID)
   const results = [];
   for (let i = 0; i < req.length; i++) {
     const call = await API.graphql({
       query: getUserByUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
-      variables: { id: req[i].request_to },
+      variables: { id: req[i] },
     });
     results.push(call.data.getUser);
   }
@@ -35,14 +35,15 @@ export const getIncomingRequests = async (user) => {
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: { id: user },
   });
-  const req = incomingRequests.data.getUser.incoming_friend_requests.items;
+  const req = incomingRequests.data.getUser.incoming_friend_requests;
+  if (req === null) return [];
   //get user information for each request (incomingRequests only contains data on specific request - no user info besides ID)
   const results = [];
   for (let i = 0; i < req.length; i++) {
     const call = await API.graphql({
       query: getUserByUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
-      variables: { id: req[i].request_from },
+      variables: { id: req[i] },
     });
     results.push(call.data.getUser);
   }
@@ -56,15 +57,15 @@ export const getFriends = async (user) => {
     authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: { id: user },
   });
-  const req = listFriends.data.getUser.friends.items;
-
+  const req = listFriends.data.getUser.friends;
+  if (req === null) return [];
   //get user information for each request (incomingRequests only contains data on specific request - no user info besides ID)
   const results = [];
   for (let i = 0; i < req.length; i++) {
     const call = await API.graphql({
       query: getUserByUser,
       authMode: 'AMAZON_COGNITO_USER_POOLS',
-      variables: { id: req[i].friend_with },
+      variables: { id: req[i] },
     });
     results.push(call.data.getUser);
   }

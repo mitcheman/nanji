@@ -16,7 +16,6 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
 
     useEffect(() => {
         getOutgoingRequests(user.username).then((data) => {
-            console.log(data)
             setOutGoing(data);
         });
     }, [])
@@ -41,9 +40,10 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
 
     const handleIncomingRequest = async (currentUser, oppositeUser) => {
                 //get incoming requests
+                console.log(currentUser)
                 const incomingRequests = await API.graphql({ query: getUserIncoming, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: currentUser} });
-                const reqIncoming = incomingRequests.data.getUser.incoming_friend_requests.items;
-                const selectedIncoming = reqIncoming.filter(el => el.request_from === oppositeUser);
+                const reqIncoming = incomingRequests.data.getUser.incoming_friend_requests;
+                const selectedIncoming = reqIncoming.filter(el => el === oppositeUser);
                 //delete incoming request that matches
                 const deleteIncomingRequest = await API.graphql({query: updateUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedIncoming[0].id }}});
                 //update incoming state
@@ -55,10 +55,10 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     const handleOutgoingRequest = async (currentUser, oppositeUser) => {
                 //get outgoing request for other user
                 const outgoingRequests = await API.graphql({ query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: oppositeUser} });
-                const reqOutgoing = outgoingRequests.data.getUser.outgoing_friend_requests.items;
-                const selectedOutgoing = reqOutgoing.filter(el => el.request_to === currentUser);
+                const reqOutgoing = outgoingRequests.data.getUser.outgoing_friend_requests;
+                const selectedOutgoing = reqOutgoing.filter(el => el === currentUser);
                 // //delete outgoing request that matches
-                const deleteOutgoingRequest = await API.graphql({query: updateUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedOutgoing[0].id }}});
+                const deleteOutgoingRequest = await API.graphql({query: updateUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedOutgoing[0] }}});
     }
 
     const acceptRequestHandler = async (selectedID) => {
@@ -88,8 +88,8 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     }
 
     const cancelRequestHandler = async (selectedID) => {
-        await handleIncomingRequest(selectedID, user.username);
         await handleOutgoingRequest(selectedID, user.username);
+        await handleIncomingRequest(selectedID, user.username);
         getOutgoingRequests(user.username).then((data) => {
             setOutGoing(data);
             setCancelledStatus(true)

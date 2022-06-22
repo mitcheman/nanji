@@ -98,3 +98,14 @@ export const searchUsers = /* GraphQL */ `
     }
   }
 `;
+
+export const updateUserOutgoinng = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      outgoing_friend_requests
+    }
+  }
+`;

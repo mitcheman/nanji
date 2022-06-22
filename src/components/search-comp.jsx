@@ -64,6 +64,7 @@ export function Search({user, outGoing, setOutGoing, incoming, setIncoming}) {
 
         //update incoming requests for requested user
         const fromFriendRequest = {id: selectedID, incoming_friend_requests: user.username};
+        console.log(fromFriendRequest)
         const createIncoming = await API.graphql({query: updateUser, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: fromFriendRequest } });
         setSearchResult(false);
     }
