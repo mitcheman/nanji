@@ -89,6 +89,4 @@ describe('Signing in on Nanji', () => {
     cy.get('[type="submit"]').click();
   })
   
-
-  
 });
