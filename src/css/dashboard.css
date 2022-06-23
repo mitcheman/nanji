@@ -4,3 +4,13 @@
   margin-top: 90px;
   margin-left: 25px;
 }
+
+.containerWithNoData {
+  flex-direction: row;
+}
+
+.menuContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
