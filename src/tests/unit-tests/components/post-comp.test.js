@@ -16,7 +16,9 @@ it('should render a post', () => {
 
   const date = screen.getByTestId('date');
   expect(date).toBeInTheDocument();
-  expect(date).toHaveTextContent('June 18th 2022 - 3 days ago');
+  expect(date).toHaveTextContent(
+    `June 18th 2022 - ${moment(posts[0].date).fromNow()}`,
+  );
 
   const image = screen.getByAltText('Post');
   expect(image).toBeInTheDocument();
