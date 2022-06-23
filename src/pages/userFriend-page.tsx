@@ -28,19 +28,18 @@ export const UserFriend: React.FC<UserFriendProps> = ({
   const { id } = useParams() as { id: string };
 
   useEffect(() => {
+    const getUserinfo = async () => {
+      const userData = (await API.graphql({
+        query: getUser,
+        authMode: 'AMAZON_COGNITO_USER_POOLS',
+        variables: { id: id },
+      })) as GraphQLResult<GetUserAPIResponse>;
+      return userData;
+    };
     getUserinfo().then(data => {
       data.data && setCurrentFriend(data.data.getUser);
     });
-  }, []);
-
-  const getUserinfo = async () => {
-    const userData = (await API.graphql({
-      query: getUser,
-      authMode: 'AMAZON_COGNITO_USER_POOLS',
-      variables: { id: id },
-    })) as GraphQLResult<GetUserAPIResponse>;
-    return userData;
-  };
+  }, [id, setCurrentFriend]);
 
   const [posts, setPosts] = useState<PostType[]>([]);
   const [allPosts, setAllPosts] = useState<PostType[]>([]);
@@ -53,7 +52,7 @@ export const UserFriend: React.FC<UserFriendProps> = ({
       const tokenID = data.data && data.data.postByUser.nextToken;
       setToken(tokenID);
     });
-  }, []);
+  }, [id, token]);
 
   useEffect(() => {
     listAllUserPosts(id).then(data => {
@@ -67,7 +66,7 @@ export const UserFriend: React.FC<UserFriendProps> = ({
         setNoPosts(false);
       }
     });
-  }, []);
+  }, [id]);
 
   async function newPage() {
     listUserPosts(id, token).then(data => {

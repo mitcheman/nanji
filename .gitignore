@@ -33,7 +33,6 @@ amplify/backend/team-provider-info.json
 build/
 dist/
 node_modules/
-aws-exports.js
 awsconfiguration.json
 amplifyconfiguration.json
 amplifyconfiguration.dart
