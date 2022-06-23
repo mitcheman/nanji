@@ -10,7 +10,7 @@ import { BsChevronDown } from 'react-icons/bs';
 import '../css/dashboard.css';
 import { CognitoUserType, FriendType, PostType } from '../Shared/Types';
 
-//temp set to public - this needs to change and implement groups for friends !fix
+//temp set to public - this needs to change and implement groups for friends !fix!
 Storage.configure({ level: 'public' });
 
 export const Dashboard: React.FC<{
