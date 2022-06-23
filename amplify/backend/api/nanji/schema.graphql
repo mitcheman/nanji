@@ -1,4 +1,4 @@
-type Post @model @auth(rules: [{ allow: private }]) {
+type Post @model @auth(rules: [{ allow: private, provider: userPools }]) {
   id: ID!
   location: String
   date: AWSDate!
@@ -18,30 +18,67 @@ type Post @model @auth(rules: [{ allow: private }]) {
     )
 }
 
-type User @model @auth(rules: [{ allow: private }]) @searchable {
+type User
+  @model
+  @auth(rules: [{ allow: owner, provider: userPools }])
+  @searchable {
   id: ID!
+    @auth(
+      rules: [
+        { allow: private, provider: userPools, operations: [read] }
+        { allow: owner, provider: userPools }
+      ]
+    )
   family_name: String!
+    @auth(
+      rules: [
+        { allow: private, provider: userPools, operations: [read] }
+        { allow: owner, provider: userPools }
+      ]
+    )
   given_name: String!
+    @auth(
+      rules: [
+        { allow: private, provider: userPools, operations: [read] }
+        { allow: owner, provider: userPools }
+      ]
+    )
   preferred_username: String
+    @auth(
+      rules: [
+        { allow: private, provider: userPools, operations: [read] }
+        { allow: owner, provider: userPools }
+      ]
+    )
   profile_pic: String
+    @auth(
+      rules: [
+        { allow: private, provider: userPools, operations: [read] }
+        { allow: owner, provider: userPools }
+      ]
+    )
   posts: [Post] @hasMany(indexName: "postByUser", fields: ["id"])
   friends: [Friend] @hasMany
   outgoing_friend_requests: [OutgoingFriendRequest] @hasMany
   incoming_friend_requests: [IncomingFriendRequest] @hasMany
 }
 
-type Friend @model @auth(rules: [{ allow: private }]) {
+type Friend @model @auth(rules: [{ allow: private, provider: userPools }]) {
   id: ID!
   friend_with: String!
   owner: String
 }
 
-type OutgoingFriendRequest @model @auth(rules: [{ allow: private }]) {
+type OutgoingFriendRequest
+  @model
+  @auth(rules: [{ allow: private, provider: userPools }]) {
   id: ID!
   request_to: String!
 }
 
-type IncomingFriendRequest @model @auth(rules: [{ allow: private }]) {
+type IncomingFriendRequest
+  @model
+  @auth(rules: [{ allow: private, provider: userPools }]) {
   id: ID!
   request_from: String!
 }

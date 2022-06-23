@@ -5,7 +5,6 @@ import { API, Storage } from 'aws-amplify';
 export const listUserPosts = async (user, token) => {
   const userPosts = await API.graphql({
     query: postByUser,
-    authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: {
       userID: user,
       limit: 5,
@@ -29,7 +28,6 @@ export const listUserPosts = async (user, token) => {
 export const listUserPostsTimeline = async (user, token, date) => {
   const userPosts = await API.graphql({
     query: postByUser,
-    authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: {
       userID: user,
       limit: 5,
@@ -53,7 +51,6 @@ export const listUserPostsTimeline = async (user, token, date) => {
 export const listAllUserPosts = async (user) => {
   const allPostData = await API.graphql({
     query: postByUser,
-    authMode: 'AMAZON_COGNITO_USER_POOLS',
     variables: {
       userID: user,
       sortDirection: 'DESC',
