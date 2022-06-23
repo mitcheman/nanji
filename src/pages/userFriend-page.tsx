@@ -66,7 +66,7 @@ export const UserFriend: React.FC<UserFriendProps> = ({
         setNoPosts(false);
       }
     });
-  }, []);
+  }, [id]);
 
   async function newPage() {
     listUserPosts(id, token).then(data => {

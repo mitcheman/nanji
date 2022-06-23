@@ -32,7 +32,7 @@ export const Dashboard: React.FC<{
         setToken(tokenID);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [token, user.username]);
 
   useEffect(() => {
     listAllUserPosts(user.username).then(data => {
@@ -46,13 +46,13 @@ export const Dashboard: React.FC<{
         setNoPosts(false);
       }
     });
-  }, []);
+  }, [user.username]);
 
   useEffect(() => {
     getFriends(user.username).then(data => {
       setFriends(data);
     });
-  }, []);
+  }, [setFriends, user.username]);
 
   async function newPage() {
     listUserPosts(user.username, token).then(data => {
