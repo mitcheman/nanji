@@ -13,7 +13,7 @@ import { GraphQLResult } from '@aws-amplify/api-graphql';
 import React from 'react';
 import { UserFriendProps, PostType, GetUserAPIResponse } from '../Shared/Types';
 
-//would love to reuse a lot of the dashboard and tried.
+//would love to reuse a lot of the dashboard and tried!
 //Some confusion and funkiness between using user token on initial login vs grabbing data and using current friend. !fix
 //future me note - can switch between user if id params exist - see friendslist component
 
