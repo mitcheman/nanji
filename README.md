@@ -1,5 +1,7 @@
 # Nanji
 
+[![CodeFactor](https://www.codefactor.io/repository/github/mitcheman/nanji/badge/main)](https://www.codefactor.io/repository/github/mitcheman/nanji/overview/main)
+
 A social media and photo sharing app focused on the simple things.
 
 ## Backend Requirements
