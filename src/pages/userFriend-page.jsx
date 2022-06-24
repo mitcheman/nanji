@@ -1,6 +1,5 @@
 import { API } from "aws-amplify"
 import { getUser } from "../graphql/queries"
-import { getUserFr } from "../graphql/custom"
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { PostList } from '../components/postList-comp'
@@ -38,7 +37,7 @@ export function UserFriend({currentFriend, setCurrentFriend}) {
             const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
         })
-    }, [])
+    }, [id])
 
     useEffect(() => {
         listAllUserPosts(id).then((data) => {
@@ -51,7 +50,7 @@ export function UserFriend({currentFriend, setCurrentFriend}) {
                 setNoPosts(false);
             }
         })
-    }, [])
+    }, [id])
 
     async function newPage () {
         listUserPosts(id, token)

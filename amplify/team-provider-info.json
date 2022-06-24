@@ -28,5 +28,35 @@
         }
       }
     }
+  },
+  "testing": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nanji-testing-184312-authRole",
+      "UnauthRoleArn": "arn:aws:iam::602366348679:role/amplify-nanji-testing-184312-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::602366348679:role/amplify-nanji-testing-184312-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-nanji-testing-184312-deployment",
+      "UnauthRoleName": "amplify-nanji-testing-184312-unauthRole",
+      "StackName": "amplify-nanji-testing-184312",
+      "StackId": "arn:aws:cloudformation:us-east-1:602366348679:stack/amplify-nanji-testing-184312/edd8b520-efee-11ec-b9ae-0ec4e9941cc7",
+      "AmplifyAppId": "dk5qtqs5o6cin"
+    },
+    "categories": {
+      "auth": {
+        "nanji": {}
+      },
+      "function": {
+        "nanji645de7d8": {
+          "deploymentBucketName": "amplify-nanji-testing-184312-deployment",
+          "s3Key": "amplify-builds/nanji645de7d8-616574732b57784d4571-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "dk5qtqs5o6cin",
+          "type": "manual"
+        }
+      }
+    }
   }
 }
