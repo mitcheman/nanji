@@ -6,6 +6,8 @@ A mobile and desktop friendly social media application built with React and AWS.
 <br>
 
 ![Sceenshots](./screenshots/nanji_sceenshots.png)
+<br>
+[Check out the full demo video here](https://youtu.be/VP4_ufbt_Dg)
 
 ## Backend Requirements
 
