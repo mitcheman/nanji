@@ -34,15 +34,7 @@ export const getUserPosts = /* GraphQL */ `
 export const getUserFriends = /* GraphQL */ `
   query getUserFriends($id: ID!) {
     getUser(id: $id) {
-      friends {
-        items {
-          createdAt
-          updatedAt
-          id
-          owner
-          friend_with
-        }
-      }
+      friends
     }
   }
 `;
@@ -50,14 +42,7 @@ export const getUserFriends = /* GraphQL */ `
 export const getUserOutgoing = /* GraphQL */ `
   query getUserOutgoing($id: ID!) {
     getUser(id: $id) {
-      outgoing_friend_requests {
-        items {
-          createdAt
-          updatedAt
-          id
-          request_to
-        }
-      }
+      outgoing_friend_requests
     }
   }
 `;
@@ -65,14 +50,62 @@ export const getUserOutgoing = /* GraphQL */ `
 export const getUserIncoming = /* GraphQL */ `
   query getUserIncoming($id: ID!) {
     getUser(id: $id) {
-      incoming_friend_requests {
-        items {
-          createdAt
-          updatedAt
-          id
-          request_from
+      incoming_friend_requests
+    }
+  }
+`;
+
+export const searchUsers = /* GraphQL */ `
+  query SearchUsers(
+    $filter: SearchableUserFilterInput
+    $sort: [SearchableUserSortInput]
+    $limit: Int
+    $nextToken: String
+    $from: Int
+    $aggregates: [SearchableUserAggregationInput]
+  ) {
+    searchUsers(
+      filter: $filter
+      sort: $sort
+      limit: $limit
+      nextToken: $nextToken
+      from: $from
+      aggregates: $aggregates
+    ) {
+      items {
+        id
+        family_name
+        given_name
+        preferred_username
+        profile_pic
+      }
+      nextToken
+      total
+      aggregateItems {
+        name
+        result {
+          ... on SearchableAggregateScalarResult {
+            value
+          }
+          ... on SearchableAggregateBucketResult {
+            buckets {
+              key
+              doc_count
+            }
+          }
         }
       }
+    }
+  }
+`;
+
+export const updateUserOutgoinng = /* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      outgoing_friend_requests
     }
   }
 `;

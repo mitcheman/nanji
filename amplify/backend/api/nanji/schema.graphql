@@ -1,4 +1,11 @@
-type Post @model @auth(rules: [{ allow: private }]) {
+type Post
+  @model
+  @auth(
+    rules: [
+      { allow: owner, operations: [create, delete, update, read] }
+      { allow: owner, ownerField: "friends", operations: [read] }
+    ]
+  ) {
   id: ID!
   location: String
   date: AWSDate!
@@ -18,30 +25,72 @@ type Post @model @auth(rules: [{ allow: private }]) {
     )
 }
 
-type User @model @auth(rules: [{ allow: private }]) @searchable {
+type User
+  @model
+  @auth(rules: [{ allow: owner, ownerField: "id" }])
+  @searchable {
   id: ID!
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
   family_name: String!
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
   given_name: String!
-  preferred_username: String
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
+  preferred_username: String!
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
   profile_pic: String
-  posts: [Post] @hasMany(indexName: "postByUser", fields: ["id"])
-  friends: [Friend] @hasMany
-  outgoing_friend_requests: [OutgoingFriendRequest] @hasMany
-  incoming_friend_requests: [IncomingFriendRequest] @hasMany
-}
-
-type Friend @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  friend_with: String!
-  owner: String
-}
-
-type OutgoingFriendRequest @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  request_to: String!
-}
-
-type IncomingFriendRequest @model @auth(rules: [{ allow: private }]) {
-  id: ID!
-  request_from: String!
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read] }
+      ]
+    )
+  posts: [Post]
+    @hasMany(indexName: "postByUser", fields: ["id"])
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: owner, ownerField: "friends", operations: [read] }
+      ]
+    )
+  friends: [String]
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: owner, ownerField: "friends", operations: [read] }
+      ]
+    )
+  outgoing_friend_requests: [String]
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: owner, ownerField: "friends", operations: [read] }
+      ]
+    )
+  incoming_friend_requests: [String]
+    @auth(
+      rules: [
+        { allow: owner, ownerField: "id" }
+        { allow: private, operations: [read, create, update] }
+      ]
+    )
 }
