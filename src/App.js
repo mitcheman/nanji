@@ -37,7 +37,7 @@ function App({ signOut, user }) {
               margin: 5,
             }}
           >
-            Checkout the Beta video here
+            Check out the Beta video here
           </a>
         </View>
       );
