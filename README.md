@@ -1,6 +1,13 @@
 # Nanji
 
-A social media and photo sharing app focused on the simple things.
+[![CodeFactor](https://www.codefactor.io/repository/github/mitcheman/nanji/badge/main)](https://www.codefactor.io/repository/github/mitcheman/nanji/overview/main)
+
+A mobile and desktop friendly social media application built with React and AWS. Nanji's goal is to strip away the complexity of what is available on current social media and share memories with close friends and family. On Nanji you can post photos with their stories and location, and jump between your memory timeline on your own profile. You are also able to search for friends and family, send friend requests, and view friends profiles.
+<br>
+
+![Sceenshots](./screenshots/nanji_sceenshots.png)
+<br>
+[Check out the full demo video here](https://youtu.be/VP4_ufbt_Dg)
 
 ## Backend Requirements
 

@@ -1,6 +1,5 @@
 import { API } from "aws-amplify"
 import { getUser } from "../graphql/queries"
-import { getUserFr } from "../graphql/custom"
 import { useParams } from "react-router-dom"
 import { isMobile } from 'react-device-detect';
 import { useState, useEffect } from "react"
@@ -40,7 +39,7 @@ export function UserFriend({user, friends, setFriends, currentFriend, setCurrent
             const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
         })
-    }, [])
+    }, [id])
 
     useEffect(() => {
         listAllUserPosts(id).then((data) => {
@@ -53,7 +52,7 @@ export function UserFriend({user, friends, setFriends, currentFriend, setCurrent
                 setNoPosts(false);
             }
         })
-    }, [])
+    }, [id])
 
     async function newPage () {
         listUserPosts(id, token)
