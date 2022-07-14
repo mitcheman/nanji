@@ -84,11 +84,8 @@ export const NewPost = ({ user }: Props ) => {
             return;
         }
         
-        //TODO: 
-        
         const dateInput = document.getElementById('picdate') as HTMLInputElement;
         const content = document.getElementById('content') as HTMLInputElement;
-
         
         //this is a stupid file naming system - need to change this
         const filename = currentDate + '_' + fileData.name;
@@ -103,7 +100,7 @@ export const NewPost = ({ user }: Props ) => {
           //reset form
             resetFormHandler(event);
         } catch(err) {
-            console.log(err)
+            console.log('Error at savePost: ', err)
         };
     }
 

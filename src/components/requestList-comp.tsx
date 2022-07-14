@@ -99,7 +99,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
                 setDeniedStatus(true);
             })
         } catch(err) {
-            console.log(err, 'err at denyRequestHandler');
+            console.log('Err at denyRequestHandler:', err);
         }
     }
     //TODO: Debug issue here 
@@ -112,7 +112,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
             setCancelledStatus(true)
         });
         } catch (err) {
-            console.log(err, 'error at cancelRequestHandler');
+            console.log('Error at cancelRequestHandler', err);
         }
     }
 

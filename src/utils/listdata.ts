@@ -28,7 +28,7 @@ export const listUserPosts = async (userID: string, token?) => {
     duplicates(userPosts.data.postByUser.items);
     return userPosts;
   } catch (err) {
-    console.log(err);
+    console.log('Error at listUserPosts: ', err);
   }
 };
 
@@ -57,7 +57,7 @@ export const listUserPostsTimeline = async (user, token, date) => {
     duplicates(userPosts.data.postByUser.items);
     return userPosts;
   } catch (err) {
-    console.log(err);
+    console.log('Error at listUserPostsTimeline: ', err);
   }
 };
 

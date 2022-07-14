@@ -31,7 +31,7 @@ export const getOutgoingRequests = async (id : string) => {
     }
     return results;
   } catch(err) {
-      console.log(err);
+      console.log('Error at getOutgoingRequests: ', err);
     }
 };
 
@@ -56,7 +56,7 @@ export const getIncomingRequests = async (id : string) => {
     }
     return results;
   } catch(err) {
-      console.log(err);
+      console.log('Error at getIncomingRequests: ', err);
     }
 };
 
@@ -82,6 +82,6 @@ export const getFriends = async ( id : string) => {
     }
     return results;
   } catch (err) {
-      console.log(err);
+      console.log('Error at getFriends: ', err);
     }
 };
