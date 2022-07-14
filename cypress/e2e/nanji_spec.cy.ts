@@ -103,12 +103,10 @@ describe("Creating New Post", () => {
 
   it("should be able to click the  location search button", () => {
     cy.get('button[aria-label="Search"]').click();
-    // cy.get('[class="locationsearchresults"]').should("be.visible");
   })
   
   it("location search results should be visible", () => {
     cy.get('[class="locationsearchresults"]').should("be.visible");
-    // cy.get('[class="locationsearchresults"]').should('have.value', 'Lisbon');
   })
 
   it('should be able to get date field', () => {
@@ -120,7 +118,7 @@ describe("Creating New Post", () => {
   }) 
   
   it('should be able to get and click the upload button', () => {
-    cy.get("[type='file']").selectFile('./karlmarx_trier.jpg');
+    cy.get("[type='file']").selectFile('./kt.jpg');
   }) 
   
   it('should be able to get and click the upload button', () => {
