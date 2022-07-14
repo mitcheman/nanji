@@ -10,7 +10,21 @@ Amplify.configure(awsExports);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App user={{
+      id: '',
+      family_name: '',
+      given_name: '',
+      preferred_username: '',
+      username: '',
+      profile_pic: '',
+      email: '',
+      attributes: {
+        family_name: '',
+        given_name: '',
+        preferred_username: '',
+        email: ''
+      }
+    }} signOut={false} />
   </React.StrictMode>
 );
 

@@ -29,7 +29,6 @@ amplify/logs
 amplify/mock-data
 amplify/backend/amplify-meta.json
 amplify/backend/.temp
-amplify/backend/team-provider-info.json
 build/
 dist/
 node_modules/
@@ -43,3 +42,6 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+#testing
+cypress.env.json

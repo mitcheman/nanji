@@ -7,11 +7,17 @@ import { Dashboard } from './pages/dashboard-page';
 import { Account } from './pages/account-page';
 import { Friends } from './pages/friends-page';
 import { UserFriend } from './pages/userFriend-page';
-import { useState } from 'react';
-
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { UserType } from './types/UserType';
 
-function App({ signOut, user }) {
+
+type Props = {
+  user: UserType;
+  signOut: boolean;
+}
+
+const App = ({ signOut, user }: Props) => {
   const [friends, setFriends] = useState([]);
   const [currentFriend, setCurrentFriend] = useState();
 
@@ -21,37 +27,40 @@ function App({ signOut, user }) {
       <Router>
         <Routes>
           <Route
-            path='/'
+            path="/"
             element={
               <Dashboard
                 user={user}
-                signout={signOut}
+                signOut={signOut}
                 friends={friends}
                 setFriends={setFriends}
               />
             }
           />
           <Route
-            path='/Friends'
+            path="/Friends"
             element={
               <Friends user={user} friends={friends} setFriends={setFriends} />
             }
           />
-          <Route path='/NewPost' element={<NewPost user={user} />} />
+          <Route path="/NewPost" element={<NewPost user={user} />} />
           <Route
-            path='/user/:id'
+            path="/user/:id"
             element={
-              <UserFriend
-                user={user}
-                friends={friends}
-                setFriends={setFriends}
-                currentFriend={currentFriend}
-                setCurrentFriend={setCurrentFriend}
-              />
+              <>
+                <UserFriend
+                  user={user}
+                  friends={friends}
+                  setFriends={setFriends}
+                  currentFriend={currentFriend}
+                  setCurrentFriend={setCurrentFriend}
+                  signOut={signOut}
+                />
+              </>
             }
           />
           <Route
-            path='/Account'
+            path="/Account"
             element={<Account user={user} signOut={signOut} />}
           />
         </Routes>
