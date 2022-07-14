@@ -30,19 +30,19 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
         getOutgoingRequests(user.username).then((data) => {
             setOutGoing(data);
         }).catch((err)=> {console.log(err);});
-    }, [])
+    }, []) //eslint-disable-line
 
     useEffect(() => {
         getIncomingRequests(user.username).then((data) => {
             setIncoming(data);
         }).catch((err)=> {console.log(err);});
-    }, [])
+    }, []) //eslint-disable-line
 
     useEffect(() => {
         getFriends(user.username).then((data) => {
             setFriends(data);
         }).catch((err)=> {console.log(err);});
-    }, [])
+    }, []) //eslint-disable-line
 
     function dismissAlerts() {
         setAcceptedStatus(false);
@@ -53,57 +53,36 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     const handleIncomingRequest = async (currentUser, oppositeUser) => {
                 //get incoming requests
                 const incomingRequests: GraphQLResult<any> = await API.graphql({ query: getUserIncoming, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: currentUser} });
-                console.log(incomingRequests, ' incoming requeeeeeests');
                 const reqIncoming = incomingRequests.data.getUser.incoming_friend_requests.items;
                 const selectedIncoming = reqIncoming.filter(el => el.request_from === oppositeUser);
                 //delete incoming request that matches
-                console.log(selectedIncoming[0].id, 'selectedIncoming[0].id at handleIncomingRequest');
                 const deleteIncomingRequest: GraphQLResult<any> = await API.graphql({query: deleteIncomingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedIncoming[0].id }}});
                 //update incoming state
                 getIncomingRequests(user.username).then((data) => {
                     setIncoming(data);
-                })
-                console.log(incomingRequests, 'incomingRequests at handleIncomingRequest');    
-                console.log(reqIncoming, 'reqIncoming at handleIncomingRequest');
-                console.log(selectedIncoming, 'selectedIncoming at handleIncomingRequest');
-                console.log(deleteIncomingRequest, 'deleteIncomingRequest at handleIncomingRequest');
-                
+                })                
     }
 
     const handleOutgoingRequest = async (currentUser, oppositeUser) => {
                 //get outgoing request for other user
                 const outgoingRequests: GraphQLResult<any> = await API.graphql({ query: getUserOutgoing, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {id: oppositeUser} });
-                console.log(outgoingRequests, 'outgoingRequests at handleOutgoingRequest');
                 const reqOutgoing = outgoingRequests.data.getUser.outgoing_friend_requests.items;
                 const selectedOutgoing = reqOutgoing.filter(el => el.request_to === currentUser);
-                // //delete outgoing request that matches
-                const deleteOutgoingRequest: GraphQLResult<any> = await API.graphql({query: deleteOutgoingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedOutgoing[0].id }}});
-    
-                console.log(outgoingRequests, 'outgoingRequests at handleOutgoingRequest');    
-                console.log(reqOutgoing, 'reqOutgoing at handleOutgoingRequest');
-                console.log(selectedOutgoing, 'selectedOutgoing at handleOutgoingRequest');
-                console.log(deleteOutgoingRequest, 'deleteOutgoingRequest at handleOutgoingRequest');
+                //delete outgoing request that matches
+                const deleteOutgoingRequest: GraphQLResult<any> = await API.graphql({query: deleteOutgoingFriendRequest, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: {id: selectedOutgoing[0].id }}}); //eslint-disable-line
             }
 
     const acceptRequestHandler = async (selectedID) => {
         //accept request
         const acceptedRequest = {userFriendsId: user.username, friend_with: selectedID, owner: user.username};
-        const createAcceptedRequest: GraphQLResult<any> = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: acceptedRequest}});
+        const createAcceptedRequest: GraphQLResult<any> = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: acceptedRequest}}); //eslint-disable-line
         const friendAcceptedRequest = {userFriendsId: selectedID, friend_with: user.username, owner: selectedID};
-        const createFriendAcceptedRequest: GraphQLResult<any> = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendAcceptedRequest}});
-        
-        console.log(acceptedRequest, 'acceptedRequest at acceptRequestHandler');    
-        console.log(createAcceptedRequest, 'createAcceptedRequest at acceptRequestHandler');
-        console.log(createAcceptedRequest, 'createAcceptedRequest at acceptRequestHandler');
-        console.log(createFriendAcceptedRequest, 'createFriendAcceptedRequest at acceptRequestHandler');
-        
+        const createFriendAcceptedRequest: GraphQLResult<any> = await API.graphql({query: createFriend, authMode: 'AMAZON_COGNITO_USER_POOLS', variables: {input: friendAcceptedRequest}}); //eslint-disable-line
         
         //handle requests
         handleIncomingRequest(user.username, selectedID);
         handleOutgoingRequest(user.username, selectedID);
         //update friends list
-        console.log(user.username, 'user.username at acceptRequestHandler');
-        console.log(selectedID, 'selectedID at acceptRequestHandler');
 
         getFriends(user.username).then((data) => {
             setFriends(data);
@@ -112,25 +91,20 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
     }
 
     const denyRequestHandler = async (selectedID) => {
-        console.log(selectedID)
         try {
-        console.log(user.username, 'user.username at denyRequestHandler');
-        console.log(selectedID, 'selectedID at denyRequestHandler');
-        await handleIncomingRequest(user.username, selectedID);
-        await handleOutgoingRequest(user.username, selectedID);
-        getIncomingRequests(user.username).then((data) => {
-            setIncoming(data);
-            setDeniedStatus(true)
-        })
+            await handleIncomingRequest(user.username, selectedID);
+            await handleOutgoingRequest(user.username, selectedID);
+            getIncomingRequests(user.username).then((data) => {
+                setIncoming(data);
+                setDeniedStatus(true);
+            })
         } catch(err) {
-            console.log(err, 'err at denyRequestHandler');
+            console.log('Err at denyRequestHandler:', err);
         }
     }
     //TODO: Debug issue here 
     const cancelRequestHandler = async (selectedID) => {
         try {
-        console.log(user.username, 'user.username at cancelRequestHandler');
-        console.log(selectedID, 'selectedID at cancelRequestHandler');
         await handleIncomingRequest(selectedID, user.username);
         await handleOutgoingRequest(selectedID, user.username);
         getOutgoingRequests(user.username).then((data) => {
@@ -138,7 +112,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
             setCancelledStatus(true)
         });
         } catch (err) {
-            console.log(err, 'error at cancelRequestHandler');
+            console.log('Error at cancelRequestHandler', err);
         }
     }
 
@@ -177,7 +151,7 @@ export function RequestList({user, outGoing, setOutGoing, incoming, setIncoming,
             </div>
             {acceptedStatus ? <Alert variation="success" isDismissible={true}>Friend Request Accepted ʕ ꈍᴥꈍʔ</Alert>: ''}
             {deniedStatus ? <Alert variation="success" isDismissible={true}>Friend Request Denied ʕ•`ᴥ´•ʔ</Alert>: ''}
-            {cancelledStatus ? <Alert variation="success" isDismissible={true}>Freind Request Cancelled  ʕノ•ᴥ•ʔノ ︵ ┻━┻</Alert>: ''}
+            {cancelledStatus ? <Alert variation="success" isDismissible={true}>Friend Request Cancelled  ʕノ•ᴥ•ʔノ ︵ ┻━┻</Alert>: ''}
             </div></>
     )
 }

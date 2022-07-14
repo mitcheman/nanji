@@ -14,7 +14,7 @@ export const Account = ({ user }: Props) => {
       const result = await Auth.deleteUser();
       return result;
     } catch (error) {
-      console.log("Error deleting user", error);
+      console.log("Error deleting user: ", error);
     }
   }
 

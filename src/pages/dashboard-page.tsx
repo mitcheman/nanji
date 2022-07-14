@@ -1,7 +1,7 @@
 
 import { Storage } from "aws-amplify"
 import React from "react"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { PostList } from '../components/postList-comp'
 import { Menu } from "../components/menu-comp"
 import { duplicatesByMonth } from "../utils/duplicates"
@@ -35,7 +35,7 @@ export const Dashboard = ({user, signOut, friends, setFriends }: Props) => {
             const tokenID = data.data.postByUser.nextToken;
             setToken(tokenID);
         }).catch((err)=> {console.log(err)});
-    }, []);
+    }, []); //eslint-disable-line
 
     useEffect(() => {
         listAllUserPosts(user.username).then((data) => {
@@ -48,13 +48,13 @@ export const Dashboard = ({user, signOut, friends, setFriends }: Props) => {
                 setNoPosts(false);
             }
         }).catch((err) => {console.log(err);})
-    }, []);
+    }, []); //eslint-disable-line
 
     useEffect(() => {
         getFriends(user.id).then((data) => {
             setFriends(data)
         })
-    }, []);
+    }, []); //eslint-disable-line
     
 
     const newPage = async () => {

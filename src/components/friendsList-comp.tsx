@@ -2,11 +2,10 @@ import "../css/friends.css";
 import { Friend } from "./friend-comp";
 import { UserType } from '../types/UserType';
 import { getFriends } from "../utils/friendRequests";
-import { Dispatch, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import React from "react";
 
-// TODO: confirm type SetFriends
 
 type Props = {
   user: UserType;
@@ -21,13 +20,11 @@ export const FriendsList = ({ user, friends, setFriends }: Props) => {
   useEffect(() => {
  
     const userId: string = id || user.username;
-    console.log('userId at friendsList component:', userId);
     
     getFriends(userId).then((data) => {
-      console.log(data, 'data coming from getFriends at Friendslist');
       setFriends(data);
     });
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <div id="friendlist">

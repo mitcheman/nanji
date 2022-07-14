@@ -1,7 +1,7 @@
 import "../css/timeline.css";
 import { listUserPostsTimeline } from "../utils/listdata";
 import { useParams } from "react-router-dom";
-import { Dispatch, SetStateAction } from "react";
+import { SetStateAction } from "react";
 import { UserType } from "../types/UserType"
 import { PostType } from "../types/PostType"
 import React from "react";
