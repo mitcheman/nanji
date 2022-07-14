@@ -1,9 +1,7 @@
 import { Storage, API, Geo } from "aws-amplify"
 import { createPost } from "../graphql/mutations"
-import React, { DetailedHTMLProps, ExoticComponent, FormEventHandler, FormHTMLAttributes } from "react";
+import React from "react";
 import { UserType } from "../types/UserType";
-import { MouseEvent , FormEvent, SyntheticEvent} from 'react';
-import { useState } from "react"
 import { TextAreaField, SearchField } from '@aws-amplify/ui-react';
 import { BsUpload } from 'react-icons/bs';
 import { TiDeleteOutline } from 'react-icons/ti'
@@ -11,7 +9,6 @@ import { AiOutlineCheckCircle } from 'react-icons/ai'
 import { GrPowerReset } from 'react-icons/gr'
 import { Alert } from '@aws-amplify/ui-react';
 import '../css/form.css'
-import { PostType } from "../types/PostType";
 const moment = require('moment')
 const currentDate = moment(new Date()).format('YYYY-MM-DD')
 
@@ -75,9 +72,7 @@ export const NewPost = ({ user }: Props ) => {
     async function savePost (event: React.SyntheticEvent) {
         event.preventDefault()
         const contentInput = document.getElementById('content') as unknown as HTMLTextAreaElement;
-        console.log(contentInput.value, 'event target NOOOWWWW')
         const fUpload = document.getElementById('fileupload') as unknown as HTMLInputElement;
-        console.log(fUpload, ' fUploadddd')
 
         if (contentInput.value.length === 0 || fUpload.value === null) {
             alert('please input all required data')
@@ -99,25 +94,21 @@ export const NewPost = ({ user }: Props ) => {
         const filename = currentDate + '_' + fileData.name;
         await Storage.put(filename, fileData, {level: 'public'});
         const newPost = {location: selectedLocation, date: (dateInput.value), content: content.value, image: filename, userID: user.username, type: "Post"};
-        console.log(newPost);
+        
         try {
             const result = await API.graphql({ query: createPost, variables: { input: newPost }, authMode: 'AMAZON_COGNITO_USER_POOLS' });
             setFileStatus(true);
             setSelectedLocation('');
             setSelectedLocationResult(false);
           //reset form
-            resetFormHandler(event); 
-            console.log(result);
+            resetFormHandler(event);
         } catch(err) {
             console.log(err)
         };
     }
 
     async function searchLocation () {
-        
-        console.log('hello darkness')
         const searchInput = document.getElementById('searchfield') as HTMLInputElement;
-        console.log(searchInput.value, 'search input value')
         const searchOptions = {maxResults: 10, language: 'en'}
             const results = await Geo.searchByText(searchInput.value, searchOptions);
             if (results.length > 0) {

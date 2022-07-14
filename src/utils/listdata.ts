@@ -6,7 +6,6 @@ import { API, Storage } from "aws-amplify";
 //TODO: check that the token is actually needed
 export const listUserPosts = async (userID: string, token?) => {
   try {
-  console.log(token);
   const userPosts: GraphQLResult<any> = await API.graphql({
     query: postByUser,
     authMode: "AMAZON_COGNITO_USER_POOLS",
@@ -47,7 +46,6 @@ export const listUserPostsTimeline = async (user, token, date) => {
   });
 
   try {
-    console.log(userPosts, 'data at listUserPostsTimeline');
     const posts = await Promise.all(
       userPosts.data.postByUser.items.map(async (post) => {
         const image = await Storage.get(post.image);

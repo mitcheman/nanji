@@ -39,7 +39,7 @@ export function UserFriend({
     getUserinfo().then((data) => {
       setCurrentFriend(data.data.getUser);
     });
-  }, []);
+  }, []); //eslint-disable-line
 
   const getUserinfo = async () => {
     const userData: GraphQLResult<any> = await API.graphql({
@@ -61,7 +61,7 @@ export function UserFriend({
       const tokenID = data.data.postByUser.nextToken;
       setToken(tokenID);
     });
-  }, []);
+  }, []); //eslint-disable-line
 
   useEffect(() => {
     listAllUserPosts(id).then((data) => {
@@ -74,7 +74,7 @@ export function UserFriend({
         setNoPosts(false);
       }
     });
-  }, []);
+  }, []); //eslint-disable-line
 
   async function newPage() {
     listUserPosts(id, token).then((data) => {

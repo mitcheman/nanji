@@ -1,6 +1,5 @@
 import { API } from 'aws-amplify';
 import { GraphQLResult } from '@aws-amplify/api-graphql';
-import { UserType } from '../types/UserType'
 
 import {
   getUserOutgoing,
@@ -9,9 +8,6 @@ import {
   getUserByUser,
 } from '../graphql/custom';
 
-type Props = {
-  user: UserType;
-}
 
 //I could put the user info in the actual friend request but what if the user changes info? sure there is a better/faster way to handle this.
 export const getOutgoingRequests = async (id : string) => {
