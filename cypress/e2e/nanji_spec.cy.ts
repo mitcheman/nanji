@@ -91,19 +91,39 @@ describe("Signing in on Nanji", () => {
 });
 
 describe("Creating New Post", () => {
+  
   it("should be able to navigate to New Post Page", () => {
     cy.get('[href="/newPost"]').click();
-    // cy.url().should("include", "/newPost");
+    cy.url().should("include", "/newPost");
   });
 
   it("should be able to get and type Location to search", () => {
-    cy.get('[id="searchfield"]').type("Lisbon");
-    cy.get('[aria-label="Search"]').click();
-    
-
-    // cy.get('#searchfield').should('have.value', 'Lisbon');
-    // cy.click('#searchfield');
-    cy.get('[class="locationsearchresults"]').should("be.visible");
+    cy.get('input[id="searchfield"]').type("Lisbon");
   });
-});
 
+  it("should be able to click the  location search button", () => {
+    cy.get('button[aria-label="Search"]').click();
+    // cy.get('[class="locationsearchresults"]').should("be.visible");
+  })
+  
+  it("location search results should be visible", () => {
+    cy.get('[class="locationsearchresults"]').should("be.visible");
+    // cy.get('[class="locationsearchresults"]').should('have.value', 'Lisbon');
+  })
+
+  it('should be able to get date field', () => {
+    cy.get("input[type='date']").type("2022-06-22");
+  }) 
+  
+  it('should be able to get the background story text field', () => {
+    cy.get("[placeholder='Enter Text Here']").type("My hometown rocks");
+  }) 
+  
+  it('should be able to get and click the upload button', () => {
+    cy.get("[type='file']").selectFile('./karlmarx_trier.jpg');
+  }) 
+  
+  it('should be able to get and click the upload button', () => {
+    cy.get("[data-type='submit-form-button']").click();
+  }) 
+});

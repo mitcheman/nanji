@@ -35,7 +35,6 @@ export const NewPost = ({ user }: Props ) => {
         label?: string;
     }
     
-
     const [fileData, setFileData] = React.useState<filePayload | null>(null);
     const [fileStatus, setFileStatus] = React.useState<boolean>(false);
 
@@ -172,26 +171,25 @@ export const NewPost = ({ user }: Props ) => {
             </div>
                 : 
                 <div className="locationsearchresults"><h5>No results</h5></div>
-             }
-             {selectedLocationResult ?
-              
-              <div id="selectedlocation">
+            }
+            {selectedLocationResult ?
+            <div id="selectedlocation">
                 <h5>Location&ensp;|</h5>
                 <p>&ensp;{selectedLocation}</p>
                 <TiDeleteOutline onClick={removeLocation}/>
-              </div>
+            </div>
             : ''}
             </div>
         <form onSubmit={savePost}>
             <label htmlFor="picdate">Date of Photo</label>
             <input id="picdate" name="date" type="date" max={currentDate} onClick={dismissAlert}/>
             <label id="contentlabel" htmlFor="content">Background Story</label>
-            <TextAreaField label="contentlabel" size="large" autoComplete="off" id="content" name="content" data-type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
+            <TextAreaField label="" size="large" autoComplete="off" id="content" name="content" data-type="text" placeholder="Enter Text Here" onClick={dismissAlert}/>
             <input id="fileupload" name="fileupload" type="file" accept="image/*" onChange={(e) => imageOnChangeHandler(e)}></input>
             <div id="formimage">
                 <img id="frame" alt="" src={currentImage} data-name="frame"/>
             </div>
-            <button id="submitbutton" type="submit"><BsUpload /></button>
+            <button id="submitbutton" data-type="submit-form-button" type="submit"><BsUpload/></button>
         </form>
     </div>
         <div id="uploadalert">
